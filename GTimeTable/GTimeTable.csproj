@@ -70,6 +70,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Building.cs">
+      <DependentUpon>GTimeTable.tt</DependentUpon>
+    </Compile>
     <Compile Include="DataSet1.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -90,6 +93,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>GTimeTable.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Locations.xaml.cs">
+      <DependentUpon>Locations.xaml</DependentUpon>
+    </Compile>
     <Compile Include="TimeTableSlot.cs">
       <DependentUpon>GTimeTable.tt</DependentUpon>
     </Compile>
@@ -108,6 +114,10 @@
     <Compile Include="WorkingTimePerDay.cs">
       <DependentUpon>GTimeTable.tt</DependentUpon>
     </Compile>
+    <Page Include="Locations.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -169,6 +179,7 @@
     <None Include="packages.config">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Properties\DataSources\Building.datasource" />
     <None Include="Properties\DataSources\TimeTableSlot.datasource" />
     <None Include="Properties\DataSources\WorkingDay.datasource" />
     <None Include="Properties\DataSources\WorkingDaysAndHours.datasource" />
