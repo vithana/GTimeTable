@@ -34,6 +34,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
     <Reference Include="MaterialDesignColors, Version=1.1.2.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\MaterialDesignColors.1.1.2\lib\net45\MaterialDesignColors.dll</HintPath>
     </Reference>
@@ -41,7 +47,11 @@
       <HintPath>..\packages\MaterialDesignThemes.2.3.1.953\lib\net45\MaterialDesignThemes.Wpf.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -60,11 +70,43 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="DataSet1.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DataSet1.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="GTimeTable.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>GTimeTable.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GTimeTable.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>GTimeTable.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GTimeTable.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>GTimeTable.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="TimeTableSlot.cs">
+      <DependentUpon>GTimeTable.tt</DependentUpon>
+    </Compile>
     <Compile Include="UserControlEscolha.xaml.cs">
       <DependentUpon>UserControlEscolha.xaml</DependentUpon>
     </Compile>
+    <Compile Include="WorkingDay.cs">
+      <DependentUpon>GTimeTable.tt</DependentUpon>
+    </Compile>
     <Compile Include="WorkingDaysAndHours.xaml.cs">
       <DependentUpon>WorkingDaysAndHours.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="WorkingDaysPerWeek.cs">
+      <DependentUpon>GTimeTable.tt</DependentUpon>
+    </Compile>
+    <Compile Include="WorkingTimePerDay.cs">
+      <DependentUpon>GTimeTable.tt</DependentUpon>
     </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -105,7 +147,37 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <None Include="packages.config" />
+    <EntityDeploy Include="GTimeTable.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>GTimeTable.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="DataSet1.xsc">
+      <DependentUpon>DataSet1.xsd</DependentUpon>
+    </None>
+    <None Include="DataSet1.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DataSet1.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="DataSet1.xss">
+      <DependentUpon>DataSet1.xsd</DependentUpon>
+    </None>
+    <None Include="GTimeTable.edmx.diagram">
+      <DependentUpon>GTimeTable.edmx</DependentUpon>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="packages.config">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Properties\DataSources\TimeTableSlot.datasource" />
+    <None Include="Properties\DataSources\WorkingDay.datasource" />
+    <None Include="Properties\DataSources\WorkingDaysAndHours.datasource" />
+    <None Include="Properties\DataSources\WorkingDaysPerWeek.datasource">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Properties\DataSources\WorkingTimePerDay.datasource">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -121,6 +193,21 @@
     <Resource Include="Assets\Pizza-doce-de-Brigadeiro.jpg" />
     <Resource Include="Assets\pizzabar.jpg" />
     <Resource Include="Assets\size_960_16_9_pizza2.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="GTimeTable.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>GTimeTable.Context.cs</LastGenOutput>
+      <DependentUpon>GTimeTable.edmx</DependentUpon>
+    </Content>
+    <Content Include="GTimeTable.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>GTimeTable.edmx</DependentUpon>
+      <LastGenOutput>GTimeTable.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
