@@ -46,8 +46,8 @@
                     </DataGrid.Columns>
                 </DataGrid>
                 <Grid HorizontalAlignment="Left" Height="200" Margin="10,94,0,0" VerticalAlignment="Top" Width="501" RenderTransformOrigin="0.481,0.449" Grid.ColumnSpan="2">
-                    <Button x:Name="addWorkingDaysPerWeek" Content="Add" HorizontalAlignment="Left" Margin="348,14,0,0" VerticalAlignment="Top" Width="75" Click="AddWorkingDaysPerWeek_Click" Background="Green"/>
-                    <Button x:Name="workingDaysPerWeekSave" Content="Save" HorizontalAlignment="Left" Margin="262,14,0,0" VerticalAlignment="Top" Width="75" Click="WorkingDaysPerWeekSave_Click"/>
+                    <Button x:Name="addWorkingDaysPerWeek" Content="Add" HorizontalAlignment="Left" Margin="357,14,0,0" VerticalAlignment="Top" Width="75" Click="AddWorkingDaysPerWeek_Click" Background="Green"/>
+                    <Button x:Name="workingDaysPerWeekSave" Content="Save" HorizontalAlignment="Left" Margin="271,14,0,0" VerticalAlignment="Top" Width="75" Click="WorkingDaysPerWeekSave_Click"/>
                     <Grid x:Name="grid1" DataContext="{StaticResource workingDaysPerWeekViewSource}" HorizontalAlignment="Left" Margin="23,15,0,0" VerticalAlignment="Top" Width="239">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="1.186"/>
@@ -66,8 +66,8 @@
                     </Grid>
 
                 </Grid>
-                <Grid Grid.Column="1" HorizontalAlignment="Left" Height="200" Margin="269.4,94,0,0" VerticalAlignment="Top" Width="504">
-                    <Grid x:Name="grid2" DataContext="{StaticResource workingTimePerDayViewSource}" HorizontalAlignment="Left" Margin="27,10,0,0" VerticalAlignment="Top" Width="288">
+                <Grid HorizontalAlignment="Left" Height="200" Margin="-55,506,0,0" VerticalAlignment="Top" Width="504" Grid.ColumnSpan="2">
+                    <Grid x:Name="grid2" DataContext="{StaticResource workingTimePerDayViewSource}" HorizontalAlignment="Left" Margin="65,10,0,0" VerticalAlignment="Top" Width="288">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="Auto" MinWidth="198.4"/>
                             <ColumnDefinition Width="Auto" MinWidth="136"/>
@@ -90,7 +90,7 @@
                         </TextBox>
                     </Grid>
                     <Button x:Name="addWorkingTimePerDayWithLunch" Content="Add" HorizontalAlignment="Left" Margin="419,9,0,0" VerticalAlignment="Top" Width="75" Background="Green" Click="Add_Time_Per_Day_Button" />
-                    <DataGrid x:Name="workingTimePerDayDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding Source={StaticResource workingTimePerDayViewSource}}" Margin="36,65,10,33" RowDetailsVisibilityMode="VisibleWhenSelected" CanUserAddRows="False">
+                    <DataGrid x:Name="workingTimePerDayDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding Source={StaticResource workingTimePerDayViewSource}}" Margin="70,65,10,33" RowDetailsVisibilityMode="VisibleWhenSelected" CanUserAddRows="False">
                         <DataGrid.Columns>
 
                             <DataGridTextColumn x:Name="numberColumn1" Binding="{Binding number}" Header="Number" Width="200"/>
@@ -114,7 +114,7 @@
                     </DataGrid>
                     <Button x:Name="saveTimePerDayButton" Content="Save" HorizontalAlignment="Left" Margin="335,9,0,0" VerticalAlignment="Top" Width="75" Click="saveTimePerDay_Click"/>
                 </Grid>
-                <Grid HorizontalAlignment="Left" Height="321" Margin="10,346,0,0" VerticalAlignment="Top" Width="501" Grid.ColumnSpan="2">
+                <Grid HorizontalAlignment="Left" Height="575" Margin="262.4,100,0,0" VerticalAlignment="Top" Width="501" Grid.Column="1">
                     <Grid x:Name="grid3" DataContext="{StaticResource workingDayViewSource}" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="246">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="Auto" MinWidth="108.8"/>
@@ -159,8 +159,8 @@
                     <Button x:Name="addWorkingDays_btn" Content="Add" HorizontalAlignment="Left" Margin="345,9,0,0" VerticalAlignment="Top" Width="75" Click="AddWorkingDays_btn_Click" Background="Green"/>
                     <Button x:Name="saveWorkingDays_btn" Content="Save" HorizontalAlignment="Left" Margin="256,9,0,0" VerticalAlignment="Top" Width="75" Click="SaveWorkingDays_btn_Click"/>
                 </Grid>
-                <Grid Grid.Column="1" HorizontalAlignment="Left" Height="419" Margin="226.4,331,0,0" VerticalAlignment="Top" Width="571">
-                    <Grid x:Name="grid4" DataContext="{StaticResource timeTableSlotViewSource}" HorizontalAlignment="Left" Margin="79,24,0,0" VerticalAlignment="Top" Width="295">
+                <Grid HorizontalAlignment="Left" Height="421" Margin="-94,294,0,0" VerticalAlignment="Top" Width="571" Grid.ColumnSpan="2">
+                    <Grid x:Name="grid4" DataContext="{StaticResource timeTableSlotViewSource}" HorizontalAlignment="Left" Margin="97,24,0,0" VerticalAlignment="Top" Width="295">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="Auto" MinWidth="141.6"/>
                             <ColumnDefinition Width="Auto" MinWidth="125.6"/>
@@ -177,7 +177,7 @@
                     </Grid>
                     <Button x:Name="addSlotsForTimeTable_btn" Content="Add" HorizontalAlignment="Left" Margin="461,23,0,0" VerticalAlignment="Top" Width="75" Background="Green" Click="AddSlotsForTimeTable_btn_Click"/>
                     <Button x:Name="saveSlotsForTimeTable_btn" Content="Save" HorizontalAlignment="Left" Margin="374,23,0,0" VerticalAlignment="Top" Width="75"/>
-                    <DataGrid x:Name="timeTableSlotDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding Source={StaticResource timeTableSlotViewSource}}" Margin="79,85,35,236" RowDetailsVisibilityMode="VisibleWhenSelected" CanUserAddRows="False">
+                    <DataGrid x:Name="timeTableSlotDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding Source={StaticResource timeTableSlotViewSource}}" Margin="105,85,35,236" RowDetailsVisibilityMode="VisibleWhenSelected" CanUserAddRows="False">
                         <DataGrid.Columns>
                             <DataGridTextColumn x:Name="timeColumn" Binding="{Binding time}" Header="Time" Width="200"/>
                             <DataGridTemplateColumn>

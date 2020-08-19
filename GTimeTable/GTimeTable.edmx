@@ -33,6 +33,13 @@
           <Property Name="lab_hrs" Type="int" Nullable="false" />
           <Property Name="eval_hrs" Type="int" Nullable="false" />
         </EntityType>
+        <EntityType Name="Buildings">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="50" />
+        </EntityType>
         <EntityType Name="TimeTableSlots">
           <Key>
             <PropertyRef Name="id" />
@@ -64,6 +71,7 @@
         <EntityContainer Name="GTimeTableModelStoreContainer">
           <EntitySet Name="Lecturers" EntityType="Self.Lecturers" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Subjects" EntityType="Self.Subjects" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Buildings" EntityType="Self.Buildings" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TimeTableSlots" EntityType="Self.TimeTableSlots" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="WorkingDays" EntityType="Self.WorkingDays" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="WorkingDaysPerWeek" EntityType="Self.WorkingDaysPerWeek" Schema="dbo" store:Type="Tables" />
@@ -87,6 +95,7 @@
           <EntitySet Name="WorkingDays" EntityType="GTimeTableModel.WorkingDay" />
           <EntitySet Name="Lecturers" EntityType="GTimeTableModel.Lecturer" />
           <EntitySet Name="Subjects" EntityType="GTimeTableModel.Subject" />
+          <EntitySet Name="Buildings" EntityType="GTimeTableModel.Building" />
         </EntityContainer>
         <EntityType Name="WorkingTimePerDay">
           <Key>
@@ -136,6 +145,13 @@
           <Property Name="tute_hrs" Type="Int32" Nullable="false" />
           <Property Name="lab_hrs" Type="Int32" Nullable="false" />
           <Property Name="eval_hrs" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Building">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -200,6 +216,14 @@
                 <ScalarProperty Name="off_sem" ColumnName="off_sem" />
                 <ScalarProperty Name="off_year" ColumnName="off_year" />
                 <ScalarProperty Name="code" ColumnName="code" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Buildings">
+            <EntityTypeMapping TypeName="GTimeTableModel.Building">
+              <MappingFragment StoreEntitySet="Buildings">
                 <ScalarProperty Name="name" ColumnName="name" />
                 <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>

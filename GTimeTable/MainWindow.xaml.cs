@@ -54,6 +54,10 @@ namespace GTimeTable
                     GridPrincipal.Children.Clear();
                     GridPrincipal.Children.Add(new Subjects());
                     break;
+                case 5:
+                    GridPrincipal.Children.Clear();
+                    GridPrincipal.Children.Add(new Locations());
+                    break;
                 default:
                     break;
             }
