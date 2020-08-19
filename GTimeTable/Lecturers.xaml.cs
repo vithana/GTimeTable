@@ -45,7 +45,6 @@ namespace GTimeTable
             centerTextBox.Text = "";
             buildingTextBox.Text = "";
             lvlTextBox.Text = "";
-            deptTextBox.Text = "";
         }
 
         private void UserControl_Loaded(object sender, RoutedEventArgs e)

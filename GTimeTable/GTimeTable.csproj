@@ -96,6 +96,9 @@
     <Compile Include="Lecturers.xaml.cs">
       <DependentUpon>Lecturers.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Subject.cs">
+      <DependentUpon>GTimeTable.tt</DependentUpon>
+    </Compile>
     <Compile Include="Subjects.xaml.cs">
       <DependentUpon>Subjects.xaml</DependentUpon>
     </Compile>
@@ -187,6 +190,7 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="Properties\DataSources\Lecturer.datasource" />
+    <None Include="Properties\DataSources\Subject.datasource" />
     <None Include="Properties\DataSources\TimeTableSlot.datasource" />
     <None Include="Properties\DataSources\WorkingDay.datasource" />
     <None Include="Properties\DataSources\WorkingDaysAndHours.datasource" />

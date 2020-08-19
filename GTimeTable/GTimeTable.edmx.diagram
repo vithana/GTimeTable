@@ -10,6 +10,7 @@
         <EntityTypeShape EntityType="GTimeTableModel.TimeTableSlot" Width="1.5" PointX="0.75" PointY="3.75" />
         <EntityTypeShape EntityType="GTimeTableModel.WorkingDay" Width="1.5" PointX="2.75" PointY="3.75" />
         <EntityTypeShape EntityType="GTimeTableModel.Lecturer" Width="1.5" PointX="5.375" PointY="0.75" />
+        <EntityTypeShape EntityType="GTimeTableModel.Subject" Width="1.5" PointX="6.5" PointY="4.25" />
       </Diagram>      
     </edmx:Diagrams>
   </edmx:Designer>

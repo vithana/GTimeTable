@@ -19,6 +19,20 @@
           <Property Name="lvl" Type="int" Nullable="false" />
           <Property Name="rank" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
+        <EntityType Name="Subjects">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="code" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="off_year" Type="int" Nullable="false" />
+          <Property Name="off_sem" Type="int" Nullable="false" />
+          <Property Name="lec_hrs" Type="int" Nullable="false" />
+          <Property Name="tute_hrs" Type="int" Nullable="false" />
+          <Property Name="lab_hrs" Type="int" Nullable="false" />
+          <Property Name="eval_hrs" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="TimeTableSlots">
           <Key>
             <PropertyRef Name="id" />
@@ -49,6 +63,7 @@
         </EntityType>
         <EntityContainer Name="GTimeTableModelStoreContainer">
           <EntitySet Name="Lecturers" EntityType="Self.Lecturers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Subjects" EntityType="Self.Subjects" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TimeTableSlots" EntityType="Self.TimeTableSlots" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="WorkingDays" EntityType="Self.WorkingDays" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="WorkingDaysPerWeek" EntityType="Self.WorkingDaysPerWeek" Schema="dbo" store:Type="Tables" />
@@ -71,6 +86,7 @@
           <EntitySet Name="TimeTableSlots" EntityType="GTimeTableModel.TimeTableSlot" />
           <EntitySet Name="WorkingDays" EntityType="GTimeTableModel.WorkingDay" />
           <EntitySet Name="Lecturers" EntityType="GTimeTableModel.Lecturer" />
+          <EntitySet Name="Subjects" EntityType="GTimeTableModel.Subject" />
         </EntityContainer>
         <EntityType Name="WorkingTimePerDay">
           <Key>
@@ -106,6 +122,20 @@
           <Property Name="building" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="lvl" Type="Int32" Nullable="false" />
           <Property Name="rank" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Subject">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="code" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="off_year" Type="Int32" Nullable="false" />
+          <Property Name="off_sem" Type="Int32" Nullable="false" />
+          <Property Name="lec_hrs" Type="Int32" Nullable="false" />
+          <Property Name="tute_hrs" Type="Int32" Nullable="false" />
+          <Property Name="lab_hrs" Type="Int32" Nullable="false" />
+          <Property Name="eval_hrs" Type="Int32" Nullable="false" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -155,6 +185,21 @@
                 <ScalarProperty Name="dept" ColumnName="dept" />
                 <ScalarProperty Name="faculty" ColumnName="faculty" />
                 <ScalarProperty Name="emp_id" ColumnName="emp_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Subjects">
+            <EntityTypeMapping TypeName="GTimeTableModel.Subject">
+              <MappingFragment StoreEntitySet="Subjects">
+                <ScalarProperty Name="eval_hrs" ColumnName="eval_hrs" />
+                <ScalarProperty Name="lab_hrs" ColumnName="lab_hrs" />
+                <ScalarProperty Name="tute_hrs" ColumnName="tute_hrs" />
+                <ScalarProperty Name="lec_hrs" ColumnName="lec_hrs" />
+                <ScalarProperty Name="off_sem" ColumnName="off_sem" />
+                <ScalarProperty Name="off_year" ColumnName="off_year" />
+                <ScalarProperty Name="code" ColumnName="code" />
                 <ScalarProperty Name="name" ColumnName="name" />
                 <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
