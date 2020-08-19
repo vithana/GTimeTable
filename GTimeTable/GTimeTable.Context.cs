@@ -29,5 +29,6 @@ namespace GTimeTable
         public virtual DbSet<WorkingTimePerDay> WorkingTimePerDays { get; set; }
         public virtual DbSet<TimeTableSlot> TimeTableSlots { get; set; }
         public virtual DbSet<WorkingDay> WorkingDays { get; set; }
+        public virtual DbSet<Building> Buildings { get; set; }
     }
 }
