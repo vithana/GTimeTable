@@ -1,0 +1,4 @@
+Server - gtimetable.chxwtniwjjni.us-east-2.rds.amazonaws.com
+DB Name - GTimeTable
+user name - admin
+password - 12345678
