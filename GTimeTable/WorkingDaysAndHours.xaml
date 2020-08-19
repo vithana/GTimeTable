@@ -1,48 +1,25 @@
-﻿<UserControl x:Class="GTimeTable.WorkingDaysAndHours"
+﻿<UserControl
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:GTimeTable"
-             mc:Ignorable="d" 
+             xmlns:local="clr-namespace:GTimeTable" 
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"             
-             Height="867.463" Width="auto">
+             xmlns:Default="clr-namespace:GTimeTable" x:Class="GTimeTable.WorkingDaysAndHours"
+             mc:Ignorable="d"             
+             Height="867.463" Width="auto" Loaded="UserControl_Loaded_1">
+    <UserControl.Resources>
+        <CollectionViewSource x:Key="workingDaysPerWeekViewSource" d:DesignSource="{d:DesignInstance {x:Type Default:WorkingDaysPerWeek}, CreateList=True}"/>
+        <CollectionViewSource x:Key="workingTimePerDayViewSource" d:DesignSource="{d:DesignInstance {x:Type Default:WorkingTimePerDay}, CreateList=True}"/>
+    </UserControl.Resources>
     <Grid>
         <materialDesign:TransitioningContent x:Name="TrainsitionigContentSlide" OpeningEffect="{materialDesign:TransitionEffect SlideInFromLeft, Duration=0:0:0.1}">
-            <Grid Margin="0,20,0,0.2" Width="1130">
+            <Grid Margin="0,20,0,0.2" Width="1130" DataContext="{StaticResource workingDaysPerWeekViewSource}">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="239*"/>
                     <ColumnDefinition Width="694*"/>
                 </Grid.ColumnDefinitions>
-                <TextBlock HorizontalAlignment="Center" Margin="96.561,0,359,0" TextWrapping="Wrap" Text="Working Days And Hours" VerticalAlignment="Top" FontSize="20" FontWeight="Bold" Grid.Column="1" />
-
-                <TextBlock Margin="10,98,128.6,0" TextWrapping="Wrap" Text="Working Days Per Week" VerticalAlignment="Top"/>
-                <TextBox HorizontalAlignment="Left" Height="23" Margin="166,97,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" Grid.ColumnSpan="2"/>
-                <Button Content="Add" HorizontalAlignment="Left" Margin="78.561,89,0,0" VerticalAlignment="Top" Width="75" Grid.Column="1"/>
-                <TextBlock HorizontalAlignment="Left" Margin="317.4,98,0,0" TextWrapping="Wrap" Text="Working Days Per Day with Lunch" VerticalAlignment="Top" Grid.Column="1"/>
-                <TextBox HorizontalAlignment="Left" Height="23" Margin="511.4,96,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" Grid.Column="1"/>
-                <Button Content="Add" HorizontalAlignment="Left" Margin="663.4,88,0,0" VerticalAlignment="Top" Width="75" Grid.Column="1" RenderTransformOrigin="1.247,0.331"/>
-
-                <DataGrid HorizontalAlignment="Left" Height="100" Margin="10,160,0,0" VerticalAlignment="Top" Width="433" Grid.ColumnSpan="2" Background="White" SelectionChanged="DataGrid_SelectionChanged_1">
-                    <DataGrid.Effect>
-                        <DropShadowEffect Color="#FFF7F7F7"/>
-                    </DataGrid.Effect>
-                    <DataGrid.Columns>
-                        <DataGridTextColumn Header="Number" Width="250"/>
-                        <DataGridTextColumn Header="Action"/>
-                    </DataGrid.Columns>
-
-                </DataGrid>
-                <DataGrid HorizontalAlignment="Left" Height="100" Margin="317.4,160,0,0" VerticalAlignment="Top" Width="421" Background="White" Grid.Column="1">
-                    <DataGrid.Effect>
-                        <DropShadowEffect Color="#FFF7F7F7"/>
-                    </DataGrid.Effect>
-                    <DataGrid.Columns>
-                        <DataGridTextColumn Header="Number" Width="250"/>
-                        <DataGridTextColumn Header="Action"/>
-                    </DataGrid.Columns>
-
-                </DataGrid>
+                <TextBlock HorizontalAlignment="Center" Margin="131.4,10,470.6,0" TextWrapping="Wrap" Text="Working Days And Hours" VerticalAlignment="Top" FontSize="20" FontWeight="Bold" Grid.Column="1" />
                 <TextBlock Margin="10,354,128.6,0" TextWrapping="Wrap" Text="Working Days" VerticalAlignment="Top"/>
                 <Button Content="Add" HorizontalAlignment="Left" Margin="78.4,345,0,0" VerticalAlignment="Top" Width="75" Grid.Column="1"/>
                 <TextBlock HorizontalAlignment="Left" Margin="317.4,354,0,0" TextWrapping="Wrap" Text="Slot For Time Table" VerticalAlignment="Top" Grid.Column="1"/>
@@ -81,6 +58,98 @@
                     <ComboBoxItem Content="TEST2"/>
                     <ComboBoxItem Content="TEST3"/>
                 </ComboBox>
+
+                <DataGrid x:Name="workingDaysPerWeekDataGrid" AutoGenerateColumns="False" Grid.ColumnSpan="2" EnableRowVirtualization="True" ItemsSource="{Binding}" Margin="10,160,686.6,589" RowDetailsVisibilityMode="VisibleWhenSelected" CanUserAddRows="False">
+                    <DataGrid.Columns>
+
+                        <DataGridTextColumn x:Name="numberColumn" Binding="{Binding number}" Header="Number" Width="SizeToHeader"/>
+                        <DataGridTemplateColumn>
+                            <DataGridTemplateColumn.HeaderTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="Action" />
+                                </DataTemplate>
+                            </DataGridTemplateColumn.HeaderTemplate>
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal" >
+                                        <Button x:Name="updateBtn" Content="Update" Click="updateBtn_Click"  Margin="0 0 5 0 " />
+                                        <Button x:Name="deleteBtn" Content="Delete" Click="deleteBtn_Click"  Background="red" />
+                                    </StackPanel>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+
+                    </DataGrid.Columns>
+                </DataGrid>
+                <Grid HorizontalAlignment="Left" Height="200" Margin="10,94,0,0" VerticalAlignment="Top" Width="501" RenderTransformOrigin="0.481,0.449" Grid.ColumnSpan="2">
+                    <Button x:Name="addWorkingDaysPerWeek" Content="Add" HorizontalAlignment="Left" Margin="348,14,0,0" VerticalAlignment="Top" Width="75" Click="AddWorkingDaysPerWeek_Click" Background="Green"/>
+                    <Button x:Name="workingDaysPerWeekSave" Content="Save" HorizontalAlignment="Left" Margin="262,14,0,0" VerticalAlignment="Top" Width="75" Click="WorkingDaysPerWeekSave_Click"/>
+                    <Grid x:Name="grid1" DataContext="{StaticResource workingDaysPerWeekViewSource}" HorizontalAlignment="Left" Margin="23,15,0,0" VerticalAlignment="Top" Width="239">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="1.186"/>
+                            <ColumnDefinition Width="56.414"/>
+                            <ColumnDefinition Width="17.864"/>
+                            <ColumnDefinition Width="108.136"/>
+                            <ColumnDefinition Width="29*"/>
+                            <ColumnDefinition Width="27*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <Label Content="Working Days Per Week:" HorizontalAlignment="Left" Margin="-25,3,0,3" Grid.Row="1" VerticalAlignment="Center" Grid.ColumnSpan="4" Width="172"/>
+                        <TextBox x:Name="numberTextBox" Grid.Column="3" HorizontalAlignment="Left" Height="24" Margin="81.8,5,0,3" Grid.Row="1" Text="{Binding number, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="72" Grid.ColumnSpan="3"/>
+                    </Grid>
+
+                </Grid>
+                <Grid Grid.Column="1" HorizontalAlignment="Left" Height="200" Margin="269.4,94,0,0" VerticalAlignment="Top" Width="504">
+                    <Grid x:Name="grid2" DataContext="{StaticResource workingTimePerDayViewSource}" HorizontalAlignment="Left" Margin="27,10,0,0" VerticalAlignment="Top" Width="288">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" MinWidth="198.4"/>
+                            <ColumnDefinition Width="Auto" MinWidth="136"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <Label Content="Working Time Per Day with Lunch
+:" Grid.Column="0" HorizontalAlignment="Left" Margin="3,3,0,3" Grid.Row="1" VerticalAlignment="Center" Height="26" Width="194"/>
+                        <TextBox x:Name="time_per_day" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="5.6,4,0,5" Grid.Row="1" Text="{Binding number, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="75" RenderTransformOrigin="0.5,0.5">
+                            <TextBox.RenderTransform>
+                                <TransformGroup>
+                                    <ScaleTransform/>
+                                    <SkewTransform AngleY="0.159"/>
+                                    <RotateTransform/>
+                                    <TranslateTransform Y="0.167"/>
+                                </TransformGroup>
+                            </TextBox.RenderTransform>
+                        </TextBox>
+                    </Grid>
+                    <Button x:Name="addWorkingTimePerDayWithLunch" Content="Add" HorizontalAlignment="Left" Margin="419,9,0,0" VerticalAlignment="Top" Width="75" Background="Green" Click="Add_Time_Per_Day_Button" />
+                    <DataGrid x:Name="workingTimePerDayDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding Source={StaticResource workingTimePerDayViewSource}}" Margin="36,65,10,39" RowDetailsVisibilityMode="VisibleWhenSelected" CanUserAddRows="False">
+                        <DataGrid.Columns>
+                            
+                            <DataGridTextColumn x:Name="numberColumn1" Binding="{Binding number}" Header="Number" Width="SizeToHeader"/>
+                            <DataGridTemplateColumn>
+                                <DataGridTemplateColumn.HeaderTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="Action" />
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.HeaderTemplate>
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <StackPanel Orientation="Horizontal" >
+                                            <Button x:Name="updateBtn" Content="Update" Click="time_per_day_updateBtn_Click"  Margin="0 0 5 0 " />
+                                            <Button x:Name="deleteBtn" Content="Delete" Click="time_per_day_deleteBtn_Click"  Background="red" />
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+
+                        </DataGrid.Columns>
+                    </DataGrid>
+                    <Button x:Name="saveTimePerDayButton" Content="Save" HorizontalAlignment="Left" Margin="335,9,0,0" VerticalAlignment="Top" Width="75" Click="saveTimePerDay_Click"/>
+                </Grid>
 
             </Grid>
 
