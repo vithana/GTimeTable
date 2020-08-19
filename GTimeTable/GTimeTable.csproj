@@ -169,6 +169,8 @@
     <None Include="packages.config">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Properties\DataSources\TimeTableSlot.datasource" />
+    <None Include="Properties\DataSources\WorkingDay.datasource" />
     <None Include="Properties\DataSources\WorkingDaysAndHours.datasource" />
     <None Include="Properties\DataSources\WorkingDaysPerWeek.datasource">
       <SubType>Designer</SubType>

@@ -26,8 +26,12 @@ namespace GTimeTable
 
         int workingTimePerDayId;
         WorkingTimePerDay time = new WorkingTimePerDay();
-        
 
+        int workingDaysId;
+        WorkingDay workingDay = new WorkingDay();
+
+        int timeSlotId;
+        TimeTableSlot timeSlot = new TimeTableSlot();
 
 
         public WorkingDaysAndHours()
@@ -40,14 +44,21 @@ namespace GTimeTable
         {
             workingDaysPerWeekDataGrid.ItemsSource = _db.WorkingDaysPerWeeks.ToList();
             workingTimePerDayDataGrid.ItemsSource = _db.WorkingTimePerDays.ToList();
+            workingDayDataGrid.ItemsSource = _db.WorkingDays.ToList();
+            timeTableSlotDataGrid.ItemsSource = _db.TimeTableSlots.ToList();
             
             workingDaysPerWeekSave.Visibility = Visibility.Hidden;
             saveTimePerDayButton.Visibility = Visibility.Hidden;
+            saveWorkingDays_btn.Visibility = Visibility.Hidden;
+            saveSlotsForTimeTable_btn.Visibility = Visibility.Hidden;
+
         }
         private void clean()
         {
             numberTextBox.Text = "";
             time_per_day.Text = "";
+            dayComboBox.Text = "";
+            timeSlotComboBox.Text = "";
         }
 
         private void DataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -177,6 +188,75 @@ namespace GTimeTable
             addWorkingTimePerDayWithLunch.IsEnabled = true;
         }
 
+        //Add working Days
+        private void AddWorkingDays_btn_Click(object sender, RoutedEventArgs e)
+        {
+            workingDay.day = dayComboBox.Text;
+            _db.WorkingDays.Add(workingDay);
+            _db.SaveChanges();
+            workingDayDataGrid.ItemsSource = _db.WorkingDays.ToList();
+            clean();
+        }
 
+        private void SaveWorkingDays_btn_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        //update days 
+        private void dayUpdateBtn_Click(object sender, RoutedEventArgs e)
+        {
+            int Id = (workingDayDataGrid.SelectedItem as WorkingDay).id;
+            WorkingDay updateDay = (from m in _db.WorkingDays
+                                            where m.id == Id
+                                            select m).Single();
+            dayComboBox.SelectedItem = updateDay.ToString();
+            workingDaysId = updateDay.id;
+            saveWorkingDays_btn.Visibility = Visibility.Visible;
+            addWorkingDays_btn.IsEnabled = false;
+        }
+
+        //Delete working days
+        private void dayDeleteBtn_Click(object sender, RoutedEventArgs e)
+        {
+            int Id = (workingDayDataGrid.SelectedItem as WorkingDay).id;
+            var deletedDay = _db.WorkingDays.Where(m => m.id == Id).Single();
+            _db.WorkingDays.Remove(deletedDay);
+            _db.SaveChanges();
+            workingDayDataGrid.ItemsSource = _db.WorkingDays.ToList();
+        }
+
+        //Add time slots for time table
+        private void AddSlotsForTimeTable_btn_Click(object sender, RoutedEventArgs e)
+        {
+            timeSlot.time = timeSlotComboBox.Text;            
+            _db.TimeTableSlots.Add(timeSlot);
+            _db.SaveChanges();
+            timeTableSlotDataGrid.ItemsSource = _db.TimeTableSlots.ToList();
+            clean();
+        }
+
+        //Get time slot
+        private void timeSlotUpdateBtn_Click(object sender, RoutedEventArgs e)
+        {
+            int Id = (timeTableSlotDataGrid.SelectedItem as TimeTableSlot).id;
+            TimeTableSlot updateTimeSlot = (from m in _db.TimeTableSlots
+                                    where m.id == Id
+                                    select m).Single();
+            dayComboBox.SelectedValue = updateTimeSlot.ToString();
+            timeSlotId = updateTimeSlot.id;
+            saveSlotsForTimeTable_btn.Visibility = Visibility.Visible;
+            addSlotsForTimeTable_btn.IsEnabled = false;
+        }
+
+        //Delete time slots
+        private void timeSlotDeleteBtn_Click(object sender, RoutedEventArgs e)
+        {
+            int Id = (timeTableSlotDataGrid.SelectedItem as TimeTableSlot).id;
+            var deletedTimeSlot = _db.TimeTableSlots.Where(m => m.id == Id).Single();
+            _db.TimeTableSlots.Remove(deletedTimeSlot);
+            _db.SaveChanges();
+            timeTableSlotDataGrid.ItemsSource = _db.TimeTableSlots.ToList();
+        }
     }
 }

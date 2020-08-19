@@ -11,6 +11,8 @@
     <UserControl.Resources>
         <CollectionViewSource x:Key="workingDaysPerWeekViewSource" d:DesignSource="{d:DesignInstance {x:Type Default:WorkingDaysPerWeek}, CreateList=True}"/>
         <CollectionViewSource x:Key="workingTimePerDayViewSource" d:DesignSource="{d:DesignInstance {x:Type Default:WorkingTimePerDay}, CreateList=True}"/>
+        <CollectionViewSource x:Key="workingDayViewSource" d:DesignSource="{d:DesignInstance {x:Type Default:WorkingDay}, CreateList=True}"/>
+        <CollectionViewSource x:Key="timeTableSlotViewSource" d:DesignSource="{d:DesignInstance {x:Type Default:TimeTableSlot}, CreateList=True}"/>
     </UserControl.Resources>
     <Grid>
         <materialDesign:TransitioningContent x:Name="TrainsitionigContentSlide" OpeningEffect="{materialDesign:TransitionEffect SlideInFromLeft, Duration=0:0:0.1}">
@@ -20,49 +22,11 @@
                     <ColumnDefinition Width="694*"/>
                 </Grid.ColumnDefinitions>
                 <TextBlock HorizontalAlignment="Center" Margin="131.4,10,470.6,0" TextWrapping="Wrap" Text="Working Days And Hours" VerticalAlignment="Top" FontSize="20" FontWeight="Bold" Grid.Column="1" />
-                <TextBlock Margin="10,354,128.6,0" TextWrapping="Wrap" Text="Working Days" VerticalAlignment="Top"/>
-                <Button Content="Add" HorizontalAlignment="Left" Margin="78.4,345,0,0" VerticalAlignment="Top" Width="75" Grid.Column="1"/>
-                <TextBlock HorizontalAlignment="Left" Margin="317.4,354,0,0" TextWrapping="Wrap" Text="Slot For Time Table" VerticalAlignment="Top" Grid.Column="1"/>
-                <Button Content="Add" HorizontalAlignment="Left" Margin="663.4,344,0,0" VerticalAlignment="Top" Width="75" Grid.Column="1" RenderTransformOrigin="1.247,0.331"/>
-                <DataGrid HorizontalAlignment="Left" Height="100" Margin="10,416,0,0" VerticalAlignment="Top" Width="433" Grid.ColumnSpan="2" Background="White">
-                    <DataGrid.Effect>
-                        <DropShadowEffect Color="#FFF7F7F7"/>
-                    </DataGrid.Effect>
-                    <DataGrid.Columns>
-                        <DataGridTextColumn Header="Number" Width="250"/>
-                        <DataGridTextColumn Header="Action"/>
-                    </DataGrid.Columns>
-
-                </DataGrid>
-                <DataGrid HorizontalAlignment="Left" Height="100" Margin="317.4,416,0,0" VerticalAlignment="Top" Width="421" Background="White" Grid.Column="1">
-                    <DataGrid.Effect>
-                        <DropShadowEffect Color="#FFF7F7F7"/>
-                    </DataGrid.Effect>
-                    <DataGrid.Columns>
-                        <DataGridTextColumn Header="Number" Width="250"/>
-                        <DataGridTextColumn Header="Action"/>
-                    </DataGrid.Columns>
-
-                </DataGrid>
-                <ComboBox  HorizontalAlignment="Left" Margin="170,348,0,0" VerticalAlignment="Top" Width="120">
-                    <ComboBoxItem Content="Monday"/>
-                    <ComboBoxItem Content="Tuesday"/>
-                    <ComboBoxItem Content="Wednesday"/>
-                    <ComboBoxItem Content="Thursday"/>
-                    <ComboBoxItem Content="Friday"/>
-                    <ComboBoxItem Content="Saturday"/>
-                    <ComboBoxItem Content="Friday"/>
-                </ComboBox>
-                <ComboBox HorizontalAlignment="Left" Margin="511.4,349,0,0" VerticalAlignment="Top" Width="120" Grid.Column="1" >
-                    <ComboBoxItem Content="TEST!"/>
-                    <ComboBoxItem Content="TEST2"/>
-                    <ComboBoxItem Content="TEST3"/>
-                </ComboBox>
 
                 <DataGrid x:Name="workingDaysPerWeekDataGrid" AutoGenerateColumns="False" Grid.ColumnSpan="2" EnableRowVirtualization="True" ItemsSource="{Binding}" Margin="10,160,686.6,589" RowDetailsVisibilityMode="VisibleWhenSelected" CanUserAddRows="False">
                     <DataGrid.Columns>
 
-                        <DataGridTextColumn x:Name="numberColumn" Binding="{Binding number}" Header="Number" Width="SizeToHeader"/>
+                        <DataGridTextColumn x:Name="numberColumn" Binding="{Binding number}" Header="Number" Width="200"/>
                         <DataGridTemplateColumn>
                             <DataGridTemplateColumn.HeaderTemplate>
                                 <DataTemplate>
@@ -126,10 +90,10 @@
                         </TextBox>
                     </Grid>
                     <Button x:Name="addWorkingTimePerDayWithLunch" Content="Add" HorizontalAlignment="Left" Margin="419,9,0,0" VerticalAlignment="Top" Width="75" Background="Green" Click="Add_Time_Per_Day_Button" />
-                    <DataGrid x:Name="workingTimePerDayDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding Source={StaticResource workingTimePerDayViewSource}}" Margin="36,65,10,39" RowDetailsVisibilityMode="VisibleWhenSelected" CanUserAddRows="False">
+                    <DataGrid x:Name="workingTimePerDayDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding Source={StaticResource workingTimePerDayViewSource}}" Margin="36,65,10,33" RowDetailsVisibilityMode="VisibleWhenSelected" CanUserAddRows="False">
                         <DataGrid.Columns>
-                            
-                            <DataGridTextColumn x:Name="numberColumn1" Binding="{Binding number}" Header="Number" Width="SizeToHeader"/>
+
+                            <DataGridTextColumn x:Name="numberColumn1" Binding="{Binding number}" Header="Number" Width="200"/>
                             <DataGridTemplateColumn>
                                 <DataGridTemplateColumn.HeaderTemplate>
                                     <DataTemplate>
@@ -149,6 +113,91 @@
                         </DataGrid.Columns>
                     </DataGrid>
                     <Button x:Name="saveTimePerDayButton" Content="Save" HorizontalAlignment="Left" Margin="335,9,0,0" VerticalAlignment="Top" Width="75" Click="saveTimePerDay_Click"/>
+                </Grid>
+                <Grid HorizontalAlignment="Left" Height="321" Margin="10,346,0,0" VerticalAlignment="Top" Width="501" Grid.ColumnSpan="2">
+                    <Grid x:Name="grid3" DataContext="{StaticResource workingDayViewSource}" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="246">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" MinWidth="108.8"/>
+                            <ColumnDefinition Width="Auto" MinWidth="123.2"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <Label Content="Working Days:" Grid.Column="0" HorizontalAlignment="Left" Margin="3,3,0,3" Grid.Row="0" VerticalAlignment="Center" Height="26" Width="96"/>
+                        <ComboBox x:Name="dayComboBox" Grid.Column="1" HorizontalAlignment="Left" Height="24" Margin="4.2,4,0,4" Grid.Row="0" Text="{Binding day, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="119">
+                            <ComboBoxItem Content="Monday"/>
+                            <ComboBoxItem Content="Tuesday"/>
+                            <ComboBoxItem Content="Wednesday"/>
+                            <ComboBoxItem Content="Thursday"/>
+                            <ComboBoxItem Content="Firday"/>
+                            <ComboBoxItem Content="Saturday"/>
+                            <ComboBoxItem Content="Sunday"/>
+                        </ComboBox>
+                    </Grid>
+                    <DataGrid x:Name="workingDayDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding Source={StaticResource workingDayViewSource}}" Margin="10,73,64,0" RowDetailsVisibilityMode="VisibleWhenSelected" CanUserAddRows="False">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn x:Name="dayColumn" Binding="{Binding day}" Header="Day" Width="200"/>
+                            <DataGridTemplateColumn>
+                                <DataGridTemplateColumn.HeaderTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="Action" />
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.HeaderTemplate>
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <StackPanel Orientation="Horizontal" >
+
+                                            <Button x:Name="deleteBtn" Content="Delete" Click="dayDeleteBtn_Click"  Background="red" />
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+
+                        </DataGrid.Columns>
+                    </DataGrid>
+                    <Button x:Name="addWorkingDays_btn" Content="Add" HorizontalAlignment="Left" Margin="345,9,0,0" VerticalAlignment="Top" Width="75" Click="AddWorkingDays_btn_Click" Background="Green"/>
+                    <Button x:Name="saveWorkingDays_btn" Content="Save" HorizontalAlignment="Left" Margin="256,9,0,0" VerticalAlignment="Top" Width="75" Click="SaveWorkingDays_btn_Click"/>
+                </Grid>
+                <Grid Grid.Column="1" HorizontalAlignment="Left" Height="419" Margin="226.4,331,0,0" VerticalAlignment="Top" Width="571">
+                    <Grid x:Name="grid4" DataContext="{StaticResource timeTableSlotViewSource}" HorizontalAlignment="Left" Margin="79,24,0,0" VerticalAlignment="Top" Width="295">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" MinWidth="141.6"/>
+                            <ColumnDefinition Width="Auto" MinWidth="125.6"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <Label Content="Slots For Time Table:" Grid.Column="0" HorizontalAlignment="Left" Margin="3,3,0,3" Grid.Row="1" VerticalAlignment="Center" Height="26" Width="129"/>
+                        <ComboBox x:Name="timeSlotComboBox" HorizontalAlignment="Left" Height="24" Margin="9.6,4,0,4" Grid.Row="1" Text="{Binding time, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="90" Grid.Column="1">
+                            <ComboBoxItem Content="1 Hr" />
+                            <ComboBoxItem Content="30 Min"/>
+                        </ComboBox>
+                    </Grid>
+                    <Button x:Name="addSlotsForTimeTable_btn" Content="Add" HorizontalAlignment="Left" Margin="461,23,0,0" VerticalAlignment="Top" Width="75" Background="Green" Click="AddSlotsForTimeTable_btn_Click"/>
+                    <Button x:Name="saveSlotsForTimeTable_btn" Content="Save" HorizontalAlignment="Left" Margin="374,23,0,0" VerticalAlignment="Top" Width="75"/>
+                    <DataGrid x:Name="timeTableSlotDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding Source={StaticResource timeTableSlotViewSource}}" Margin="79,85,35,236" RowDetailsVisibilityMode="VisibleWhenSelected" CanUserAddRows="False">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn x:Name="timeColumn" Binding="{Binding time}" Header="Time" Width="200"/>
+                            <DataGridTemplateColumn>
+                                <DataGridTemplateColumn.HeaderTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="Action" />
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.HeaderTemplate>
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <StackPanel Orientation="Horizontal" >
+                                            <!--<Button x:Name="timeSlitUpdateBtn" Content="Update" Click="timeSlotUpdateBtn_Click"  Margin="0 0 5 0 " />-->
+                                            <Button x:Name="timeSlotDeleteBtn" Content="Delete" Click="timeSlotDeleteBtn_Click"  Background="red" />
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+
+                        </DataGrid.Columns>
+                    </DataGrid>
                 </Grid>
 
             </Grid>
