@@ -44,7 +44,7 @@ namespace GTimeTable
             {
                 case 0:
                     GridPrincipal.Children.Clear();
-                    GridPrincipal.Children.Add(new UserControlEscolha());
+                    GridPrincipal.Children.Add(new Lecturers());
                     break;
                 case 1:
                     GridPrincipal.Children.Clear();
@@ -52,7 +52,7 @@ namespace GTimeTable
                     break;
                 case 2:
                     GridPrincipal.Children.Clear();
-                    //GridPrincipal.Children.Add(new Lecturers());
+                    GridPrincipal.Children.Add(new Subjects());
                     break;
                 default:
                     break;

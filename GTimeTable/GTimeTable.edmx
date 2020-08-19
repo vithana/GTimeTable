@@ -5,6 +5,20 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="GTimeTableModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Lecturers">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="emp_id" Type="nvarchar" MaxLength="6" Nullable="false" />
+          <Property Name="faculty" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="dept" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="center" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="building" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="lvl" Type="int" Nullable="false" />
+          <Property Name="rank" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
         <EntityType Name="TimeTableSlots">
           <Key>
             <PropertyRef Name="id" />
@@ -34,6 +48,7 @@
           <Property Name="number" Type="int" Nullable="false" />
         </EntityType>
         <EntityContainer Name="GTimeTableModelStoreContainer">
+          <EntitySet Name="Lecturers" EntityType="Self.Lecturers" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TimeTableSlots" EntityType="Self.TimeTableSlots" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="WorkingDays" EntityType="Self.WorkingDays" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="WorkingDaysPerWeek" EntityType="Self.WorkingDaysPerWeek" Schema="dbo" store:Type="Tables" />
@@ -55,6 +70,7 @@
           <EntitySet Name="WorkingTimePerDays" EntityType="GTimeTableModel.WorkingTimePerDay" />
           <EntitySet Name="TimeTableSlots" EntityType="GTimeTableModel.TimeTableSlot" />
           <EntitySet Name="WorkingDays" EntityType="GTimeTableModel.WorkingDay" />
+          <EntitySet Name="Lecturers" EntityType="GTimeTableModel.Lecturer" />
         </EntityContainer>
         <EntityType Name="WorkingTimePerDay">
           <Key>
@@ -76,6 +92,20 @@
           </Key>
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="day" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Lecturer">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="emp_id" Type="String" Nullable="false" MaxLength="6" FixedLength="false" Unicode="true" />
+          <Property Name="faculty" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="dept" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="center" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="building" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="lvl" Type="Int32" Nullable="false" />
+          <Property Name="rank" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -111,6 +141,21 @@
             <EntityTypeMapping TypeName="GTimeTableModel.WorkingDay">
               <MappingFragment StoreEntitySet="WorkingDays">
                 <ScalarProperty Name="day" ColumnName="day" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Lecturers">
+            <EntityTypeMapping TypeName="GTimeTableModel.Lecturer">
+              <MappingFragment StoreEntitySet="Lecturers">
+                <ScalarProperty Name="rank" ColumnName="rank" />
+                <ScalarProperty Name="lvl" ColumnName="lvl" />
+                <ScalarProperty Name="building" ColumnName="building" />
+                <ScalarProperty Name="center" ColumnName="center" />
+                <ScalarProperty Name="dept" ColumnName="dept" />
+                <ScalarProperty Name="faculty" ColumnName="faculty" />
+                <ScalarProperty Name="emp_id" ColumnName="emp_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
                 <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>
