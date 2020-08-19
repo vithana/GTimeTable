@@ -22,5 +22,15 @@ namespace GTimeTable.Properties {
                 return defaultInstance;
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=SAJEEWA-LAPTOP;Initial Catalog=Time_Table;Integrated Security=True")]
+        public string Time_TableConnectionString {
+            get {
+                return ((string)(this["Time_TableConnectionString"]));
+            }
+        }
     }
 }
