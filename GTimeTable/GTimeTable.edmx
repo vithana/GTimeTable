@@ -5,6 +5,34 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="GTimeTableModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Lecturers">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="emp_id" Type="nvarchar" MaxLength="6" Nullable="false" />
+          <Property Name="faculty" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="dept" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="center" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="building" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="lvl" Type="int" Nullable="false" />
+          <Property Name="rank" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Subjects">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="code" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="off_year" Type="int" Nullable="false" />
+          <Property Name="off_sem" Type="int" Nullable="false" />
+          <Property Name="lec_hrs" Type="int" Nullable="false" />
+          <Property Name="tute_hrs" Type="int" Nullable="false" />
+          <Property Name="lab_hrs" Type="int" Nullable="false" />
+          <Property Name="eval_hrs" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="Buildings">
           <Key>
             <PropertyRef Name="id" />
@@ -41,6 +69,8 @@
           <Property Name="number" Type="int" Nullable="false" />
         </EntityType>
         <EntityContainer Name="GTimeTableModelStoreContainer">
+          <EntitySet Name="Lecturers" EntityType="Self.Lecturers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Subjects" EntityType="Self.Subjects" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Buildings" EntityType="Self.Buildings" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TimeTableSlots" EntityType="Self.TimeTableSlots" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="WorkingDays" EntityType="Self.WorkingDays" Schema="dbo" store:Type="Tables" />
@@ -63,6 +93,8 @@
           <EntitySet Name="WorkingTimePerDays" EntityType="GTimeTableModel.WorkingTimePerDay" />
           <EntitySet Name="TimeTableSlots" EntityType="GTimeTableModel.TimeTableSlot" />
           <EntitySet Name="WorkingDays" EntityType="GTimeTableModel.WorkingDay" />
+          <EntitySet Name="Lecturers" EntityType="GTimeTableModel.Lecturer" />
+          <EntitySet Name="Subjects" EntityType="GTimeTableModel.Subject" />
           <EntitySet Name="Buildings" EntityType="GTimeTableModel.Building" />
         </EntityContainer>
         <EntityType Name="WorkingTimePerDay">
@@ -85,6 +117,34 @@
           </Key>
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="day" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Lecturer">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="emp_id" Type="String" Nullable="false" MaxLength="6" FixedLength="false" Unicode="true" />
+          <Property Name="faculty" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="dept" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="center" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="building" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="lvl" Type="Int32" Nullable="false" />
+          <Property Name="rank" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Subject">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="code" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="off_year" Type="Int32" Nullable="false" />
+          <Property Name="off_sem" Type="Int32" Nullable="false" />
+          <Property Name="lec_hrs" Type="Int32" Nullable="false" />
+          <Property Name="tute_hrs" Type="Int32" Nullable="false" />
+          <Property Name="lab_hrs" Type="Int32" Nullable="false" />
+          <Property Name="eval_hrs" Type="Int32" Nullable="false" />
         </EntityType>
         <EntityType Name="Building">
           <Key>
@@ -127,6 +187,36 @@
             <EntityTypeMapping TypeName="GTimeTableModel.WorkingDay">
               <MappingFragment StoreEntitySet="WorkingDays">
                 <ScalarProperty Name="day" ColumnName="day" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Lecturers">
+            <EntityTypeMapping TypeName="GTimeTableModel.Lecturer">
+              <MappingFragment StoreEntitySet="Lecturers">
+                <ScalarProperty Name="rank" ColumnName="rank" />
+                <ScalarProperty Name="lvl" ColumnName="lvl" />
+                <ScalarProperty Name="building" ColumnName="building" />
+                <ScalarProperty Name="center" ColumnName="center" />
+                <ScalarProperty Name="dept" ColumnName="dept" />
+                <ScalarProperty Name="faculty" ColumnName="faculty" />
+                <ScalarProperty Name="emp_id" ColumnName="emp_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Subjects">
+            <EntityTypeMapping TypeName="GTimeTableModel.Subject">
+              <MappingFragment StoreEntitySet="Subjects">
+                <ScalarProperty Name="eval_hrs" ColumnName="eval_hrs" />
+                <ScalarProperty Name="lab_hrs" ColumnName="lab_hrs" />
+                <ScalarProperty Name="tute_hrs" ColumnName="tute_hrs" />
+                <ScalarProperty Name="lec_hrs" ColumnName="lec_hrs" />
+                <ScalarProperty Name="off_sem" ColumnName="off_sem" />
+                <ScalarProperty Name="off_year" ColumnName="off_year" />
+                <ScalarProperty Name="code" ColumnName="code" />
+                <ScalarProperty Name="name" ColumnName="name" />
                 <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>

@@ -93,6 +93,18 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>GTimeTable.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Lecturer.cs">
+      <DependentUpon>GTimeTable.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Lecturers.xaml.cs">
+      <DependentUpon>Lecturers.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Subject.cs">
+      <DependentUpon>GTimeTable.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Subjects.xaml.cs">
+      <DependentUpon>Subjects.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Locations.xaml.cs">
       <DependentUpon>Locations.xaml</DependentUpon>
     </Compile>
@@ -114,6 +126,10 @@
     <Compile Include="WorkingTimePerDay.cs">
       <DependentUpon>GTimeTable.tt</DependentUpon>
     </Compile>
+    <Page Include="Lecturers.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Locations.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -130,6 +146,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Subjects.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="UserControlEscolha.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -179,6 +199,8 @@
     <None Include="packages.config">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Properties\DataSources\Lecturer.datasource" />
+    <None Include="Properties\DataSources\Subject.datasource" />
     <None Include="Properties\DataSources\Building.datasource" />
     <None Include="Properties\DataSources\TimeTableSlot.datasource" />
     <None Include="Properties\DataSources\WorkingDay.datasource" />
