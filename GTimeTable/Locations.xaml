@@ -15,9 +15,6 @@
             <Grid HorizontalAlignment="Left" Height="857" Margin="10,10,-0.4,0" VerticalAlignment="Top" Width="1120">
                 <TextBlock HorizontalAlignment="Center" Margin="487,10,543,0" TextWrapping="Wrap" Text="Locations" VerticalAlignment="Top" FontSize="20" FontWeight="Bold"/>
                 <TabControl HorizontalAlignment="Left" Height="602" Margin="0,74,0,0" VerticalAlignment="Top" Width="1034">
-                    <TabControl.Effect>
-                        <DropShadowEffect/>
-                    </TabControl.Effect>
                     <TabItem Header="Building">
                         <Grid DataContext="{StaticResource buildingViewSource}">
                             <DataGrid x:Name="buildingDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding}" Margin="41,126,42,56.8" RowDetailsVisibilityMode="VisibleWhenSelected" CanUserAddRows="False">
