@@ -20,19 +20,19 @@
                         <ColumnDefinition Width="Auto"/>
                         <ColumnDefinition Width="89.867"/>
                         <ColumnDefinition Width="19.467"/>
-                        <ColumnDefinition Width="17.333"/>
+                        <ColumnDefinition Width="Auto"/>
                     </Grid.ColumnDefinitions>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
                     <Label Content="Tag:" Grid.Column="0" HorizontalAlignment="Left" Margin="-149,-149,0,109" Grid.Row="1" VerticalAlignment="Center" FontWeight="Bold" FontSize="22"/>
-                    <TextBox x:Name="tag_TextBox" Grid.Column="1" HorizontalAlignment="Left" Height="40" Margin="27,-149,-115.6,0" Grid.Row="1" VerticalAlignment="Top" Width="215" Grid.ColumnSpan="3" FontSize="20"/>
+                    <TextBox x:Name="tag_TextBox" Grid.Column="1" HorizontalAlignment="Left" Height="40" Margin="-41,-149,0,0" Grid.Row="1" VerticalAlignment="Top" Width="96" FontSize="20"/>
                 </Grid>
-                <Button x:Name="addbtn_tags" Content="Add" HorizontalAlignment="Left" Margin="267,227,0,0" VerticalAlignment="Top" Width="189" Height="45" FontSize="15" Click="addbtn_tags_Click"/>
-                <DataGrid x:Name="tagDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding}" Margin="172,421,233,246" RowDetailsVisibilityMode="VisibleWhenSelected" CanUserAddRows="False">
+                <Button x:Name="addbtn_tags" Content="Add" HorizontalAlignment="Left" Margin="435,153,0,0" VerticalAlignment="Top" Width="94" Height="39" FontSize="15" Click="addbtn_tags_Click"/>
+                <DataGrid x:Name="tagDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding}" Margin="183,240,287,154" RowDetailsVisibilityMode="VisibleWhenSelected" CanUserAddRows="False">
                     <DataGrid.Columns>
-                        <DataGridTextColumn x:Name="idColumn" Binding="{Binding id}" Header="ID        " Width="SizeToHeader"/>
+                        <!--<DataGridTextColumn x:Name="idColumn" Binding="{Binding id}" Header="ID        " Width="SizeToHeader"/>-->
                         <DataGridTextColumn x:Name="tag1Column" Binding="{Binding tag1}" Header="Tag                      " Width="SizeToHeader"/>
                         <DataGridTemplateColumn>
                             <DataGridTemplateColumn.HeaderTemplate>
@@ -51,7 +51,7 @@
                         </DataGridTemplateColumn>
                     </DataGrid.Columns>
                 </DataGrid>
-                <Button x:Name="button_update_save" Content="Save" HorizontalAlignment="Left" Margin="267,225,0,0" VerticalAlignment="Top" Width="189" Height="47" Background="Green" Click="button_update_save_Click"/>
+                <Button x:Name="button_update_save" Content="Save" HorizontalAlignment="Left" Margin="435,153,0,0" VerticalAlignment="Top" Width="95" Height="39" Background="Green" Click="button_update_save_Click"/>
 
             </Grid>
         </materialDesign:TransitioningContent>

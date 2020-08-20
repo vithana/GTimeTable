@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BespokeFusion;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -61,19 +62,29 @@ namespace GTimeTable
         private void button_add_Student_Click(object sender, RoutedEventArgs e)
         {
 
-            student.acdamicYear = acdamicYearComboBox.Text;
-            student.semester = semesterComboBox.Text;
-            student.program = programComboBox.Text;
-            student.groupNo = groupNoComboBox.Text.ToString();
-            student.groupId = groupIdTextBox.Text;
-            student.subGroupNo = subGroupNoComboBox.Text.ToString();
-            student.subGropId = subGropIdTextBox.Text;
+            if(semesterComboBox.Text == "" || acdamicYearComboBox.Text == "" || programComboBox.Text == "" || groupNoComboBox.Text == "" || groupIdTextBox.Text == "" ||
+               subGroupNoComboBox.Text == "" || subGropIdTextBox.Text == "")
+            {
+                MaterialMessageBox.ShowError(@"Please Enter All Fields");
 
-            _db.Students.Add(student);
-            _db.SaveChanges();
+            }
+            else
+            {
+                student.acdamicYear = acdamicYearComboBox.Text;
+                student.semester = semesterComboBox.Text;
+                student.program = programComboBox.Text;
+                student.groupNo = groupNoComboBox.Text.ToString();
+                student.groupId = groupIdTextBox.Text;
+                student.subGroupNo = subGroupNoComboBox.Text.ToString();
+                student.subGropId = subGropIdTextBox.Text;
 
-            studentDataGrid.ItemsSource = _db.Students.ToList();
-            clean();
+                _db.Students.Add(student);
+                _db.SaveChanges();
+
+                studentDataGrid.ItemsSource = _db.Students.ToList();
+                clean();
+            }
+
 
         }
         private void updateStudentBtn_Click(object sender, RoutedEventArgs e)

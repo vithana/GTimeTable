@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BespokeFusion;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -47,14 +48,21 @@ namespace GTimeTable
 
         private void addbtn_tags_Click(object sender, RoutedEventArgs e)
         {
-            tag.tag1 = tag_TextBox.Text;
+            if (tag_TextBox.Text == "")
+            {
+                MaterialMessageBox.ShowError(@"Please Enter Tag");
+            }
+            else
+            {
+                tag.tag1 = tag_TextBox.Text;
+                _db.Tags.Add(tag);
+                _db.SaveChanges();
 
-            _db.Tags.Add(tag);
-            _db.SaveChanges();
-
-            tagDataGrid.ItemsSource = _db.Tags.ToList();
-            clean();
-            tag_TextBox.Focus();
+                tagDataGrid.ItemsSource = _db.Tags.ToList();
+                clean();
+                tag_TextBox.Focus();
+            }
+            
 
         }
 

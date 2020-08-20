@@ -6,7 +6,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:GTimeTable"
              mc:Ignorable="d" 
-             Height="867.463" Width="820.831">
+             Height="867.463" Width="1130">
     <UserControl.Resources>
         <CollectionViewSource x:Key="StudentsViewSource" d:DesignSource="{d:DesignInstance {x:Type local:Lecturer}, CreateList=True}"/>
         <CollectionViewSource x:Key="StudnetsViewSource" d:DesignSource="{d:DesignInstance {x:Type local:Tag}, CreateList=True}"/>
@@ -14,7 +14,7 @@
     </UserControl.Resources>
     <Grid>
         <materialDesign:TransitioningContent x:Name="TrainsitionigContentSlide_student" OpeningEffect="{materialDesign:TransitionEffect SlideInFromLeft, Duration=0:0:0.1}">
-            <Grid  Margin="0,0,-10.2,0" Height="867" VerticalAlignment="Top" HorizontalAlignment="Right" Width="821" DataContext="{StaticResource studentViewSource}">
+            <Grid  Margin="0,-10,139.6,0" Height="867" VerticalAlignment="Top" HorizontalAlignment="Right" Width="906" DataContext="{StaticResource studentViewSource}">
                 <TextBlock x:Name="textBlock_studnet" HorizontalAlignment="Left" Margin="315,10,0,0" TextWrapping="Wrap" Text="Student" VerticalAlignment="Top" FontWeight="Bold" FontSize="36"/>
                 <Grid x:Name="grid1" DataContext="{StaticResource studentViewSource}" HorizontalAlignment="Left" Margin="360,419,0,0" VerticalAlignment="Top">
                     <Grid.ColumnDefinitions>
@@ -68,7 +68,7 @@
                     </ComboBox>
                 </Grid>
                 <Button x:Name="button_add_Student" Content="Add" HorizontalAlignment="Left" Margin="276,364,0,0" VerticalAlignment="Top" Width="217" Height="36" Click="button_add_Student_Click"/>
-                <DataGrid x:Name="studentDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding}" Margin="10,508,10,159" RowDetailsVisibilityMode="VisibleWhenSelected" CanUserAddRows="False">
+                <DataGrid x:Name="studentDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding}" Margin="10,440,10,159" RowDetailsVisibilityMode="VisibleWhenSelected" CanUserAddRows="False">
                     <DataGrid.Columns>
                         <DataGridTextColumn x:Name="Id" Binding="{Binding id}" Header="id" Width="SizeToHeader"/>
                         <DataGridTextColumn x:Name="AcdamicYear" Binding="{Binding acdamicYear}" Header="acdamic Year" Width="SizeToHeader"/>
