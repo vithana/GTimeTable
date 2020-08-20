@@ -6,7 +6,7 @@
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:local="clr-namespace:GTimeTable"
              mc:Ignorable="d" 
-             Height="867.463" Width="816.831" Loaded="UserControl_Loaded_1">
+             Height="867.463" Width="1130" Loaded="UserControl_Loaded_1">
     <UserControl.Resources>
         <CollectionViewSource x:Key="subjectViewSource" d:DesignSource="{d:DesignInstance {x:Type local:Subject}, CreateList=True}"/>
     </UserControl.Resources>
@@ -17,7 +17,10 @@
                     <ColumnDefinition Width="475*"/>
                     <ColumnDefinition Width="332*"/>
                 </Grid.ColumnDefinitions>
-                <Grid x:Name="grid1" HorizontalAlignment="Left" Margin="10,24,0,0" VerticalAlignment="Top" Height="396" Width="787" Grid.ColumnSpan="2" Background="#c9c9c9">
+                <Grid x:Name="grid1" HorizontalAlignment="Left" Margin="10,24,-147.8,0" VerticalAlignment="Top" Height="390" Width="945" Grid.ColumnSpan="2" Background="#FFFDFCFC">
+                    <Grid.Effect>
+                        <DropShadowEffect Color="#FFEDEBEB"/>
+                    </Grid.Effect>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto"/>
                         <ColumnDefinition Width="Auto"/>
@@ -41,14 +44,14 @@
                     <Label Content="Subject Code" Grid.Column="1" HorizontalAlignment="Left" Grid.Row="7" VerticalAlignment="Center" RenderTransformOrigin="0.702,1.196" Margin="32.2,20.8,0,-10.8"/>
                     <TextBox x:Name="codeTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="23" Grid.Row="7" VerticalAlignment="Center" Width="120" Margin="141.2,21.8,-53.2,-8.8"/>
                     <Label Content="Offered Year" Grid.Column="1" HorizontalAlignment="Left" Grid.Row="7" VerticalAlignment="Center" Margin="32.2,76.8,0,-65.8"/>
-                    <ComboBox x:Name="off_yearTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="23" Grid.Row="7" Text="Faculty" VerticalAlignment="Center" Width="120" Margin="141.2,79.8,-53.2,-66.8">
+                    <ComboBox x:Name="off_yearTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="35" Grid.Row="7" Text="Faculty" VerticalAlignment="Center" Width="120" Margin="141.2,75.2,0,-59">
                         <ComboBoxItem Content="1"/>
                         <ComboBoxItem Content="2"/>
                         <ComboBoxItem Content="3"/>
                         <ComboBoxItem Content="4"/>
                     </ComboBox>
                     <Label Content="Offered Semester" Grid.Column="1" HorizontalAlignment="Left" Grid.Row="7" VerticalAlignment="Center" Margin="32.2,141.2,0,-128.6"/>
-                    <ComboBox x:Name="off_semTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="23" Grid.Row="7" VerticalAlignment="Center" Width="120" Margin="141.2,141.2,0,-125">
+                    <ComboBox x:Name="off_semTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="33" Grid.Row="7" VerticalAlignment="Center" Width="120" Margin="141.2,137.2,0,-118.2">
                         <ComboBoxItem Content="1"/>
                         <ComboBoxItem Content="2"/>
                     </ComboBox>
@@ -60,7 +63,7 @@
                 <Button x:Name="add_subject_btn" Content="Add" HorizontalAlignment="Left" Margin="356,330,0,0" VerticalAlignment="Top" Width="75" Click="add_subject_btn_Click" />
                 <Button x:Name="edit_subject_btn" Content="Save" HorizontalAlignment="Left" Margin="356,330,0,0" VerticalAlignment="Top" Width="75" Click="edit_subject_btn_Click" Background="Green"/>
                 <TextBlock HorizontalAlignment="Center" Margin="356,24,20.2,0" TextWrapping="Wrap" Text="Subjects" VerticalAlignment="Top" FontSize="20" FontWeight="Bold" Width="99" />
-                <DataGrid x:Name="subjectDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding}" Margin="10,445,10.2,182" RowDetailsVisibilityMode="VisibleWhenSelected" Grid.ColumnSpan="2" CanUserAddRows="False">
+                <DataGrid x:Name="subjectDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding}" Margin="10,453,-147.8,182" RowDetailsVisibilityMode="VisibleWhenSelected" Grid.ColumnSpan="2" CanUserAddRows="False">
                     <DataGrid.Columns>
                         <DataGridTextColumn x:Name="nameColumn" Binding="{Binding name}" Header="Subject Name" Width="Auto"/>
                         <DataGridTextColumn x:Name="codeColumn" Binding="{Binding code}" Header="Subject Code" Width="Auto"/>

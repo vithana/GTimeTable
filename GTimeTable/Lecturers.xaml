@@ -6,18 +6,21 @@
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:local="clr-namespace:GTimeTable"
              mc:Ignorable="d" 
-             Height="867.463" Width="816.831" Loaded="UserControl_Loaded_1">
+             Height="867.463" Width="1130" Loaded="UserControl_Loaded_1">
     <UserControl.Resources>
         <CollectionViewSource x:Key="lecturerViewSource" d:DesignSource="{d:DesignInstance {x:Type local:Lecturer}, CreateList=True}"/>
     </UserControl.Resources>
     <Grid>
         <materialDesign:TransitioningContent x:Name="TrainsitionigContentSlide" OpeningEffect="{materialDesign:TransitionEffect SlideInFromLeft, Duration=0:0:0.1}">
-            <Grid HorizontalAlignment="Left" Height="857" Margin="10,0,-0.2,0.2" VerticalAlignment="Bottom" Width="807" DataContext="{StaticResource lecturerViewSource}">
+            <Grid HorizontalAlignment="Left" Height="857" Margin="10,0,0,0.2" VerticalAlignment="Bottom" Width="1110" DataContext="{StaticResource lecturerViewSource}">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="475*"/>
                     <ColumnDefinition Width="332*"/>
                 </Grid.ColumnDefinitions>
-                <Grid x:Name="grid1" DataContext="{StaticResource lecturerViewSource}" HorizontalAlignment="Left" Margin="10,24,0,0" VerticalAlignment="Top" Height="396" Width="787" Grid.ColumnSpan="2" Background="#c9c9c9">
+                <Grid x:Name="grid1" DataContext="{StaticResource lecturerViewSource}" HorizontalAlignment="Left" Margin="10,24,0,0" VerticalAlignment="Top" Height="396" Width="972" Grid.ColumnSpan="2" Background="White">
+                    <Grid.Effect>
+                        <DropShadowEffect Color="#FFCBCACA"/>
+                    </Grid.Effect>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto"/>
                         <ColumnDefinition Width="Auto"/>
@@ -32,15 +35,15 @@
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
-                    <Label Content="Building" Grid.Column="1" HorizontalAlignment="Left" Grid.Row="7" VerticalAlignment="Center" Margin="466.2,77.8,-311.2,-67.8"/>
-                    <ComboBox x:Name="buildingTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="22" Grid.Row="7" VerticalAlignment="Center" Width="120" Margin="557.2,80.8,-469.2,-66.8">
+                    <Label Content="Building" Grid.Column="1" HorizontalAlignment="Left" Grid.Row="7" VerticalAlignment="Center" Margin="515.2,70.4,-324.8,-45.2"/>
+                    <ComboBox x:Name="buildingTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="33" Grid.Row="7" VerticalAlignment="Center" Width="120" Margin="606.2,63.4,-481.4,-42.8">
                         <ComboBoxItem Content="A-block"/>
                         <ComboBoxItem Content="B-block"/>
                         <ComboBoxItem Content="New building"/>
                         <ComboBoxItem Content="D-block"/>
                     </ComboBox>
-                    <Label Content="Center" Grid.Column="1" HorizontalAlignment="Left" Grid.Row="7" VerticalAlignment="Top" Margin="466.2,17.8,-303.2,-6.8"/>
-                    <ComboBox x:Name="centerTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="23" Grid.Row="7" VerticalAlignment="Bottom" Width="120" Margin="557.2,0,-469.2,-11.8">
+                    <Label Content="Center" Grid.Column="1" HorizontalAlignment="Left" Grid.Row="7" VerticalAlignment="Top" Margin="515.2,12.4,-316.8,0"/>
+                    <ComboBox x:Name="centerTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="31" Grid.Row="7" VerticalAlignment="Bottom" Width="120" Margin="606.2,0,-480.6,13">
                         <ComboBoxItem Content="Malabe"/>
                         <ComboBoxItem Content="Metro"/>
                         <ComboBoxItem Content="Matara"/>
@@ -48,19 +51,19 @@
                         <ComboBoxItem Content="Kurunagala"/>
                         <ComboBoxItem Content="Jaffna"/>
                     </ComboBox>
-                    <Label Content="Department" Grid.Column="1" HorizontalAlignment="Left" Grid.Row="3" VerticalAlignment="Center" RenderTransformOrigin="3.424,0.625" Margin="466.2,45.6,-332.2,7.8"/>
-                    <TextBox x:Name="deptTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="24" Grid.Row="3" VerticalAlignment="Center" Width="120" Margin="557.2,44.6,-469.2,9.8"/>
-                    <Label Content="Employee ID" Grid.Column="1" HorizontalAlignment="Left" Grid.Row="7" VerticalAlignment="Center" RenderTransformOrigin="0.702,1.196" Margin="32.2,20.8,0,-10.8"/>
-                    <TextBox x:Name="emp_idTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="23" Grid.Row="7" VerticalAlignment="Center" Width="120" Margin="141.2,21.8,-53.2,-8.8"/>
-                    <Label Content="Faculty" Grid.Column="1" HorizontalAlignment="Left" Grid.Row="7" VerticalAlignment="Center" Margin="32.2,76.8,0,-65.8"/>
-                    <ComboBox x:Name="facultyTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="23" Grid.Row="7" Text="Faculty" VerticalAlignment="Center" Width="120" Margin="141.2,79.8,-53.2,-66.8">
+                    <Label Content="Department" Grid.Column="1" HorizontalAlignment="Left" Grid.Row="3" VerticalAlignment="Center" RenderTransformOrigin="3.424,0.625" Margin="513.2,51.6,-345.6,10.8"/>
+                    <TextBox x:Name="deptTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="24" Grid.Row="3" VerticalAlignment="Center" Width="120" Margin="604.2,50.6,-482.6,11.8"/>
+                    <Label Content="Employee ID" Grid.Column="1" HorizontalAlignment="Left" Grid.Row="7" VerticalAlignment="Center" RenderTransformOrigin="0.702,1.196" Margin="78.2,13.4,0,11.8"/>
+                    <TextBox x:Name="emp_idTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="23" Grid.Row="7" VerticalAlignment="Center" Width="120" Margin="187.2,14.4,-64.8,13.8"/>
+                    <Label Content="Faculty" Grid.Column="1" HorizontalAlignment="Left" Grid.Row="7" VerticalAlignment="Center" Margin="78.2,69.4,0,-43.2"/>
+                    <ComboBox x:Name="facultyTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="34" Grid.Row="7" Text="Faculty" VerticalAlignment="Center" Width="120" Margin="187.2,62.4,-63.2,-43.6">
                         <ComboBoxItem Content="Computing"/>
                         <ComboBoxItem Content="Business"/>
                         <ComboBoxItem Content="Engineering"/>
                         <ComboBoxItem Content="Humanities and Sciences"/>
                     </ComboBox>
-                    <Label Content="Level" Grid.Column="1" HorizontalAlignment="Left" Grid.Row="7" VerticalAlignment="Center" Margin="268.2,156.8,-97.2,-146.8"/>
-                    <ComboBox x:Name="lvlTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="23" Grid.Row="7" VerticalAlignment="Center" Width="120" Margin="334.2,157.8,-246.2,-144.8">
+                    <Label Content="Level" Grid.Column="1" HorizontalAlignment="Left" Grid.Row="7" VerticalAlignment="Center" Margin="310.2,141.4,-103.8,-116.2"/>
+                    <ComboBox x:Name="lvlTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="34" Grid.Row="7" VerticalAlignment="Center" Width="120" Margin="352.2,134.4,-225.8,-114">
                         <ComboBoxItem Content="Professor"/>
                         <ComboBoxItem Content="Assistant Professor"/>
                         <ComboBoxItem Content="Senior Lecturer(HG) "/>
@@ -69,13 +72,13 @@
                         <ComboBoxItem Content="Assistant Lecturer"/>
                         <ComboBoxItem Content="Instructors"/>
                     </ComboBox>
-                    <Label Content="Name" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Row="3" Margin="32.2,45.6,0,7.8"/>
-                    <TextBox x:Name="nameTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="23" VerticalAlignment="Center" Width="120" Grid.Row="3" Margin="141.2,44.6,-53.2,10.8"/>
+                    <Label Content="Name" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Row="3" Margin="76.2,48.6,0,7.2"/>
+                    <TextBox x:Name="nameTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="23" VerticalAlignment="Center" Width="120" Grid.Row="3" Margin="185.2,47.6,-95.6,10.2"/>
                 </Grid>
-                <Button x:Name="add_lecture_btn" Content="Add" HorizontalAlignment="Left" Margin="356,330,0,0" VerticalAlignment="Top" Width="75" Click="add_lecture_btn_Click" />
-                <Button x:Name="edit_lecture_btn" Content="Save" HorizontalAlignment="Left" Margin="356,330,0,0" VerticalAlignment="Top" Width="75" Click="edit_lecture_btn_Click" Background="Green"/>
-                <TextBlock HorizontalAlignment="Center" Margin="356,24,20.2,0" TextWrapping="Wrap" Text="Lecturers" VerticalAlignment="Top" FontSize="20" FontWeight="Bold" Width="99" />
-                <DataGrid x:Name="lecturerDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding}" Margin="10,449,10.2,10" RowDetailsVisibilityMode="VisibleWhenSelected" Grid.ColumnSpan="2" CanUserAddRows="False">
+                <Button x:Name="add_lecture_btn" Content="Add" HorizontalAlignment="Left" Margin="391,330,0,0" VerticalAlignment="Top" Width="75" Click="add_lecture_btn_Click" />
+                <Button x:Name="edit_lecture_btn" Content="Save" HorizontalAlignment="Left" Margin="391,330,0,0" VerticalAlignment="Top" Width="75" Click="edit_lecture_btn_Click" Background="Green"/>
+                <TextBlock HorizontalAlignment="Center" Margin="382,30,172.6,0" TextWrapping="Wrap" Text="Lecturers" VerticalAlignment="Top" FontSize="20" FontWeight="Bold" Width="99" RenderTransformOrigin="-0.017,0.436" />
+                <DataGrid x:Name="lecturerDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding}" Margin="10,449,128.4,9" RowDetailsVisibilityMode="VisibleWhenSelected" Grid.ColumnSpan="2" CanUserAddRows="False">
                     <DataGrid.Columns>
                         <DataGridTextColumn x:Name="nameColumn" Binding="{Binding name}" Header="Name" Width="Auto"/>
                         <DataGridTextColumn x:Name="emp_idColumn" Binding="{Binding emp_id}" Header="Employee ID" Width="Auto"/>

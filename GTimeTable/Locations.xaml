@@ -55,8 +55,8 @@
                                 <Label Content="Building Name:" Grid.Column="0" HorizontalAlignment="Left" Margin="3,3.2,0,2.8" Grid.Row="1" VerticalAlignment="Center"/>
                                 <TextBox x:Name="buildingNameTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="3.4,4.2,0,4.8" Grid.Row="1" Text="{Binding name, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120" Grid.ColumnSpan="2"/>
                             </Grid>
-                            <Button x:Name="saveBuildingName" Content="Save" HorizontalAlignment="Left" Margin="296,52,0,0" VerticalAlignment="Top" Width="75" Click="SaveBuildingName_Click" />
-                            <Button x:Name="addBuildingName" Content="Add" HorizontalAlignment="Left" Margin="384,52,0,0" VerticalAlignment="Top" Width="75" Background="Green" Click="AddBuildingName_Click"/>
+                            <Button x:Name="saveBuildingName" Content="Save" HorizontalAlignment="Left" Margin="384,52,0,0" VerticalAlignment="Top" Width="75" Click="SaveBuildingName_Click" Background="Green"/>
+                            <Button x:Name="addBuildingName" Content="Add" HorizontalAlignment="Left" Margin="384,52,0,0" VerticalAlignment="Top" Width="75"  Click="AddBuildingName_Click"/>
                         </Grid>
                     </TabItem>
                     <TabItem Header="Room">
