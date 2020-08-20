@@ -104,5 +104,7 @@ namespace GTimeTable
             saveBuildingName.Visibility = Visibility.Hidden;
             addBuildingName.Visibility = Visibility.Visible;
         }
+
+        
     }
 }
