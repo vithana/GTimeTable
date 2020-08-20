@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BespokeFusion;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -62,7 +63,7 @@ namespace GTimeTable
             buildingNameTextBox.Text = updateBuilding.name.ToString();
             buildingId = updateBuilding.id;
             saveBuildingName.Visibility = Visibility.Visible;
-            addBuildingName.IsEnabled = false;
+            addBuildingName.Visibility = Visibility.Hidden;
         }
 
         private void building_deleteBtn_Click(object sender, RoutedEventArgs e)
@@ -76,11 +77,19 @@ namespace GTimeTable
 
         private void AddBuildingName_Click(object sender, RoutedEventArgs e)
         {
-            building.name = buildingNameTextBox.Text;
-            _db.Buildings.Add(building);
-            _db.SaveChanges();
-            buildingDataGrid.ItemsSource = _db.Buildings.ToList();
-            clean();
+            if(buildingNameTextBox.Text == "")
+            {
+                MaterialMessageBox.ShowError(@"Please Enter Building Name");
+            }
+            else
+            {
+                building.name = buildingNameTextBox.Text;
+                _db.Buildings.Add(building);
+                _db.SaveChanges();
+                buildingDataGrid.ItemsSource = _db.Buildings.ToList();
+                clean();
+            }
+            
         }
 
         private void SaveBuildingName_Click(object sender, RoutedEventArgs e)
@@ -93,7 +102,7 @@ namespace GTimeTable
             buildingDataGrid.ItemsSource = _db.Buildings.ToList();
             clean();
             saveBuildingName.Visibility = Visibility.Hidden;
-            addBuildingName.IsEnabled = true;
+            addBuildingName.Visibility = Visibility.Visible;
         }
     }
 }
