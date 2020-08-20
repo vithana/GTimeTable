@@ -17,7 +17,7 @@
                     <ColumnDefinition Width="475*"/>
                     <ColumnDefinition Width="332*"/>
                 </Grid.ColumnDefinitions>
-                <Grid x:Name="grid1" HorizontalAlignment="Left" Margin="10,24,-147.8,0" VerticalAlignment="Top" Height="390" Width="945" Grid.ColumnSpan="2" Background="#FFFDFCFC">
+                <Grid x:Name="grid1" HorizontalAlignment="Left" Margin="10,24,-147.8,0" VerticalAlignment="Top" Height="390" Width="945" Grid.ColumnSpan="2">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto"/>
                         <ColumnDefinition Width="Auto"/>
@@ -32,12 +32,12 @@
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
-                    <Label Content="Number of lab hours" Grid.Column="1" HorizontalAlignment="Left" Grid.Row="7" VerticalAlignment="Center" Margin="432.2,82.2,-245.8,-67.2"/>
-                    <TextBox x:Name="lab_hrsTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="22" Grid.Row="7" VerticalAlignment="Center" Width="120" Margin="604.2,87,-346.6,-59.4"/>
-                    <Label Content="Number of tutorial hours" Grid.Column="1" HorizontalAlignment="Left" Grid.Row="7" VerticalAlignment="Top" Margin="432.2,25.2,-266.2,-7.8" RenderTransformOrigin="0.19,1.074"/>
-                    <TextBox x:Name="tute_hrsTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="23" Grid.Row="7" VerticalAlignment="Bottom" Width="120" Margin="604.2,0,-345,-2.8"/>
-                    <Label Content="Number of lecture hours" Grid.Column="1" HorizontalAlignment="Left" Grid.Row="3" VerticalAlignment="Center" RenderTransformOrigin="3.424,0.625" Margin="432.2,45.6,-260.4,11"/>
-                    <TextBox x:Name="lec_hrsTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="24" Grid.Row="3" VerticalAlignment="Center" Width="120" Margin="604.2,47.6,-344.2,11.6"/>
+                    <Label Content="Number of lab hours" Grid.Column="1" HorizontalAlignment="Left" Grid.Row="7" VerticalAlignment="Center" Margin="489.2,91.4,-227.6,-62.8"/>
+                    <TextBox x:Name="lab_hrsTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="22" Grid.Row="7" VerticalAlignment="Center" Width="120" Margin="661.2,91.4,-399.6,-59.8"/>
+                    <Label Content="Number of tutorial hours" Grid.Column="1" HorizontalAlignment="Left" Grid.Row="7" VerticalAlignment="Top" Margin="489.2,27.4,-250.6,0" RenderTransformOrigin="0.19,1.074"/>
+                    <TextBox x:Name="tute_hrsTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="23" Grid.Row="7" VerticalAlignment="Bottom" Width="120" Margin="661.2,0,-399.6,-5.8"/>
+                    <Label Content="Number of lecture hours" Grid.Column="1" HorizontalAlignment="Left" Grid.Row="3" VerticalAlignment="Center" RenderTransformOrigin="3.424,0.625" Margin="489.2,49.6,-248.6,9.2"/>
+                    <TextBox x:Name="lec_hrsTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="24" Grid.Row="3" VerticalAlignment="Center" Width="120" Margin="661.2,51.6,-399.6,9.2"/>
                     <Label Content="Subject Code" Grid.Column="1" HorizontalAlignment="Left" Grid.Row="7" VerticalAlignment="Center" RenderTransformOrigin="0.702,1.196" Margin="32.2,20.8,0,-10.8"/>
                     <TextBox x:Name="codeTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="23" Grid.Row="7" VerticalAlignment="Center" Width="120" Margin="141.2,21.8,-53.2,-8.8"/>
                     <Label Content="Offered Year" Grid.Column="1" HorizontalAlignment="Left" Grid.Row="7" VerticalAlignment="Center" Margin="32.2,76.8,0,-65.8"/>
@@ -54,8 +54,8 @@
                     </ComboBox>
                     <Label Content="Subject Name" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Row="3" Margin="32.2,45.6,0,7.8"/>
                     <TextBox x:Name="nameTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="23" VerticalAlignment="Center" Width="120" Grid.Row="3" Margin="141.2,44.6,-53.2,10.8"/>
-                    <Label Content="Number of evaluation hours" Grid.Column="1" HorizontalAlignment="Left" Grid.Row="7" VerticalAlignment="Center" Margin="429.2,145,-212,-122.2"/>
-                    <TextBox x:Name="eval_hrsTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="22" Grid.Row="7" VerticalAlignment="Center" Width="120" Margin="604.2,146,-345.8,-117.6"/>
+                    <Label Content="Number of evaluation hours" Grid.Column="1" HorizontalAlignment="Left" Grid.Row="7" VerticalAlignment="Center" Margin="486.2,150.4,-263.6,-121.8"/>
+                    <TextBox x:Name="eval_hrsTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="22" Grid.Row="7" VerticalAlignment="Center" Width="120" Margin="661.2,148.4,-399.6,-116.8"/>
                 </Grid>
                 <Button x:Name="add_subject_btn" Content="Add" HorizontalAlignment="Left" Margin="356,330,0,0" VerticalAlignment="Top" Width="75" Click="add_subject_btn_Click" />
                 <Button x:Name="edit_subject_btn" Content="Save" HorizontalAlignment="Left" Margin="356,330,0,0" VerticalAlignment="Top" Width="75" Click="edit_subject_btn_Click" Background="Green"/>

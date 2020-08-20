@@ -93,6 +93,12 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>DataSet1.xsd</DependentUpon>
     </Compile>
+    <Compile Include="frmStudent.xaml.cs">
+      <DependentUpon>frmStudent.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="frmTags.xaml.cs">
+      <DependentUpon>frmTags.xaml</DependentUpon>
+    </Compile>
     <Compile Include="GTimeTable.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -114,6 +120,12 @@
     <Compile Include="Lecturers.xaml.cs">
       <DependentUpon>Lecturers.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Staticstic.xaml.cs">
+      <DependentUpon>Staticstic.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Student.cs">
+      <DependentUpon>GTimeTable.tt</DependentUpon>
+    </Compile>
     <Compile Include="Subject.cs">
       <DependentUpon>GTimeTable.tt</DependentUpon>
     </Compile>
@@ -122,6 +134,9 @@
     </Compile>
     <Compile Include="Locations.xaml.cs">
       <DependentUpon>Locations.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Tag.cs">
+      <DependentUpon>GTimeTable.tt</DependentUpon>
     </Compile>
     <Compile Include="TimeTableSlot.cs">
       <DependentUpon>GTimeTable.tt</DependentUpon>
@@ -141,6 +156,14 @@
     <Compile Include="WorkingTimePerDay.cs">
       <DependentUpon>GTimeTable.tt</DependentUpon>
     </Compile>
+    <Page Include="frmStudent.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="frmTags.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Lecturers.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -161,6 +184,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Staticstic.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Subjects.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -215,8 +242,10 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="Properties\DataSources\Lecturer.datasource" />
+    <None Include="Properties\DataSources\Student.datasource" />
     <None Include="Properties\DataSources\Subject.datasource" />
     <None Include="Properties\DataSources\Building.datasource" />
+    <None Include="Properties\DataSources\Tag.datasource" />
     <None Include="Properties\DataSources\TimeTableSlot.datasource" />
     <None Include="Properties\DataSources\WorkingDay.datasource" />
     <None Include="Properties\DataSources\WorkingDaysAndHours.datasource" />

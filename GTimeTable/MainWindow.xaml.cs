@@ -54,9 +54,21 @@ namespace GTimeTable
                     GridPrincipal.Children.Clear();
                     GridPrincipal.Children.Add(new Subjects());
                     break;
+                case 3:
+                    GridPrincipal.Children.Clear();
+                    GridPrincipal.Children.Add(new frmStudent());
+                    break;
+                case 4:
+                    GridPrincipal.Children.Clear();
+                    GridPrincipal.Children.Add(new frmTags());
+                    break;
                 case 5:
                     GridPrincipal.Children.Clear();
                     GridPrincipal.Children.Add(new Locations());
+                    break;
+                case 8:
+                    GridPrincipal.Children.Clear();
+                    GridPrincipal.Children.Add(new Staticstic());
                     break;
                 default:
                     break;
