@@ -18,9 +18,6 @@
                     <ColumnDefinition Width="332*"/>
                 </Grid.ColumnDefinitions>
                 <Grid x:Name="grid1" DataContext="{StaticResource lecturerViewSource}" HorizontalAlignment="Left" Margin="10,24,0,0" VerticalAlignment="Top" Height="396" Width="972" Grid.ColumnSpan="2" Background="White">
-                    <Grid.Effect>
-                        <DropShadowEffect Color="#FFCBCACA"/>
-                    </Grid.Effect>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto"/>
                         <ColumnDefinition Width="Auto"/>
@@ -72,7 +69,7 @@
                         <ComboBoxItem Content="Assistant Lecturer"/>
                         <ComboBoxItem Content="Instructors"/>
                     </ComboBox>
-                    <Label Content="Name" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Row="3" Margin="76.2,48.6,0,7.2"/>
+                    <Label Content="Name" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Row="3" Margin="76.2,48.6,0,7.2" Background="{x:Null}"/>
                     <TextBox x:Name="nameTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="23" VerticalAlignment="Center" Width="120" Grid.Row="3" Margin="185.2,47.6,-95.6,10.2"/>
                 </Grid>
                 <Button x:Name="add_lecture_btn" Content="Add" HorizontalAlignment="Left" Margin="391,330,0,0" VerticalAlignment="Top" Width="75" Click="add_lecture_btn_Click" />
