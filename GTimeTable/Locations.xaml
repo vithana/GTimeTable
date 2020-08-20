@@ -15,9 +15,6 @@
             <Grid HorizontalAlignment="Left" Height="857" Margin="10,10,-0.4,0" VerticalAlignment="Top" Width="1120">
                 <TextBlock HorizontalAlignment="Center" Margin="487,10,543,0" TextWrapping="Wrap" Text="Locations" VerticalAlignment="Top" FontSize="20" FontWeight="Bold"/>
                 <TabControl HorizontalAlignment="Left" Height="602" Margin="0,74,0,0" VerticalAlignment="Top" Width="1034">
-                    <TabControl.Effect>
-                        <DropShadowEffect/>
-                    </TabControl.Effect>
                     <TabItem Header="Building">
                         <Grid DataContext="{StaticResource buildingViewSource}">
                             <DataGrid x:Name="buildingDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding}" Margin="41,126,42,56.8" RowDetailsVisibilityMode="VisibleWhenSelected" CanUserAddRows="False">
@@ -55,12 +52,36 @@
                                 <Label Content="Building Name:" Grid.Column="0" HorizontalAlignment="Left" Margin="3,3.2,0,2.8" Grid.Row="1" VerticalAlignment="Center"/>
                                 <TextBox x:Name="buildingNameTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="3.4,4.2,0,4.8" Grid.Row="1" Text="{Binding name, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120" Grid.ColumnSpan="2"/>
                             </Grid>
-                            <Button x:Name="saveBuildingName" Content="Save" HorizontalAlignment="Left" Margin="296,52,0,0" VerticalAlignment="Top" Width="75" Click="SaveBuildingName_Click" />
-                            <Button x:Name="addBuildingName" Content="Add" HorizontalAlignment="Left" Margin="384,52,0,0" VerticalAlignment="Top" Width="75" Background="Green" Click="AddBuildingName_Click"/>
+                            <Button x:Name="saveBuildingName" Content="Save" HorizontalAlignment="Left" Margin="384,52,0,0" VerticalAlignment="Top" Width="75" Click="SaveBuildingName_Click" Background="Green"/>
+                            <Button x:Name="addBuildingName" Content="Add" HorizontalAlignment="Left" Margin="384,52,0,0" VerticalAlignment="Top" Width="75"  Click="AddBuildingName_Click"/>
                         </Grid>
                     </TabItem>
                     <TabItem Header="Room">
-                        <Grid Background="White"/>
+                        <Grid Background="White">
+                            <TextBlock HorizontalAlignment="Left" Margin="170,66,0,0" TextWrapping="Wrap" Text="Building" VerticalAlignment="Top"/>
+                            <ComboBox HorizontalAlignment="Left" Margin="236,49,0,0" VerticalAlignment="Top" Width="170" Height="33">
+                                <ComboBoxItem ></ComboBoxItem>
+                            </ComboBox>
+                            <TextBlock HorizontalAlignment="Left" Margin="632,65,0,0" TextWrapping="Wrap" Text="Capacity" VerticalAlignment="Top"/>
+                            <TextBox HorizontalAlignment="Left" Height="23" Margin="705,61,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="178"/>
+                            <TextBlock HorizontalAlignment="Left" Margin="170,114,0,0" TextWrapping="Wrap" Text="Room ID" VerticalAlignment="Top"/>
+                            <TextBox HorizontalAlignment="Left" Height="23" Margin="236,107,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="170" />
+                            <TextBlock HorizontalAlignment="Left" Margin="632,114,0,0" TextWrapping="Wrap" Text="Room Type" VerticalAlignment="Top" Width="68"/>
+                            <ComboBox HorizontalAlignment="Left" Margin="705,97,0,0" VerticalAlignment="Top" Width="178" Height="33"/>
+                            <TextBlock HorizontalAlignment="Left" Margin="170,168,0,0" TextWrapping="Wrap" Text="Room Type" VerticalAlignment="Top" Width="68"/>
+                            <ComboBox HorizontalAlignment="Left" Margin="236,151,0,0" VerticalAlignment="Top" Width="170" Height="33"/>
+                            <Button Content="Add" HorizontalAlignment="Center" Margin="493,220,460,0" VerticalAlignment="Top" Width="75"/>
+                            <DataGrid HorizontalAlignment="Left" Height="236" Margin="86,281,0,0" VerticalAlignment="Top" Width="866" AutoGenerateColumns="False" CanUserAddRows="False">
+                                <DataGrid.Columns>
+                                    <DataGridTextColumn Header="Building" />
+                                    <DataGridTextColumn Header="RoomID" />
+                                    <DataGridTextColumn Header="Faculty" />
+                                    <DataGridTextColumn Header="Capacity" />
+                                    <DataGridTextColumn Header="Room Type" />
+                                    <DataGridTextColumn Header="Action" />
+                                </DataGrid.Columns>
+                            </DataGrid>
+                        </Grid>
                     </TabItem>
                     <TabItem Header="Subject Preferences">
                         <Grid Background="#FFE5E5E5"/>

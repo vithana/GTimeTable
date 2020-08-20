@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BespokeFusion;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -91,11 +92,23 @@ namespace GTimeTable
         //Add working days per week
         private void AddWorkingDaysPerWeek_Click(object sender, RoutedEventArgs e)
         {
-            workingDaysPerWeek.number = int.Parse(numberTextBox.Text);
-            _db.WorkingDaysPerWeeks.Add(workingDaysPerWeek);
-            _db.SaveChanges();
-            workingDaysPerWeekDataGrid.ItemsSource = _db.WorkingDaysPerWeeks.ToList();
-            clean();
+            if(numberTextBox.Text == "")
+            {                
+                MaterialMessageBox.ShowError(@"Please Enter Working Days Per Week" );
+            }
+            else if (workingDaysPerWeekDataGrid.Items.Count == 1)
+            {
+                MaterialMessageBox.Show(@"You already added working days per week.Please remove it or update it" );
+            }
+            else
+            {
+                workingDaysPerWeek.number = int.Parse(numberTextBox.Text);
+                _db.WorkingDaysPerWeeks.Add(workingDaysPerWeek);
+                _db.SaveChanges();
+                workingDaysPerWeekDataGrid.ItemsSource = _db.WorkingDaysPerWeeks.ToList();
+                clean();
+            }
+            
         }
 
         //get details of working days of week
@@ -108,7 +121,7 @@ namespace GTimeTable
             numberTextBox.Text = updateDays.number.ToString();
             workingDaysPerWeekID = updateDays.id;
             workingDaysPerWeekSave.Visibility = Visibility.Visible;
-            addWorkingDaysPerWeek.IsEnabled = false;
+            addWorkingDaysPerWeek.Visibility = Visibility.Hidden;
 
 
         }
@@ -124,7 +137,7 @@ namespace GTimeTable
             workingDaysPerWeekDataGrid.ItemsSource = _db.WorkingDaysPerWeeks.ToList();
             clean();
             workingDaysPerWeekSave.Visibility = Visibility.Hidden;
-            addWorkingDaysPerWeek.IsEnabled = true;
+            addWorkingDaysPerWeek.Visibility = Visibility.Visible;
 
         }
 
@@ -144,11 +157,23 @@ namespace GTimeTable
         //Add working time per day
         private void Add_Time_Per_Day_Button(object sender, RoutedEventArgs e)
         {
-            time.number = int.Parse(time_per_day.Text);
-            _db.WorkingTimePerDays.Add(time);
-            _db.SaveChanges();
-            workingTimePerDayDataGrid.ItemsSource = _db.WorkingTimePerDays.ToList();
-            clean();
+            if(time_per_day.Text == "")
+            {
+                MaterialMessageBox.ShowError(@"Please Enter Working Time Per Day");
+            }
+            else if (workingTimePerDayDataGrid.Items.Count == 1)
+            {
+                MaterialMessageBox.Show(@"You already added working time per day.Please remove it or update it");
+            }
+            else
+            {
+                time.number = int.Parse(time_per_day.Text);
+                _db.WorkingTimePerDays.Add(time);
+                _db.SaveChanges();
+                workingTimePerDayDataGrid.ItemsSource = _db.WorkingTimePerDays.ToList();
+                clean();
+            }
+            
         }
 
         //Get details of working time per day
@@ -161,7 +186,7 @@ namespace GTimeTable
             time_per_day.Text = updateTime.number.ToString();
             workingTimePerDayId = updateTime.id;
             saveTimePerDayButton.Visibility = Visibility.Visible;
-            addWorkingTimePerDayWithLunch.IsEnabled = false;
+            addWorkingTimePerDayWithLunch.Visibility = Visibility.Visible;
         }
 
         //Delete working time per day
@@ -185,7 +210,7 @@ namespace GTimeTable
             workingTimePerDayDataGrid.ItemsSource = _db.WorkingTimePerDays.ToList();
             clean();
             saveTimePerDayButton.Visibility = Visibility.Hidden;
-            addWorkingTimePerDayWithLunch.IsEnabled = true;
+            addWorkingTimePerDayWithLunch.Visibility = Visibility.Visible; 
         }
 
         //Add working Days
@@ -213,7 +238,7 @@ namespace GTimeTable
             dayComboBox.SelectedItem = updateDay.ToString();
             workingDaysId = updateDay.id;
             saveWorkingDays_btn.Visibility = Visibility.Visible;
-            addWorkingDays_btn.IsEnabled = false;
+            addWorkingDays_btn.Visibility = Visibility.Visible;
         }
 
         //Delete working days
@@ -246,7 +271,7 @@ namespace GTimeTable
             dayComboBox.SelectedValue = updateTimeSlot.ToString();
             timeSlotId = updateTimeSlot.id;
             saveSlotsForTimeTable_btn.Visibility = Visibility.Visible;
-            addSlotsForTimeTable_btn.IsEnabled = false;
+            addSlotsForTimeTable_btn.Visibility = Visibility.Visible;
         }
 
         //Delete time slots

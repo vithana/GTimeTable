@@ -32,25 +32,25 @@
             <ListView x:Name="ListViewMenu" Margin="0 100 0 0" Foreground="LightGray" FontFamily="Champagne &amp; Limousines" FontSize="18" SelectionChanged="ListViewMenu_SelectionChanged" SelectedIndex="0">
                 <ListViewItem Height="60">
                     <StackPanel Orientation="Horizontal">
-                        <materialDesign:PackIcon Kind="Home" Width="30" Height="30" VerticalAlignment="Center" Margin="5"/>
-                        <TextBlock Text="Lectures" FontSize="17" VerticalAlignment="Center" Margin="20 0"/>
+                        <materialDesign:PackIcon Kind="Human" Width="30" Height="30" VerticalAlignment="Center" Margin="5"/>
+                        <TextBlock Text="Lecturers" FontSize="17" VerticalAlignment="Center" Margin="20 0"/>
                     </StackPanel>
                 </ListViewItem>
                 <ListViewItem Height="60">
                     <StackPanel Orientation="Horizontal">
-                        <materialDesign:PackIcon Kind="FoodForkDrink" Width="30" Height="30" VerticalAlignment="Center" Margin="5"/>
+                        <materialDesign:PackIcon Kind="Clock" Width="30" Height="30" VerticalAlignment="Center" Margin="5"/>
                         <TextBlock Text="Working Days &amp; Hours" FontSize="17" VerticalAlignment="Center" Margin="20 0"/>
                     </StackPanel>
                 </ListViewItem>
                 <ListViewItem Height="60">
                     <StackPanel Orientation="Horizontal">
-                        <materialDesign:PackIcon Kind="FormatListBulleted" Width="30" Height="30" VerticalAlignment="Center" Margin="5"/>
+                        <materialDesign:PackIcon Kind="BookmarkOutline" Width="30" Height="30" VerticalAlignment="Center" Margin="5"/>
                         <TextBlock Text="Subjects" FontSize="17" VerticalAlignment="Center" Margin="20 0"/>
                     </StackPanel>
                 </ListViewItem>
                 <ListViewItem Height="60">
                     <StackPanel Orientation="Horizontal">
-                        <materialDesign:PackIcon Kind="TruckDelivery" Width="30" Height="30" VerticalAlignment="Center" Margin="5"/>
+                        <materialDesign:PackIcon Kind="HumanChild" Width="30" Height="30" VerticalAlignment="Center" Margin="5"/>
                         <TextBlock Text="Students" FontSize="17" VerticalAlignment="Center" Margin="20 0"/>
                     </StackPanel>
                 </ListViewItem>
@@ -62,31 +62,31 @@
                 </ListViewItem>
                 <ListViewItem Height="60">
                     <StackPanel Orientation="Horizontal">
-                        <materialDesign:PackIcon Kind="AccountStar" Width="30" Height="30" VerticalAlignment="Center" Margin="5"/>
+                        <materialDesign:PackIcon Kind="Map" Width="30" Height="30" VerticalAlignment="Center" Margin="5"/>
                         <TextBlock Text="Locations" FontSize="17" VerticalAlignment="Center" Margin="20 0"/>
                     </StackPanel>
                 </ListViewItem>
                 <ListViewItem Height="60">
                     <StackPanel Orientation="Horizontal">
-                        <materialDesign:PackIcon Kind="FormatListBulleted" Width="30" Height="30" VerticalAlignment="Center" Margin="5"/>
+                        <materialDesign:PackIcon Kind="Repeat" Width="30" Height="30" VerticalAlignment="Center" Margin="5"/>
                         <TextBlock Text="Sessions" FontSize="17" VerticalAlignment="Center" Margin="20 0"/>
                     </StackPanel>
                 </ListViewItem>
                 <ListViewItem Height="60">
                     <StackPanel Orientation="Horizontal">
-                        <materialDesign:PackIcon Kind="TruckDelivery" Width="30" Height="30" VerticalAlignment="Center" Margin="5"/>
+                        <materialDesign:PackIcon Kind="NaturePeople" Width="30" Height="30" VerticalAlignment="Center" Margin="5"/>
                         <TextBlock Text="Managment" FontSize="17" VerticalAlignment="Center" Margin="20 0"/>
                     </StackPanel>
                 </ListViewItem>
                 <ListViewItem Height="60">
                     <StackPanel Orientation="Horizontal">
-                        <materialDesign:PackIcon Kind="Cash" Width="30" Height="30" VerticalAlignment="Center" Margin="5"/>
+                        <materialDesign:PackIcon Kind="NestThermostat" Width="30" Height="30" VerticalAlignment="Center" Margin="5"/>
                         <TextBlock Text="Statistics" FontSize="17" VerticalAlignment="Center" Margin="20 0"/>
                     </StackPanel>
                 </ListViewItem>
                 <ListViewItem Height="60">
                     <StackPanel Orientation="Horizontal">
-                        <materialDesign:PackIcon Kind="AccountStar" Width="30" Height="30" VerticalAlignment="Center" Margin="5"/>
+                        <materialDesign:PackIcon Kind="Timetable" Width="30" Height="30" VerticalAlignment="Center" Margin="5"/>
                         <TextBlock Text="Time Tables" FontSize="17" VerticalAlignment="Center" Margin="20 0"/>
                     </StackPanel>
                 </ListViewItem>
