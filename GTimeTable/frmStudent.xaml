@@ -1,0 +1,105 @@
+﻿<UserControl x:Class="GTimeTable.frmStudent"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:GTimeTable"
+             mc:Ignorable="d" 
+             Height="867.463" Width="820.831">
+    <UserControl.Resources>
+        <CollectionViewSource x:Key="StudentsViewSource" d:DesignSource="{d:DesignInstance {x:Type local:Lecturer}, CreateList=True}"/>
+        <CollectionViewSource x:Key="StudnetsViewSource" d:DesignSource="{d:DesignInstance {x:Type local:Tag}, CreateList=True}"/>
+        <CollectionViewSource x:Key="studentViewSource" d:DesignSource="{d:DesignInstance {x:Type local:Student}, CreateList=True}"/>
+    </UserControl.Resources>
+    <Grid>
+        <materialDesign:TransitioningContent x:Name="TrainsitionigContentSlide_student" OpeningEffect="{materialDesign:TransitionEffect SlideInFromLeft, Duration=0:0:0.1}">
+            <Grid  Margin="0,0,-10.2,0" Height="867" VerticalAlignment="Top" HorizontalAlignment="Right" Width="821" DataContext="{StaticResource studentViewSource}">
+                <TextBlock x:Name="textBlock_studnet" HorizontalAlignment="Left" Margin="315,10,0,0" TextWrapping="Wrap" Text="Student" VerticalAlignment="Top" FontWeight="Bold" FontSize="36"/>
+                <Grid x:Name="grid1" DataContext="{StaticResource studentViewSource}" HorizontalAlignment="Left" Margin="360,419,0,0" VerticalAlignment="Top">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Label Content="Academic Year:" Grid.Column="0" HorizontalAlignment="Left" Margin="-358,-312,0,327" Grid.Row="0" VerticalAlignment="Center"/>
+                    <ComboBox x:Name="acdamicYearComboBox" HorizontalAlignment="Left" Height="36" Margin="-211,-316,0,332" Grid.Row="0" Text="{Binding acdamicYear, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="109" FontSize="18">
+                        <ComboBoxItem Content="Y1"/>
+                        <ComboBoxItem Content="Y2"/>
+                        <ComboBoxItem Content="Y3"/>
+                        <ComboBoxItem Content="Y4"/>
+                    </ComboBox>
+                    <Label Content="Group Id:" HorizontalAlignment="Left" Margin="151,-219,-16.4,247.4" VerticalAlignment="Center" Grid.Column="1"/>
+                    <TextBox x:Name="groupIdTextBox" HorizontalAlignment="Left" Height="31" Margin="266,-224,-242.4,247.4" VerticalAlignment="Center" Width="170" Grid.Column="1" FontSize="14" IsEnabled="False"/>
+                    <Label Content="Group No:" Grid.Column="0" HorizontalAlignment="Left" Margin="-347,-204,0,232.4" VerticalAlignment="Center"/>
+                    <ComboBox x:Name="groupNoComboBox" HorizontalAlignment="Left" Height="38" Margin="-224,-224,0,240.4" Text="{Binding groupNo, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="154" FontSize="18" SelectionChanged="GroupNocomboboxOnchange">
+                        <ComboBoxItem Content="1"/>
+                        <ComboBoxItem Content="2"/>
+                        <ComboBoxItem Content="3"/>
+                        <ComboBoxItem Content="4"/>
+                    </ComboBox>
+                    <Label Content="Program:" Grid.Column="1" HorizontalAlignment="Left" Margin="184,-318,-81.8,333" VerticalAlignment="Center" RenderTransformOrigin="1.76,-4.203"/>
+                    <ComboBox x:Name="programComboBox" Grid.Column="1" HorizontalAlignment="Left" Height="39" Margin="291,-318,-250.8,331" Text="{Binding program, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="151" FontSize="18">
+                        <ComboBoxItem Content="SE"/>
+                        <ComboBoxItem Content="IT"/>
+                        <ComboBoxItem Content="CS"/>
+                        <ComboBoxItem Content="IS"/>
+                    </ComboBox>
+                    <Label Content="Semester:" Grid.Column="0" HorizontalAlignment="Left" Margin="-73,-313,0,328" VerticalAlignment="Center" Grid.ColumnSpan="2"/>
+                    <ComboBox x:Name="semesterComboBox" HorizontalAlignment="Left" Height="38" Margin="41,-319,0,333" Text="{Binding semester, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="119" Grid.Column="1" FontSize="18">
+                        <ComboBoxItem Content="S1"/>
+                        <ComboBoxItem Content="S2"/>
+                    </ComboBox>
+                    <Label Content="Sub Grop Id:" Grid.Column="1" HorizontalAlignment="Left" Margin="133,-137,-16.4,165.4" VerticalAlignment="Center"/>
+                    <TextBox x:Name="subGropIdTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="34" Margin="266,-145,-242.4,165.4" VerticalAlignment="Center" Width="170" FontSize="14" IsEnabled="False"/>
+                    <Label Content="Sub Group No:" Grid.Column="0" HorizontalAlignment="Left" Margin="-347,-129,0,157.4" VerticalAlignment="Center"/>
+                    <ComboBox x:Name="subGroupNoComboBox" HorizontalAlignment="Left" Height="41" Margin="-224,-152,0,165.4" Text="{Binding subGroupNo, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="154" FontSize="18" SelectionChanged="SubGroupNocomboboxOnchange">
+                        <ComboBoxItem Content="1"/>
+                        <ComboBoxItem Content="2"/>
+                    </ComboBox>
+                </Grid>
+                <Button x:Name="button_add_Student" Content="Add" HorizontalAlignment="Left" Margin="276,364,0,0" VerticalAlignment="Top" Width="217" Height="36" Click="button_add_Student_Click"/>
+                <DataGrid x:Name="studentDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding}" Margin="10,508,10,159" RowDetailsVisibilityMode="VisibleWhenSelected" CanUserAddRows="False">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn x:Name="Id" Binding="{Binding id}" Header="id" Width="SizeToHeader"/>
+                        <DataGridTextColumn x:Name="AcdamicYear" Binding="{Binding acdamicYear}" Header="acdamic Year" Width="SizeToHeader"/>
+                        <DataGridTextColumn x:Name="Semester" Binding="{Binding semester}" Header="semester" Width="SizeToHeader"/>
+                        <DataGridTextColumn x:Name="Program" Binding="{Binding program}" Header="program" Width="SizeToHeader"/>
+                        <DataGridTextColumn x:Name="GroupNo" Binding="{Binding groupNo}" Header="group No" Width="SizeToHeader"/>
+                        <DataGridTextColumn x:Name="GroupId" Binding="{Binding groupId}" Header="group Id" Width="SizeToHeader"/>
+                        <DataGridTextColumn x:Name="SubGroupNo" Binding="{Binding subGroupNo}" Header="sub Group No" Width="SizeToHeader"/>
+                        <DataGridTextColumn x:Name="SubGroupId" Binding="{Binding subGropId}" Header="sub Grop Id" Width="SizeToHeader"/>
+                        <DataGridTemplateColumn>
+                            <DataGridTemplateColumn.HeaderTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="Action" />
+                                </DataTemplate>
+                            </DataGridTemplateColumn.HeaderTemplate>
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal" >
+                                        <Button x:Name="updateLecturerBtn" Content="Update" Click="updateStudentBtn_Click"  Margin="0 0 5 0 " />
+                                        <Button x:Name="deleteLecturerBtn" Content="Delete" Click="deleteStudentBtn_Click"  Background="red" />
+                                    </StackPanel>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                    </DataGrid.Columns>
+                </DataGrid>
+                <Button x:Name="button_update_save" Content="Save" HorizontalAlignment="Left" Margin="276,364,0,0" VerticalAlignment="Top" Width="217" Background="Green" Click="button_update_save_Click" Height="36"/>
+
+
+            </Grid>
+
+        </materialDesign:TransitioningContent>
+    </Grid>
+</UserControl>

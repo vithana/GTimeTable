@@ -5,6 +5,13 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="GTimeTableModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Buildings">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="50" />
+        </EntityType>
         <EntityType Name="Lecturers">
           <Key>
             <PropertyRef Name="id" />
@@ -18,6 +25,19 @@
           <Property Name="building" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="lvl" Type="int" Nullable="false" />
           <Property Name="rank" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Student">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="acdamicYear" Type="nvarchar" MaxLength="50" />
+          <Property Name="semester" Type="nvarchar" MaxLength="50" />
+          <Property Name="program" Type="nvarchar" MaxLength="50" />
+          <Property Name="groupNo" Type="nvarchar" MaxLength="50" />
+          <Property Name="groupId" Type="nvarchar" MaxLength="50" />
+          <Property Name="subGroupNo" Type="nvarchar" MaxLength="50" />
+          <Property Name="subGropId" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="Subjects">
           <Key>
@@ -33,12 +53,12 @@
           <Property Name="lab_hrs" Type="int" Nullable="false" />
           <Property Name="eval_hrs" Type="int" Nullable="false" />
         </EntityType>
-        <EntityType Name="Buildings">
+        <EntityType Name="Tags">
           <Key>
             <PropertyRef Name="id" />
           </Key>
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="name" Type="nvarchar" MaxLength="50" />
+          <Property Name="tag" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <EntityType Name="TimeTableSlots">
           <Key>
@@ -69,9 +89,11 @@
           <Property Name="number" Type="int" Nullable="false" />
         </EntityType>
         <EntityContainer Name="GTimeTableModelStoreContainer">
-          <EntitySet Name="Lecturers" EntityType="Self.Lecturers" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Subjects" EntityType="Self.Subjects" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Buildings" EntityType="Self.Buildings" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Lecturers" EntityType="Self.Lecturers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Student" EntityType="Self.Student" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Subjects" EntityType="Self.Subjects" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tags" EntityType="Self.Tags" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TimeTableSlots" EntityType="Self.TimeTableSlots" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="WorkingDays" EntityType="Self.WorkingDays" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="WorkingDaysPerWeek" EntityType="Self.WorkingDaysPerWeek" Schema="dbo" store:Type="Tables" />
@@ -96,6 +118,8 @@
           <EntitySet Name="Lecturers" EntityType="GTimeTableModel.Lecturer" />
           <EntitySet Name="Subjects" EntityType="GTimeTableModel.Subject" />
           <EntitySet Name="Buildings" EntityType="GTimeTableModel.Building" />
+          <EntitySet Name="Tags" EntityType="GTimeTableModel.Tag" />
+          <EntitySet Name="Students" EntityType="GTimeTableModel.Student" />
         </EntityContainer>
         <EntityType Name="WorkingTimePerDay">
           <Key>
@@ -152,6 +176,26 @@
           </Key>
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Tag">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="tag1" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Student">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="acdamicYear" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="semester" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="program" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="groupNo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="groupId" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="subGroupNo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="subGropId" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -225,6 +269,28 @@
             <EntityTypeMapping TypeName="GTimeTableModel.Building">
               <MappingFragment StoreEntitySet="Buildings">
                 <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tags">
+            <EntityTypeMapping TypeName="GTimeTableModel.Tag">
+              <MappingFragment StoreEntitySet="Tags">
+                <ScalarProperty Name="tag1" ColumnName="tag" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Students">
+            <EntityTypeMapping TypeName="GTimeTableModel.Student">
+              <MappingFragment StoreEntitySet="Student">
+                <ScalarProperty Name="subGropId" ColumnName="subGropId" />
+                <ScalarProperty Name="subGroupNo" ColumnName="subGroupNo" />
+                <ScalarProperty Name="groupId" ColumnName="groupId" />
+                <ScalarProperty Name="groupNo" ColumnName="groupNo" />
+                <ScalarProperty Name="program" ColumnName="program" />
+                <ScalarProperty Name="semester" ColumnName="semester" />
+                <ScalarProperty Name="acdamicYear" ColumnName="acdamicYear" />
                 <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>
