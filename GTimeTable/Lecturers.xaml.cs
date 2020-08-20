@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BespokeFusion;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -95,20 +96,34 @@ namespace GTimeTable
                     break;
             }
 
-            lecturer.name = nameTextBox.Text;
-            lecturer.emp_id = emp_idTextBox.Text;
-            lecturer.faculty = facultyTextBox.Text;
-            lecturer.dept = deptTextBox.Text;
-            lecturer.center = centerTextBox.Text;
-            lecturer.building = buildingTextBox.Text;
-            lecturer.lvl = level;
-            lecturer.rank = level + "."+ emp_idTextBox.Text;
+            if (nameTextBox.Text == "" || emp_idTextBox.Text== "" || facultyTextBox.Text == "" 
+                || deptTextBox.Text == "" || centerTextBox.Text == "" || buildingTextBox.Text == "" 
+                || lvlTextBox.Text == ""
+            )
+            {
+                MaterialMessageBox.ShowError(@"Please Enter All the fields");
+            }
+            else {
+                if (emp_idTextBox.Text.Length != 6) {
+                    MaterialMessageBox.ShowError(@"Employee ID should have 6 digits");
+                }
+                else { 
+                    lecturer.name = nameTextBox.Text;
+                    lecturer.emp_id = emp_idTextBox.Text;
+                    lecturer.faculty = facultyTextBox.Text;
+                    lecturer.dept = deptTextBox.Text;
+                    lecturer.center = centerTextBox.Text;
+                    lecturer.building = buildingTextBox.Text;
+                    lecturer.lvl = level;
+                    lecturer.rank = level + "."+ emp_idTextBox.Text;
 
-            _db.Lecturers.Add(lecturer);
-            _db.SaveChanges();
+                    _db.Lecturers.Add(lecturer);
+                    _db.SaveChanges();
 
-            lecturerDataGrid.ItemsSource = _db.Lecturers.ToList();
-            clean();
+                    lecturerDataGrid.ItemsSource = _db.Lecturers.ToList();
+                    clean();
+                }
+            }
         }
 
         //get details of working days of week
@@ -208,21 +223,40 @@ namespace GTimeTable
                     break;
             }
 
-            lecturer.name = nameTextBox.Text;
-            lecturer.emp_id = emp_idTextBox.Text;
-            lecturer.faculty = facultyTextBox.Text;
-            lecturer.dept = deptTextBox.Text;
-            lecturer.center = centerTextBox.Text;
-            lecturer.building = buildingTextBox.Text;
-            lecturer.lvl = level;
-            lecturer.rank = level + "." + emp_idTextBox.Text;
+            if (nameTextBox.Text == "" || emp_idTextBox.Text == "" || facultyTextBox.Text == ""
+                || deptTextBox.Text == "" || centerTextBox.Text == "" || buildingTextBox.Text == ""
+                || lvlTextBox.Text == ""
+            )
+            {
+                MaterialMessageBox.ShowError(@"Please Enter All the fields");
+            }
+            else
+            {
+                if (emp_idTextBox.Text.Length != 6)
+                {
+                    MaterialMessageBox.ShowError(@"Employee ID should have 6 digits");
+                }
+                else
+                {
+                    lecturer.name = nameTextBox.Text;
+                    lecturer.emp_id = emp_idTextBox.Text;
+                    lecturer.faculty = facultyTextBox.Text;
+                    lecturer.dept = deptTextBox.Text;
+                    lecturer.center = centerTextBox.Text;
+                    lecturer.building = buildingTextBox.Text;
+                    lecturer.lvl = level;
+                    lecturer.rank = level + "." + emp_idTextBox.Text;
 
-            _db.SaveChanges();
-            lecturerDataGrid.ItemsSource = _db.Lecturers.ToList();
-            clean();
+                    _db.SaveChanges();
+                    lecturerDataGrid.ItemsSource = _db.Lecturers.ToList();
+                    clean();
 
-            edit_lecture_btn.Visibility = Visibility.Hidden;
-            add_lecture_btn.Visibility = Visibility.Visible;
+                    edit_lecture_btn.Visibility = Visibility.Hidden;
+                    add_lecture_btn.Visibility = Visibility.Visible;
+                }
+            }
+
+            
         }
     }
 }

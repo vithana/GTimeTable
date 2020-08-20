@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BespokeFusion;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -66,20 +67,30 @@ namespace GTimeTable
 
         private void add_subject_btn_Click(object sender, RoutedEventArgs e)
         {
-            subject.name = nameTextBox.Text;
-            subject.code = codeTextBox.Text;
-            subject.off_year = int.Parse(off_yearTextBox.Text);
-            subject.off_sem = int.Parse(off_semTextBox.Text);
-            subject.lec_hrs = int.Parse(lec_hrsTextBox.Text);
-            subject.tute_hrs = int.Parse(tute_hrsTextBox.Text);
-            subject.lab_hrs = int.Parse(lab_hrsTextBox.Text);
-            subject.eval_hrs = int.Parse(eval_hrsTextBox.Text);
+            if (nameTextBox.Text == "" || codeTextBox.Text == "" || off_yearTextBox.Text == ""
+                || off_semTextBox.Text == "" || off_semTextBox.Text == "" || lec_hrsTextBox.Text == ""
+                || tute_hrsTextBox.Text == "" || lab_hrsTextBox.Text == "" || eval_hrsTextBox.Text == ""
+            )
+            {
+                MaterialMessageBox.ShowError(@"Please Enter All the fields");
+            }
+            else
+            {
+                subject.name = nameTextBox.Text;
+                subject.code = codeTextBox.Text;
+                subject.off_year = int.Parse(off_yearTextBox.Text);
+                subject.off_sem = int.Parse(off_semTextBox.Text);
+                subject.lec_hrs = int.Parse(lec_hrsTextBox.Text);
+                subject.tute_hrs = int.Parse(tute_hrsTextBox.Text);
+                subject.lab_hrs = int.Parse(lab_hrsTextBox.Text);
+                subject.eval_hrs = int.Parse(eval_hrsTextBox.Text);
 
-            _db.Subjects.Add(subject);
-            _db.SaveChanges();
+                _db.Subjects.Add(subject);
+                _db.SaveChanges();
 
-            subjectDataGrid.ItemsSource = _db.Subjects.ToList();
-            clean();
+                subjectDataGrid.ItemsSource = _db.Subjects.ToList();
+                clean();
+            }
         }
 
         private void updateSubjectBtn_Click(object sender, RoutedEventArgs e)
@@ -111,7 +122,7 @@ namespace GTimeTable
             var deletedsubject = _db.Subjects.Where(m => m.id == Id).Single();
             _db.Subjects.Remove(deletedsubject);
             _db.SaveChanges();
-            subjectDataGrid.ItemsSource = _db.Lecturers.ToList();
+            subjectDataGrid.ItemsSource = _db.Subjects.ToList();
 
         }
 
@@ -122,22 +133,32 @@ namespace GTimeTable
                                  select m).Single();
 
 
+            if (nameTextBox.Text == "" || codeTextBox.Text == "" || off_yearTextBox.Text == ""
+                || off_semTextBox.Text == "" || off_semTextBox.Text == "" || lec_hrsTextBox.Text == ""
+                || tute_hrsTextBox.Text == "" || lab_hrsTextBox.Text == "" || eval_hrsTextBox.Text == ""
+            )
+            {
+                MaterialMessageBox.ShowError(@"Please Enter All the fields");
+            }
+            else
+            {
+                subject.name = nameTextBox.Text;
+                subject.code = codeTextBox.Text;
+                subject.off_year = int.Parse(off_yearTextBox.Text);
+                subject.off_sem = int.Parse(off_semTextBox.Text);
+                subject.lec_hrs = int.Parse(lec_hrsTextBox.Text);
+                subject.tute_hrs = int.Parse(tute_hrsTextBox.Text);
+                subject.lab_hrs = int.Parse(lab_hrsTextBox.Text);
+                subject.eval_hrs = int.Parse(eval_hrsTextBox.Text);
 
-            subject.name = nameTextBox.Text;
-            subject.code = codeTextBox.Text;
-            subject.off_year = int.Parse(off_yearTextBox.Text);
-            subject.off_sem = int.Parse(off_semTextBox.Text);
-            subject.lec_hrs = int.Parse(lec_hrsTextBox.Text);
-            subject.tute_hrs = int.Parse(tute_hrsTextBox.Text);
-            subject.lab_hrs = int.Parse(lab_hrsTextBox.Text);
-            subject.eval_hrs = int.Parse(eval_hrsTextBox.Text);
+                _db.SaveChanges();
+                subjectDataGrid.ItemsSource = _db.Subjects.ToList();
+                clean();
 
-            _db.SaveChanges();
-            subjectDataGrid.ItemsSource = _db.Subjects.ToList();
-            clean();
-
-            edit_subject_btn.Visibility = Visibility.Hidden;
-            add_subject_btn.Visibility = Visibility.Visible;
+                edit_subject_btn.Visibility = Visibility.Hidden;
+                add_subject_btn.Visibility = Visibility.Visible;
+            }
+            
         }
     }
 }
