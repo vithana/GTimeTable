@@ -5,15 +5,14 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="3e98bcf8942543c09ab82a7fba1ffdd8" Name="Diagram1">
-        <EntityTypeShape EntityType="GTimeTableModel.WorkingDaysPerWeek" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="GTimeTableModel.WorkingTimePerDay" Width="1.5" PointX="3.375" PointY="0.75" />
-        <EntityTypeShape EntityType="GTimeTableModel.TimeTableSlot" Width="1.5" PointX="0.75" PointY="3.75" />
-        <EntityTypeShape EntityType="GTimeTableModel.WorkingDay" Width="1.5" PointX="2.75" PointY="3.75" />
         <EntityTypeShape EntityType="GTimeTableModel.Lecturer" Width="1.5" PointX="5.375" PointY="0.75" />
-        <EntityTypeShape EntityType="GTimeTableModel.Subject" Width="1.5" PointX="6.5" PointY="4.25" />
+        <EntityTypeShape EntityType="GTimeTableModel.Subject" Width="1.5" PointX="0.5" PointY="4.25" />
         <EntityTypeShape EntityType="GTimeTableModel.Building" Width="1.5" PointX="5.375" PointY="0.75" />
-        <EntityTypeShape EntityType="GTimeTableModel.Tag" Width="1.5" PointX="0.75" PointY="6.75" />
-        <EntityTypeShape EntityType="GTimeTableModel.Student" Width="1.5" PointX="3.375" PointY="6.75" />
+        <EntityTypeShape EntityType="GTimeTableModel.Tag" Width="1.5" PointX="0.625" PointY="0.75" />
+        <EntityTypeShape EntityType="GTimeTableModel.Student" Width="1.5" PointX="2.75" PointY="0.75" />
+        <EntityTypeShape EntityType="GTimeTableModel.WorkingDaysAndHour" Width="2" PointX="7.375" PointY="0.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="GTimeTableModel.WorkingDaysOfWeek" Width="3.25" PointX="11.375" PointY="0.875" />
+        <AssociationConnector Association="GTimeTableModel.FK_WorkingDaysOfWeek_WorkingDaysAndHours" />
       </Diagram>      
     </edmx:Diagrams>
   </edmx:Designer>

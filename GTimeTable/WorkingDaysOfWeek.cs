@@ -12,9 +12,12 @@ namespace GTimeTable
     using System;
     using System.Collections.Generic;
     
-    public partial class WorkingDay
+    public partial class WorkingDaysOfWeek
     {
         public int id { get; set; }
         public string day { get; set; }
+        public int working_day_and_hours_id { get; set; }
+    
+        public virtual WorkingDaysAndHour WorkingDaysAndHour { get; set; }
     }
 }

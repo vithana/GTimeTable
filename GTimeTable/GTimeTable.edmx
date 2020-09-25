@@ -60,88 +60,65 @@
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="tag" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
-        <EntityType Name="TimeTableSlots">
+        <EntityType Name="WorkingDaysAndHours">
           <Key>
             <PropertyRef Name="id" />
           </Key>
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="time" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="slots_for_time_table" Type="nvarchar" MaxLength="50" />
+          <Property Name="no_of_working_days" Type="int" />
+          <Property Name="working_time_per_day" Type="int" />
         </EntityType>
-        <EntityType Name="WorkingDays">
+        <EntityType Name="WorkingDaysOfWeek">
           <Key>
             <PropertyRef Name="id" />
           </Key>
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="day" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="working_day_and_hours_id" Type="int" Nullable="false" />
         </EntityType>
-        <EntityType Name="WorkingDaysPerWeek">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="number" Type="int" Nullable="false" />
-        </EntityType>
-        <EntityType Name="WorkingTimePerDay">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="number" Type="int" Nullable="false" />
-        </EntityType>
+        <Association Name="FK_WorkingDaysOfWeek_WorkingDaysAndHours">
+          <End Role="WorkingDaysAndHours" Type="Self.WorkingDaysAndHours" Multiplicity="1" />
+          <End Role="WorkingDaysOfWeek" Type="Self.WorkingDaysOfWeek" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="WorkingDaysAndHours">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="WorkingDaysOfWeek">
+              <PropertyRef Name="working_day_and_hours_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="GTimeTableModelStoreContainer">
           <EntitySet Name="Buildings" EntityType="Self.Buildings" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Lecturers" EntityType="Self.Lecturers" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Student" EntityType="Self.Student" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Subjects" EntityType="Self.Subjects" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Tags" EntityType="Self.Tags" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="TimeTableSlots" EntityType="Self.TimeTableSlots" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="WorkingDays" EntityType="Self.WorkingDays" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="WorkingDaysPerWeek" EntityType="Self.WorkingDaysPerWeek" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="WorkingTimePerDay" EntityType="Self.WorkingTimePerDay" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="WorkingDaysAndHours" EntityType="Self.WorkingDaysAndHours" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="WorkingDaysOfWeek" EntityType="Self.WorkingDaysOfWeek" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_WorkingDaysOfWeek_WorkingDaysAndHours" Association="Self.FK_WorkingDaysOfWeek_WorkingDaysAndHours">
+            <End Role="WorkingDaysAndHours" EntitySet="WorkingDaysAndHours" />
+            <End Role="WorkingDaysOfWeek" EntitySet="WorkingDaysOfWeek" />
+          </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="GTimeTableModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityType Name="WorkingDaysPerWeek">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="number" Type="Int32" Nullable="false" />
-        </EntityType>
         <EntityContainer Name="GTimeTableEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="WorkingDaysPerWeeks" EntityType="Self.WorkingDaysPerWeek" />
-          <EntitySet Name="WorkingTimePerDays" EntityType="GTimeTableModel.WorkingTimePerDay" />
-          <EntitySet Name="TimeTableSlots" EntityType="GTimeTableModel.TimeTableSlot" />
-          <EntitySet Name="WorkingDays" EntityType="GTimeTableModel.WorkingDay" />
           <EntitySet Name="Lecturers" EntityType="GTimeTableModel.Lecturer" />
           <EntitySet Name="Subjects" EntityType="GTimeTableModel.Subject" />
           <EntitySet Name="Buildings" EntityType="GTimeTableModel.Building" />
           <EntitySet Name="Tags" EntityType="GTimeTableModel.Tag" />
           <EntitySet Name="Students" EntityType="GTimeTableModel.Student" />
+          <EntitySet Name="WorkingDaysAndHours" EntityType="GTimeTableModel.WorkingDaysAndHour" />
+          <EntitySet Name="WorkingDaysOfWeeks" EntityType="GTimeTableModel.WorkingDaysOfWeek" />
+          <AssociationSet Name="FK_WorkingDaysOfWeek_WorkingDaysAndHours" Association="GTimeTableModel.FK_WorkingDaysOfWeek_WorkingDaysAndHours">
+            <End Role="WorkingDaysAndHour" EntitySet="WorkingDaysAndHours" />
+            <End Role="WorkingDaysOfWeek" EntitySet="WorkingDaysOfWeeks" />
+          </AssociationSet>
         </EntityContainer>
-        <EntityType Name="WorkingTimePerDay">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="number" Type="Int32" Nullable="false" />
-        </EntityType>
-        <EntityType Name="TimeTableSlot">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="time" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-        </EntityType>
-        <EntityType Name="WorkingDay">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="day" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-        </EntityType>
         <EntityType Name="Lecturer">
           <Key>
             <PropertyRef Name="id" />
@@ -197,44 +174,43 @@
           <Property Name="subGroupNo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="subGropId" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
+        <EntityType Name="WorkingDaysAndHour">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="slots_for_time_table" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="no_of_working_days" Type="Int32" />
+          <Property Name="working_time_per_day" Type="Int32" />
+          <NavigationProperty Name="WorkingDaysOfWeeks" Relationship="GTimeTableModel.FK_WorkingDaysOfWeek_WorkingDaysAndHours" FromRole="WorkingDaysAndHour" ToRole="WorkingDaysOfWeek" />
+        </EntityType>
+        <EntityType Name="WorkingDaysOfWeek">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="day" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="working_day_and_hours_id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="WorkingDaysAndHour" Relationship="GTimeTableModel.FK_WorkingDaysOfWeek_WorkingDaysAndHours" FromRole="WorkingDaysOfWeek" ToRole="WorkingDaysAndHour" />
+        </EntityType>
+        <Association Name="FK_WorkingDaysOfWeek_WorkingDaysAndHours">
+          <End Type="GTimeTableModel.WorkingDaysAndHour" Role="WorkingDaysAndHour" Multiplicity="1" />
+          <End Type="GTimeTableModel.WorkingDaysOfWeek" Role="WorkingDaysOfWeek" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="WorkingDaysAndHour">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="WorkingDaysOfWeek">
+              <PropertyRef Name="working_day_and_hours_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="GTimeTableModelStoreContainer" CdmEntityContainer="GTimeTableEntities">
-          <EntitySetMapping Name="WorkingDaysPerWeeks">
-            <EntityTypeMapping TypeName="GTimeTableModel.WorkingDaysPerWeek">
-              <MappingFragment StoreEntitySet="WorkingDaysPerWeek">
-                <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="number" ColumnName="number" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="WorkingTimePerDays">
-            <EntityTypeMapping TypeName="GTimeTableModel.WorkingTimePerDay">
-              <MappingFragment StoreEntitySet="WorkingTimePerDay">
-                <ScalarProperty Name="number" ColumnName="number" />
-                <ScalarProperty Name="id" ColumnName="id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="TimeTableSlots">
-            <EntityTypeMapping TypeName="GTimeTableModel.TimeTableSlot">
-              <MappingFragment StoreEntitySet="TimeTableSlots">
-                <ScalarProperty Name="time" ColumnName="time" />
-                <ScalarProperty Name="id" ColumnName="id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="WorkingDays">
-            <EntityTypeMapping TypeName="GTimeTableModel.WorkingDay">
-              <MappingFragment StoreEntitySet="WorkingDays">
-                <ScalarProperty Name="day" ColumnName="day" />
-                <ScalarProperty Name="id" ColumnName="id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Lecturers">
             <EntityTypeMapping TypeName="GTimeTableModel.Lecturer">
               <MappingFragment StoreEntitySet="Lecturers">
@@ -291,6 +267,25 @@
                 <ScalarProperty Name="program" ColumnName="program" />
                 <ScalarProperty Name="semester" ColumnName="semester" />
                 <ScalarProperty Name="acdamicYear" ColumnName="acdamicYear" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="WorkingDaysAndHours">
+            <EntityTypeMapping TypeName="GTimeTableModel.WorkingDaysAndHour">
+              <MappingFragment StoreEntitySet="WorkingDaysAndHours">
+                <ScalarProperty Name="working_time_per_day" ColumnName="working_time_per_day" />
+                <ScalarProperty Name="no_of_working_days" ColumnName="no_of_working_days" />
+                <ScalarProperty Name="slots_for_time_table" ColumnName="slots_for_time_table" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="WorkingDaysOfWeeks">
+            <EntityTypeMapping TypeName="GTimeTableModel.WorkingDaysOfWeek">
+              <MappingFragment StoreEntitySet="WorkingDaysOfWeek">
+                <ScalarProperty Name="working_day_and_hours_id" ColumnName="working_day_and_hours_id" />
+                <ScalarProperty Name="day" ColumnName="day" />
                 <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>

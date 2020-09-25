@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace GTimeTable
 {
     /// <summary>
-    /// Interação lógica para UserControlEscolha.xam
+    /// Interaction logic for Templete.xaml
     /// </summary>
-    public partial class UserControlEscolha : UserControl
+    public partial class Templete : UserControl
     {
-        public UserControlEscolha()
+        public Templete()
         {
             InitializeComponent();
         }
