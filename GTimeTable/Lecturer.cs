@@ -20,8 +20,10 @@ namespace GTimeTable
         public string faculty { get; set; }
         public string dept { get; set; }
         public string center { get; set; }
-        public string building { get; set; }
+        public int building { get; set; }
         public int lvl { get; set; }
         public string rank { get; set; }
+    
+        public virtual Building Building1 { get; set; }
     }
 }

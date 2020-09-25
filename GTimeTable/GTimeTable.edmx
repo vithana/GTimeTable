@@ -22,7 +22,7 @@
           <Property Name="faculty" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="dept" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="center" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="building" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="building" Type="int" Nullable="false" />
           <Property Name="lvl" Type="int" Nullable="false" />
           <Property Name="rank" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
@@ -77,6 +77,18 @@
           <Property Name="day" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="working_day_and_hours_id" Type="int" Nullable="false" />
         </EntityType>
+        <Association Name="FK_Lecturers_Buildings">
+          <End Role="Buildings" Type="Self.Buildings" Multiplicity="1" />
+          <End Role="Lecturers" Type="Self.Lecturers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Buildings">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Lecturers">
+              <PropertyRef Name="building" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_WorkingDaysOfWeek_WorkingDaysAndHours">
           <End Role="WorkingDaysAndHours" Type="Self.WorkingDaysAndHours" Multiplicity="1" />
           <End Role="WorkingDaysOfWeek" Type="Self.WorkingDaysOfWeek" Multiplicity="*" />
@@ -97,6 +109,10 @@
           <EntitySet Name="Tags" EntityType="Self.Tags" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="WorkingDaysAndHours" EntityType="Self.WorkingDaysAndHours" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="WorkingDaysOfWeek" EntityType="Self.WorkingDaysOfWeek" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Lecturers_Buildings" Association="Self.FK_Lecturers_Buildings">
+            <End Role="Buildings" EntitySet="Buildings" />
+            <End Role="Lecturers" EntitySet="Lecturers" />
+          </AssociationSet>
           <AssociationSet Name="FK_WorkingDaysOfWeek_WorkingDaysAndHours" Association="Self.FK_WorkingDaysOfWeek_WorkingDaysAndHours">
             <End Role="WorkingDaysAndHours" EntitySet="WorkingDaysAndHours" />
             <End Role="WorkingDaysOfWeek" EntitySet="WorkingDaysOfWeek" />
@@ -107,9 +123,7 @@
     <edmx:ConceptualModels>
       <Schema Namespace="GTimeTableModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityContainer Name="GTimeTableEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="Lecturers" EntityType="GTimeTableModel.Lecturer" />
           <EntitySet Name="Subjects" EntityType="GTimeTableModel.Subject" />
-          <EntitySet Name="Buildings" EntityType="GTimeTableModel.Building" />
           <EntitySet Name="Tags" EntityType="GTimeTableModel.Tag" />
           <EntitySet Name="Students" EntityType="GTimeTableModel.Student" />
           <EntitySet Name="WorkingDaysAndHours" EntityType="GTimeTableModel.WorkingDaysAndHour" />
@@ -118,21 +132,13 @@
             <End Role="WorkingDaysAndHour" EntitySet="WorkingDaysAndHours" />
             <End Role="WorkingDaysOfWeek" EntitySet="WorkingDaysOfWeeks" />
           </AssociationSet>
+          <EntitySet Name="Buildings" EntityType="GTimeTableModel.Building" />
+          <EntitySet Name="Lecturers" EntityType="GTimeTableModel.Lecturer" />
+          <AssociationSet Name="FK_Lecturers_Buildings" Association="GTimeTableModel.FK_Lecturers_Buildings">
+            <End Role="Building" EntitySet="Buildings" />
+            <End Role="Lecturer" EntitySet="Lecturers" />
+          </AssociationSet>
         </EntityContainer>
-        <EntityType Name="Lecturer">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="emp_id" Type="String" Nullable="false" MaxLength="6" FixedLength="false" Unicode="true" />
-          <Property Name="faculty" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="dept" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="center" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="building" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="lvl" Type="Int32" Nullable="false" />
-          <Property Name="rank" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-        </EntityType>
         <EntityType Name="Subject">
           <Key>
             <PropertyRef Name="id" />
@@ -146,13 +152,6 @@
           <Property Name="tute_hrs" Type="Int32" Nullable="false" />
           <Property Name="lab_hrs" Type="Int32" Nullable="false" />
           <Property Name="eval_hrs" Type="Int32" Nullable="false" />
-        </EntityType>
-        <EntityType Name="Building">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="Tag">
           <Key>
@@ -205,27 +204,47 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="Building">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Lecturers" Relationship="GTimeTableModel.FK_Lecturers_Buildings" FromRole="Building" ToRole="Lecturer" />
+        </EntityType>
+        <EntityType Name="Lecturer">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="emp_id" Type="String" Nullable="false" MaxLength="6" FixedLength="false" Unicode="true" />
+          <Property Name="faculty" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="dept" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="center" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="building" Type="Int32" Nullable="false" />
+          <Property Name="lvl" Type="Int32" Nullable="false" />
+          <Property Name="rank" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Building1" Relationship="GTimeTableModel.FK_Lecturers_Buildings" FromRole="Lecturer" ToRole="Building" />
+        </EntityType>
+        <Association Name="FK_Lecturers_Buildings">
+          <End Type="GTimeTableModel.Building" Role="Building" Multiplicity="1" />
+          <End Type="GTimeTableModel.Lecturer" Role="Lecturer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Building">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Lecturer">
+              <PropertyRef Name="building" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="GTimeTableModelStoreContainer" CdmEntityContainer="GTimeTableEntities">
-          <EntitySetMapping Name="Lecturers">
-            <EntityTypeMapping TypeName="GTimeTableModel.Lecturer">
-              <MappingFragment StoreEntitySet="Lecturers">
-                <ScalarProperty Name="rank" ColumnName="rank" />
-                <ScalarProperty Name="lvl" ColumnName="lvl" />
-                <ScalarProperty Name="building" ColumnName="building" />
-                <ScalarProperty Name="center" ColumnName="center" />
-                <ScalarProperty Name="dept" ColumnName="dept" />
-                <ScalarProperty Name="faculty" ColumnName="faculty" />
-                <ScalarProperty Name="emp_id" ColumnName="emp_id" />
-                <ScalarProperty Name="name" ColumnName="name" />
-                <ScalarProperty Name="id" ColumnName="id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Subjects">
             <EntityTypeMapping TypeName="GTimeTableModel.Subject">
               <MappingFragment StoreEntitySet="Subjects">
@@ -236,14 +255,6 @@
                 <ScalarProperty Name="off_sem" ColumnName="off_sem" />
                 <ScalarProperty Name="off_year" ColumnName="off_year" />
                 <ScalarProperty Name="code" ColumnName="code" />
-                <ScalarProperty Name="name" ColumnName="name" />
-                <ScalarProperty Name="id" ColumnName="id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Buildings">
-            <EntityTypeMapping TypeName="GTimeTableModel.Building">
-              <MappingFragment StoreEntitySet="Buildings">
                 <ScalarProperty Name="name" ColumnName="name" />
                 <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
@@ -286,6 +297,29 @@
               <MappingFragment StoreEntitySet="WorkingDaysOfWeek">
                 <ScalarProperty Name="working_day_and_hours_id" ColumnName="working_day_and_hours_id" />
                 <ScalarProperty Name="day" ColumnName="day" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Buildings">
+            <EntityTypeMapping TypeName="GTimeTableModel.Building">
+              <MappingFragment StoreEntitySet="Buildings">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Lecturers">
+            <EntityTypeMapping TypeName="GTimeTableModel.Lecturer">
+              <MappingFragment StoreEntitySet="Lecturers">
+                <ScalarProperty Name="rank" ColumnName="rank" />
+                <ScalarProperty Name="lvl" ColumnName="lvl" />
+                <ScalarProperty Name="building" ColumnName="building" />
+                <ScalarProperty Name="center" ColumnName="center" />
+                <ScalarProperty Name="dept" ColumnName="dept" />
+                <ScalarProperty Name="faculty" ColumnName="faculty" />
+                <ScalarProperty Name="emp_id" ColumnName="emp_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
                 <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>
