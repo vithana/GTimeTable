@@ -25,12 +25,12 @@ namespace GTimeTable
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<Lecturer> Lecturers { get; set; }
         public virtual DbSet<Subject> Subjects { get; set; }
-        public virtual DbSet<Building> Buildings { get; set; }
         public virtual DbSet<Tag> Tags { get; set; }
         public virtual DbSet<Student> Students { get; set; }
         public virtual DbSet<WorkingDaysAndHour> WorkingDaysAndHours { get; set; }
         public virtual DbSet<WorkingDaysOfWeek> WorkingDaysOfWeeks { get; set; }
+        public virtual DbSet<Building> Buildings { get; set; }
+        public virtual DbSet<Lecturer> Lecturers { get; set; }
     }
 }

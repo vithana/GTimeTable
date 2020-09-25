@@ -36,6 +36,20 @@ namespace GTimeTable
         {
             lecturerDataGrid.ItemsSource = _db.Lecturers.ToList();
             edit_lecture_btn.Visibility = Visibility.Hidden;
+
+            List<Building> buildings = new List<Building>();
+            buildings = _db.Buildings.ToList();
+
+            foreach (var building in buildings)
+            {
+                if(building != null)
+                {
+                    buildingTextBox.Items.Add(building.name);
+                }
+            }
+
+
+
         }
         private void clean()
         {
@@ -103,17 +117,25 @@ namespace GTimeTable
             {
                 MaterialMessageBox.ShowError(@"Please Enter All the fields");
             }
-            else {
+            else
+            {
                 if (emp_idTextBox.Text.Length != 6) {
                     MaterialMessageBox.ShowError(@"Employee ID should have 6 digits");
                 }
                 else { 
+
+                    Building building = (from m in _db.Buildings
+                                         where m.name.Equals(buildingTextBox.Text)
+                                         select m).Single();
+
+                    Console.WriteLine(building.id + building.name);
+
                     lecturer.name = nameTextBox.Text;
                     lecturer.emp_id = emp_idTextBox.Text;
                     lecturer.faculty = facultyTextBox.Text;
                     lecturer.dept = deptTextBox.Text;
                     lecturer.center = centerTextBox.Text;
-                    lecturer.building = buildingTextBox.Text;
+                    lecturer.building = building.id;
                     lecturer.lvl = level;
                     lecturer.rank = level + "."+ emp_idTextBox.Text;
 
@@ -163,12 +185,14 @@ namespace GTimeTable
                     level = "Professor";
                     break;
             }
+            int Textbox = int.Parse(buildingTextBox.Text);
+
             nameTextBox.Text = lecturer.name;
             emp_idTextBox.Text = lecturer.emp_id;
             facultyTextBox.Text = lecturer.faculty;
             deptTextBox.Text = lecturer.dept;
             centerTextBox.Text = lecturer.center;
-            buildingTextBox.Text = lecturer.building;
+            Textbox = lecturer.building;
             lvlTextBox.Text = level;
 
             lecturer_id = lecturer.id;
@@ -238,12 +262,14 @@ namespace GTimeTable
                 }
                 else
                 {
+                    int Textbox = int.Parse(buildingTextBox.Text);
+
                     lecturer.name = nameTextBox.Text;
                     lecturer.emp_id = emp_idTextBox.Text;
                     lecturer.faculty = facultyTextBox.Text;
                     lecturer.dept = deptTextBox.Text;
                     lecturer.center = centerTextBox.Text;
-                    lecturer.building = buildingTextBox.Text;
+                    lecturer.building = int.Parse(buildingTextBox.Text);
                     lecturer.lvl = level;
                     lecturer.rank = level + "." + emp_idTextBox.Text;
 
