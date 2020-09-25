@@ -1,4 +1,5 @@
 ﻿using BespokeFusion;
+using GTimeTable.Dtos;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -34,7 +35,15 @@ namespace GTimeTable
 
         private void Load()
         {
-            lecturerDataGrid.ItemsSource = _db.Lecturers.ToList();
+            List<LectureDto> lectureDto = new List<LectureDto>();
+            using (var ctx = new GTimeTableEntities())
+            {
+                lectureDto = ctx.Database.SqlQuery<LectureDto>("Select L.id, L.name, l.emp_id, L.faculty, L.dept, L.center, B.name AS building, L.lvl, L.rank " +
+                                                                "from Lecturers L INNER JOIN Buildings B ON L.[building] = B.id   ").ToList();                
+            }
+            
+
+            lecturerDataGrid.ItemsSource = lectureDto;
             edit_lecture_btn.Visibility = Visibility.Hidden;
 
             List<Building> buildings = new List<Building>();
@@ -142,7 +151,11 @@ namespace GTimeTable
                     _db.Lecturers.Add(lecturer);
                     _db.SaveChanges();
 
-                    lecturerDataGrid.ItemsSource = _db.Lecturers.ToList();
+                    using (var ctx = new GTimeTableEntities())
+                    {
+                        lecturerDataGrid.ItemsSource = ctx.Database.SqlQuery<LectureDto>("Select L.id, L.name, l.emp_id, L.faculty, L.dept, L.center, B.name AS building, L.lvl, L.rank " +
+                                                                        "from Lecturers L INNER JOIN Buildings B ON L.[building] = B.id   ").ToList();
+                    }                   
                     clean();
                 }
             }
@@ -151,7 +164,8 @@ namespace GTimeTable
         //get details of working days of week
         private void updateLecBtn_Click(object sender, RoutedEventArgs e)
         {
-            int Id = (lecturerDataGrid.SelectedItem as Lecturer).id;
+            int Id = (lecturerDataGrid.SelectedItem as LectureDto).id;
+
             Lecturer lecturer = (from m in _db.Lecturers
                                              where m.id == Id
                                              select m).Single();
@@ -185,17 +199,28 @@ namespace GTimeTable
                     level = "Professor";
                     break;
             }
-            int Textbox = int.Parse(buildingTextBox.Text);
+            
+
+            Building building = (from m in _db.Buildings
+                                 where m.id == lecturer.building
+                                 select m).Single();
 
             nameTextBox.Text = lecturer.name;
             emp_idTextBox.Text = lecturer.emp_id;
             facultyTextBox.Text = lecturer.faculty;
             deptTextBox.Text = lecturer.dept;
             centerTextBox.Text = lecturer.center;
-            Textbox = lecturer.building;
+
+            buildingTextBox.Text = building.name;
             lvlTextBox.Text = level;
 
             lecturer_id = lecturer.id;
+
+            using (var ctx = new GTimeTableEntities())
+            {
+                lecturerDataGrid.ItemsSource = ctx.Database.SqlQuery<LectureDto>("Select L.id, L.name, l.emp_id, L.faculty, L.dept, L.center, B.name AS building, L.lvl, L.rank " +
+                                                                "from Lecturers L INNER JOIN Buildings B ON L.[building] = B.id   ").ToList();
+            }
 
             edit_lecture_btn.Visibility = Visibility.Visible;
             add_lecture_btn.Visibility = Visibility.Hidden;
@@ -204,11 +229,15 @@ namespace GTimeTable
         private void deleteLecBtn_Click(object sender, RoutedEventArgs e)
         {
             //int Id = (workingDaysPerWeekDataGrid.SelectedItem as Day).id;
-            int Id = (lecturerDataGrid.SelectedItem as Lecturer).id;
+            int Id = (lecturerDataGrid.SelectedItem as LectureDto).id;
             var deletedLecturer = _db.Lecturers.Where(m => m.id == Id).Single();
             _db.Lecturers.Remove(deletedLecturer);
             _db.SaveChanges();
-            lecturerDataGrid.ItemsSource = _db.Lecturers.ToList();
+            using (var ctx = new GTimeTableEntities())
+            {
+                lecturerDataGrid.ItemsSource = ctx.Database.SqlQuery<LectureDto>("Select L.id, L.name, l.emp_id, L.faculty, L.dept, L.center, B.name AS building, L.lvl, L.rank " +
+                                                                "from Lecturers L INNER JOIN Buildings B ON L.[building] = B.id   ").ToList();
+            }
 
         }
         private void edit_lecture_btn_Click(object sender, RoutedEventArgs e)
@@ -262,19 +291,26 @@ namespace GTimeTable
                 }
                 else
                 {
-                    int Textbox = int.Parse(buildingTextBox.Text);
+                    Building building = (from m in _db.Buildings
+                                         where m.name.Equals(buildingTextBox.Text)
+                                         select m).Single();
+                    
 
                     lecturer.name = nameTextBox.Text;
                     lecturer.emp_id = emp_idTextBox.Text;
                     lecturer.faculty = facultyTextBox.Text;
                     lecturer.dept = deptTextBox.Text;
                     lecturer.center = centerTextBox.Text;
-                    lecturer.building = int.Parse(buildingTextBox.Text);
+                    lecturer.building = building.id;
                     lecturer.lvl = level;
                     lecturer.rank = level + "." + emp_idTextBox.Text;
 
                     _db.SaveChanges();
-                    lecturerDataGrid.ItemsSource = _db.Lecturers.ToList();
+                    using (var ctx = new GTimeTableEntities())
+                    {
+                        lecturerDataGrid.ItemsSource = ctx.Database.SqlQuery<LectureDto>("Select L.id, L.name, l.emp_id, L.faculty, L.dept, L.center, B.name AS building, L.lvl, L.rank " +
+                                                                        "from Lecturers L INNER JOIN Buildings B ON L.[building] = B.id   ").ToList();
+                    }
                     clean();
 
                     edit_lecture_btn.Visibility = Visibility.Hidden;

@@ -132,6 +132,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>DataSet1.xsd</DependentUpon>
     </Compile>
+    <Compile Include="Dtos\LectureDto.cs" />
     <Compile Include="frmStudent.xaml.cs">
       <DependentUpon>frmStudent.xaml</DependentUpon>
     </Compile>
