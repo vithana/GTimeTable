@@ -8,10 +8,9 @@
         mc:Ignorable="d" Height="735.424" Width="1230.461" WindowStartupLocation="CenterScreen" Cursor="Arrow" Visibility="Visible" Title="GenTime" ResizeMode="CanResizeWithGrip" WindowState="Maximized" >
     <Grid Background="#FFEEEEEE" MouseDown="Grid_MouseDown" Margin="0,0,-6.4,-1.4">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="302*"/>
-            <ColumnDefinition Width="929*"/>
+            <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        <StackPanel VerticalAlignment="Top" Grid.ColumnSpan="2" Margin="0,0,0.4,0">
+        <StackPanel VerticalAlignment="Top" Margin="0,0,0.4,0">
             <Grid Background="#FF0069C0" Height="10">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="90*"/>
@@ -21,12 +20,12 @@
             </Grid>
         </StackPanel>
 
-        <Grid Margin="10.4,10" Grid.Column="1">
+        <Grid Margin="303,10,10.4,0">
             <Grid x:Name="GridPrincipal" HorizontalAlignment="Center" VerticalAlignment="Center"/>
         </Grid>
 
         <Grid Width="298" HorizontalAlignment="Left" Background="#FF222222">
-            <materialDesign:TransitioningContent x:Name="TrainsitionigContentSlide" OpeningEffect="{materialDesign:TransitionEffect SlideInFromLeft, Duration=0:0:0.2}">
+            <materialDesign:TransitioningContent x:Name="TrainsitionigContentSlide" OpeningEffect="{materialDesign:TransitionEffect SlideInFromLeft, Duration=0:0:0.2}" Margin="0,0,0,0.2">
                 <Grid x:Name="GridCursor" Margin="0 100 0 0" Background="#FF0069C0" Width="10" HorizontalAlignment="Left" Height="60" VerticalAlignment="Top"/>
             </materialDesign:TransitioningContent>
             <ListView x:Name="ListViewMenu" Margin="0 100 0 0" Foreground="LightGray" FontFamily="Champagne &amp; Limousines" FontSize="18" SelectionChanged="ListViewMenu_SelectionChanged" SelectedIndex="0">
