@@ -119,6 +119,7 @@ namespace GTimeTable
                     break;
             }
 
+
             if (nameTextBox.Text == "" || emp_idTextBox.Text== "" || facultyTextBox.Text == "" 
                 || deptTextBox.Text == "" || centerTextBox.Text == "" || buildingTextBox.Text == "" 
                 || lvlTextBox.Text == ""
@@ -128,10 +129,18 @@ namespace GTimeTable
             }
             else
             {
+                Lecturer new_lecturer = (from m in _db.Lecturers
+                                     where m.emp_id == emp_idTextBox.Text
+                                     select m).FirstOrDefault();
+
                 if (emp_idTextBox.Text.Length != 6) {
                     MaterialMessageBox.ShowError(@"Employee ID should have 6 digits");
                 }
-                else { 
+                else if(new_lecturer != null)
+                {
+                    MaterialMessageBox.ShowError(@"Employee ID should be unique");
+                }
+                else {
 
                     Building building = (from m in _db.Buildings
                                          where m.name.Equals(buildingTextBox.Text)
@@ -146,7 +155,7 @@ namespace GTimeTable
                     lecturer.center = centerTextBox.Text;
                     lecturer.building = building.id;
                     lecturer.lvl = level;
-                    lecturer.rank = level + "."+ emp_idTextBox.Text;
+                    lecturer.rank = level + "." + emp_idTextBox.Text;
 
                     _db.Lecturers.Add(lecturer);
                     _db.SaveChanges();
@@ -155,7 +164,7 @@ namespace GTimeTable
                     {
                         lecturerDataGrid.ItemsSource = ctx.Database.SqlQuery<LectureDto>("Select L.id, L.name, l.emp_id, L.faculty, L.dept, L.center, B.name AS building, L.lvl, L.rank " +
                                                                         "from Lecturers L INNER JOIN Buildings B ON L.[building] = B.id   ").ToList();
-                    }                   
+                    }
                     clean();
                 }
             }
@@ -285,9 +294,17 @@ namespace GTimeTable
             }
             else
             {
+                Lecturer new_lecturer = (from m in _db.Lecturers
+                                         where m.emp_id == emp_idTextBox.Text
+                                         select m).FirstOrDefault();
+
                 if (emp_idTextBox.Text.Length != 6)
                 {
                     MaterialMessageBox.ShowError(@"Employee ID should have 6 digits");
+                }
+                else if (new_lecturer != null && new_lecturer != lecturer)
+                {
+                    MaterialMessageBox.ShowError(@"Employee ID should be unique");
                 }
                 else
                 {
