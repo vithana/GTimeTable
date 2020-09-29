@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -67,12 +68,20 @@ namespace GTimeTable
 
         private void add_subject_btn_Click(object sender, RoutedEventArgs e)
         {
+            Subject new_subject = (from m in _db.Subjects
+                                   where m.code == codeTextBox.Text
+                                   select m).FirstOrDefault();
+
             if (nameTextBox.Text == "" || codeTextBox.Text == "" || off_yearTextBox.Text == ""
                 || off_semTextBox.Text == "" || off_semTextBox.Text == "" || lec_hrsTextBox.Text == ""
                 || tute_hrsTextBox.Text == "" || lab_hrsTextBox.Text == "" || eval_hrsTextBox.Text == ""
             )
             {
                 MaterialMessageBox.ShowError(@"Please Enter All the fields");
+            }
+            else if (new_subject != null)
+            {
+                MaterialMessageBox.ShowError(@"Subject Code should be unique");
             }
             else
             {
@@ -132,6 +141,9 @@ namespace GTimeTable
                                  where m.id == subject_id
                                  select m).Single();
 
+            Subject new_subject = (from m in _db.Subjects
+                                   where m.code == codeTextBox.Text
+                                   select m).FirstOrDefault();
 
             if (nameTextBox.Text == "" || codeTextBox.Text == "" || off_yearTextBox.Text == ""
                 || off_semTextBox.Text == "" || off_semTextBox.Text == "" || lec_hrsTextBox.Text == ""
@@ -139,6 +151,10 @@ namespace GTimeTable
             )
             {
                 MaterialMessageBox.ShowError(@"Please Enter All the fields");
+            }
+            else if (new_subject != null && new_subject != subject)
+            {
+                MaterialMessageBox.ShowError(@"Subject Code should be unique");
             }
             else
             {
