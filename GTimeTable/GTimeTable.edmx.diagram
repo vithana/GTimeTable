@@ -25,6 +25,9 @@
         <AssociationConnector Association="GTimeTableModel.FK_Sessions_Tags" />
         <EntityTypeShape EntityType="GTimeTableModel.NotAvailbleTimesOfLecturer" Width="1.5" PointX="7.875" PointY="5.625" />
         <AssociationConnector Association="GTimeTableModel.FK_NotAvailbleTimesOfLecturers_Lecturers" />
+        <EntityTypeShape EntityType="GTimeTableModel.SutiableTabforRoom" Width="1.5" PointX="7.875" PointY="5.25" />
+        <AssociationConnector Association="GTimeTableModel.FK_SutiableTabforRoom_room" />
+        <AssociationConnector Association="GTimeTableModel.FK_SutiableTabforRoom_tag" />
       </Diagram>      
     </edmx:Diagrams>
   </edmx:Designer>

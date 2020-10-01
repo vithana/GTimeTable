@@ -2,6 +2,7 @@
 using GTimeTable.Dtos;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -22,11 +23,22 @@ namespace GTimeTable
     /// </summary>
     public partial class Locations : UserControl
     {
+
+       
         GTimeTableEntities _db = new GTimeTableEntities();
+
+        //------- Add  Buildng  Tab-----------------
         int buildingId;
         int roomId;
         Building building = new Building();
+
+        //------- Add  Rooms  Tab-----------------
         Room room;
+
+        //-------- Suitable Rooms for tab -------------
+        SutiableTabforRoom suitableRoomsforTag;
+
+       
 
         public Locations()
         {
@@ -36,21 +48,32 @@ namespace GTimeTable
 
         private void Load()
         {
-
+            
             BuildingLoad();
             RoomsLoad();
+           
+        }
+        //=============== Main clear Function ==================================
+
+         private void clearMainFunction()
+        {
+            suitableRoomsforTagsClearText();
         }
 
         private void BuildingLoad()
         {
+            clearMainFunction();
             //Showing Values in the Building Tab
             buildingDataGrid.ItemsSource = _db.Buildings.ToList();
             saveBuildingName.Visibility = Visibility.Hidden;
         }
+
+        // ================================= Rooms Tab Function  ============================================================
         private void RoomsLoad()
         {
+            clearMainFunction();
             List<RoomsDto> roomDto = new List<RoomsDto>();
-
+            
             using (var ctx = new GTimeTableEntities())
             {
                roomDto = ctx.Database.SqlQuery<RoomsDto>("SELECT R.id , R.capacity, R.roomId, R.roomType, B.name As building " +
@@ -77,17 +100,225 @@ namespace GTimeTable
          
         }
 
+        private void CleanRoom()
+        {
+            capacityTextbox.Text = "";
+            roomIdTextBox.Text = "";
+        }
+        private void AddRoomBtn_Click(object sender, RoutedEventArgs e)
+        {
+            //Add Function
+            if (addRoomBtn.Content.Equals("Add"))
+            {
+                room = new Room();
+
+                Building building = (from m in _db.Buildings
+                                     where m.name.Equals(buildingComboBox.Text)
+                                     select m).Single();
+
+                room.capacity = int.Parse(capacityTextbox.Text);
+                room.roomId = roomIdTextBox.Text;
+                room.building = building.id;
+                room.roomType = roomTypeComboBox.Text;
+
+                _db.Rooms.Add(room);
+                _db.SaveChanges();
+                using (var ctx = new GTimeTableEntities())
+                {
+                    roomDataGrid.ItemsSource = ctx.Database.SqlQuery<RoomsDto>("SELECT R.id , R.capacity, R.roomId, R.roomType, B.name As building " +
+                                                                     "FROM Rooms R INNER JOIN Buildings B ON R.[building] = B.id   ").ToList();
+                }
+                CleanRoom();
+            }
+            //update a room
+            else
+            {
+                Room room = (from m in _db.Rooms
+                             where m.id == roomId
+                             select m).Single();
+
+                Building building = (from m in _db.Buildings
+                                     where m.name.Equals(buildingComboBox.Text)
+                                     select m).Single();
+
+                room.capacity = int.Parse(capacityTextbox.Text);
+                room.roomId = roomIdTextBox.Text;
+                room.building = building.id;
+                room.roomType = roomTypeComboBox.Text;
+
+                _db.SaveChanges();
+                using (var ctx = new GTimeTableEntities())
+                {
+                    roomDataGrid.ItemsSource = ctx.Database.SqlQuery<RoomsDto>("SELECT R.id , R.capacity, R.roomId, R.roomType, B.name As building " +
+                                                                     "FROM Rooms R INNER JOIN Buildings B ON R.[building] = B.id   ").ToList();
+                }
+                CleanRoom();
+            }
+
+        }
+
+        private void updateRoomBtn_Click(object sender, RoutedEventArgs e)
+        {
+            addRoomBtn.Content = "Save";
+
+            int Id = (roomDataGrid.SelectedItem as RoomsDto).id;
+
+            Room room = (from m in _db.Rooms
+                         where m.id == Id
+                         select m).Single();
+
+            Building building = (from m in _db.Buildings
+                                 where m.id == room.building
+                                 select m).Single();
+
+            buildingComboBox.Text = building.name;
+            roomIdTextBox.Text = room.roomId;
+            capacityTextbox.Text = room.capacity.ToString();
+            roomTypeComboBox.Text = room.roomType;
+            roomId = room.id;
+        }
+
+        private void deleteRoomBtn_Click(object sender, RoutedEventArgs e)
+        {
+            int Id = (roomDataGrid.SelectedItem as RoomsDto).id;
+            var deletedRoom = _db.Rooms.Where(r => r.id == Id).Single();
+            _db.Rooms.Remove(deletedRoom);
+            _db.SaveChanges();
+
+            using (var ctx = new GTimeTableEntities())
+            {
+                roomDataGrid.ItemsSource = ctx.Database.SqlQuery<RoomsDto>("SELECT R.id , R.capacity, R.roomId, R.roomType, B.name As building " +
+                                                                 "FROM Rooms R INNER JOIN Buildings B ON R.[building] = B.id   ").ToList();
+            }
+
+
+        }
+
+        //===============================================================================================================================
+
+        // ================================= Suitable Rooms For Tags Tab Function  ============================================================
+
+        // --------------- Main Load Function -----------------------------------
+        private void TBSuitableRoomsforTags(object sender, MouseButtonEventArgs e)
+            {
+                clearMainFunction();
+                List<suitableroomsforTagDto> suitableRoomsforTags = new List<suitableroomsforTagDto>();
+
+                using (var ctx = new GTimeTableEntities())
+                {
+                    suitableRoomsforTags = ctx.Database.SqlQuery<suitableroomsforTagDto>("select s.id, (select r.roomId from Rooms r where r.id = s.room) as  room , " +
+                        "(select t.tag from Tags t where t.id = s.tag) as tag from SutiableTabforRoom s  ").ToList();
+                }
+
+                sutiableTabforRoomDataGrid.ItemsSource = suitableRoomsforTags;
+
+                List<Tag> LstTags = new List<Tag>();
+                LstTags = _db.Tags.ToList();
+
+                List<Room> LstRooms = new List<Room>();
+                LstRooms = _db.Rooms.ToList();
+
+                foreach (var tags in LstTags)
+                {
+                    if (tags != null)
+                    {
+                        comboBox_Tags_TBSuitableRoomsForTags.Items.Add(tags.tag1);
+                    }
+                }
+
+                foreach (var room in LstRooms)
+                {
+                    if (room != null)
+                    {
+                        comboBox_Rooms_TBSuitableRoomsForTags.Items.Add(room.roomId);
+                    }
+                }
+
+            }
+
+            //----------------- Add Button click Function ---------------------
+            private void addClickSuitableRoomsfoTag_TBSuitableRoomsForTags(object sender, RoutedEventArgs e)
+            {
+
+                if (comboBox_Tags_TBSuitableRoomsForTags.Text == "")
+                {
+                    MaterialMessageBox.ShowError(@"Please Select Tag Befor Save");
+                }
+
+                if (comboBox_Rooms_TBSuitableRoomsForTags.Text == "")
+                {
+                    MaterialMessageBox.ShowError(@"Please Select Room Befor Save");
+                }
+                else
+                {
+                    try
+                    {
+                        suitableRoomsforTag = new SutiableTabforRoom();
+                        Tag tag = (from m in _db.Tags
+                                   where m.tag1.Equals(comboBox_Tags_TBSuitableRoomsForTags.Text)
+                                   select m).Single();
+
+                        Room room = (from m in _db.Rooms
+                                     where m.roomId.Equals(comboBox_Rooms_TBSuitableRoomsForTags.Text)
+                                     select m).Single();
+
+                        suitableRoomsforTag.room = room.id;
+                        suitableRoomsforTag.tag = tag.id;
+                        _db.SutiableTabforRooms.Add(suitableRoomsforTag);
+                        _db.SaveChanges();
+                        using (var ctx = new GTimeTableEntities())
+                        {
+                                sutiableTabforRoomDataGrid.ItemsSource = ctx.Database.SqlQuery<suitableroomsforTagDto>("select s.id, (select r.roomId from Rooms r where r.id = s.room) as  room , " +
+                                "(select t.tag from Tags t where t.id = s.tag) as tag from SutiableTabforRoom s  ").ToList();
+                        }
+                }
+                    catch (Exception exe)
+                    {
+                        MessageBox.Show(exe.ToString());
+                    }
+
+                    suitableRoomsforTagsClearText();
+
+                }
+
+
+            }
+            //-------------- Delete Function in Grid ------------------------------------
+
+            private void deleteRoomBtnClick_TBSuitableRoomsForTags(object sender, RoutedEventArgs e)
+            {
+                int Id = (sutiableTabforRoomDataGrid.SelectedItem as suitableroomsforTagDto).id;
+                var deletedRoom = _db.SutiableTabforRooms.Where(r => r.id == Id).Single();
+                _db.SutiableTabforRooms.Remove(deletedRoom);
+                _db.SaveChanges();
+                    using (var ctx = new GTimeTableEntities())
+                    {
+                        sutiableTabforRoomDataGrid.ItemsSource = ctx.Database.SqlQuery<suitableroomsforTagDto>("select s.id, (select r.roomId from Rooms r where r.id = s.room) as  room , " +
+                        "(select t.tag from Tags t where t.id = s.tag) as tag from SutiableTabforRoom s  ").ToList();
+                    }
+
+        }
+
+        //-------- Clear Data Function ------------
+        private void suitableRoomsforTagsClearText()
+            {
+                comboBox_Tags_TBSuitableRoomsForTags.Text = "";
+                comboBox_Rooms_TBSuitableRoomsForTags.Text = "";
+                comboBox_Tags_TBSuitableRoomsForTags.Items.Clear();
+                comboBox_Rooms_TBSuitableRoomsForTags.Items.Clear();
+
+            }
+
+
+        //=============================================================================================================================================
+
         private void clean() {
             buildingNameTextBox.Text = "";
             capacityTextbox.Text = "";
             roomIdTextBox.Text = "";
         }
 
-        private void CleanRoom()
-        {           
-            capacityTextbox.Text = "";
-            roomIdTextBox.Text = "";
-        }
+        
 
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
@@ -152,93 +383,8 @@ namespace GTimeTable
             addBuildingName.Visibility = Visibility.Visible;
         }
 
-        private void AddRoomBtn_Click(object sender, RoutedEventArgs e)
-        {
-            //Add Function
-            if(addRoomBtn.Content.Equals("Add"))
-            {
-                room = new Room();
+      
 
-                Building building = (from m in _db.Buildings
-                                     where m.name.Equals(buildingComboBox.Text)
-                                     select m).Single();
-
-                room.capacity = int.Parse(capacityTextbox.Text);
-                room.roomId = roomIdTextBox.Text;
-                room.building = building.id;
-                room.roomType = roomTypeComboBox.Text;
-
-                _db.Rooms.Add(room);
-                _db.SaveChanges();
-                using (var ctx = new GTimeTableEntities())
-                {
-                    roomDataGrid.ItemsSource = ctx.Database.SqlQuery<RoomsDto>("SELECT R.id , R.capacity, R.roomId, R.roomType, B.name As building " +
-                                                                     "FROM Rooms R INNER JOIN Buildings B ON R.[building] = B.id   ").ToList();
-                }
-                CleanRoom();
-            }
-            //update a room
-            else
-            {
-                Room room = (from m in _db.Rooms
-                             where m.id == roomId
-                             select m).Single();
-
-                Building building = (from m in _db.Buildings
-                                     where m.name.Equals(buildingComboBox.Text)
-                                     select m).Single();
-
-                room.capacity = int.Parse(capacityTextbox.Text);
-                room.roomId = roomIdTextBox.Text;
-                room.building = building.id;
-                room.roomType = roomTypeComboBox.Text;
-                
-                _db.SaveChanges();
-                using (var ctx = new GTimeTableEntities())
-                {
-                    roomDataGrid.ItemsSource = ctx.Database.SqlQuery<RoomsDto>("SELECT R.id , R.capacity, R.roomId, R.roomType, B.name As building " +
-                                                                     "FROM Rooms R INNER JOIN Buildings B ON R.[building] = B.id   ").ToList();
-                }
-                CleanRoom();
-            }
-            
-        }
-
-        private void updateRoomBtn_Click(object sender, RoutedEventArgs e)
-        {
-            addRoomBtn.Content = "Save";
-
-            int Id = (roomDataGrid.SelectedItem as RoomsDto).id;
-
-            Room room = (from m in _db.Rooms
-                         where m.id == Id
-                         select m).Single();
-
-            Building building = (from m in _db.Buildings
-                                 where m.id == room.building
-                                 select m).Single();
-
-            buildingComboBox.Text = building.name;
-            roomIdTextBox.Text = room.roomId;
-            capacityTextbox.Text = room.capacity.ToString();
-            roomTypeComboBox.Text = room.roomType;
-            roomId = room.id;
-        }
-
-        private void deleteRoomBtn_Click(object sender, RoutedEventArgs e)
-        {
-            int Id = (roomDataGrid.SelectedItem as RoomsDto).id;
-            var deletedRoom = _db.Rooms.Where(r => r.id == Id).Single();
-            _db.Rooms.Remove(deletedRoom);
-            _db.SaveChanges();
-
-            using (var ctx = new GTimeTableEntities())
-            {
-                roomDataGrid.ItemsSource = ctx.Database.SqlQuery<RoomsDto>("SELECT R.id , R.capacity, R.roomId, R.roomType, B.name As building " +
-                                                                 "FROM Rooms R INNER JOIN Buildings B ON R.[building] = B.id   ").ToList();
-            }
-           
-
-        }
+       
     }
 }

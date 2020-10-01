@@ -10,15 +10,21 @@
     <UserControl.Resources>
         <CollectionViewSource x:Key="buildingViewSource" d:DesignSource="{d:DesignInstance {x:Type local:Building}, CreateList=True}"/>
         <CollectionViewSource x:Key="roomViewSource" d:DesignSource="{d:DesignInstance {x:Type local:Room}, CreateList=True}"/>
+        <CollectionViewSource x:Key="sutiableTabforRoomViewSource" d:DesignSource="{d:DesignInstance {x:Type local:SutiableTabforRoom}, CreateList=True}"/>
     </UserControl.Resources>
     <Grid>
         <materialDesign:TransitioningContent x:Name="TrainsitionigContentSlide" OpeningEffect="{materialDesign:TransitionEffect SlideInFromLeft, Duration=0:0:0.1}">
             <Grid HorizontalAlignment="Left" Height="857" Margin="10,10,-0.4,0" VerticalAlignment="Top" Width="1120">
                 <TextBlock HorizontalAlignment="Center" Margin="487,10,543,0" TextWrapping="Wrap" Text="Locations" VerticalAlignment="Top" FontSize="20" FontWeight="Bold"/>
                 <TabControl HorizontalAlignment="Left" Height="602" Margin="0,74,0,0" VerticalAlignment="Top" Width="1034">
-                    <TabItem Header="Building">
+                    <TabItem x:Name="TBBuilding"  Header="Building" >
                         <Grid DataContext="{StaticResource buildingViewSource}">
-                            <DataGrid x:Name="buildingDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding}" Margin="41,126,42,56.8" RowDetailsVisibilityMode="VisibleWhenSelected" CanUserAddRows="False">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="50*"/>
+                                <ColumnDefinition Width="21*"/>
+                                <ColumnDefinition Width="272*"/>
+                            </Grid.ColumnDefinitions>
+                            <DataGrid x:Name="buildingDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding}" Margin="41,126,42,56.6" RowDetailsVisibilityMode="VisibleWhenSelected" CanUserAddRows="False" Grid.ColumnSpan="3">
                                 <DataGrid.Columns>
 
                                     <DataGridTextColumn x:Name="nameColumn" Binding="{Binding name}" Header="Building Name" Width="700"/>
@@ -40,7 +46,7 @@
 
                                 </DataGrid.Columns>
                             </DataGrid>
-                            <Grid x:Name="grid1" HorizontalAlignment="Left" Margin="48,53,0,0" VerticalAlignment="Top">
+                            <Grid x:Name="grid1" HorizontalAlignment="Left" Margin="48,53,0,0" VerticalAlignment="Top" Grid.ColumnSpan="3">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="Auto"/>
                                     <ColumnDefinition Width="117.8"/>
@@ -53,24 +59,30 @@
                                 <Label Content="Building Name:" Grid.Column="0" HorizontalAlignment="Left" Margin="3,3.2,0,2.8" Grid.Row="1" VerticalAlignment="Center"/>
                                 <TextBox x:Name="buildingNameTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="3.4,4.2,0,4.8" Grid.Row="1" Text="{Binding name, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120" Grid.ColumnSpan="2"/>
                             </Grid>
-                            <Button x:Name="saveBuildingName" Content="Save" HorizontalAlignment="Left" Margin="384,52,0,0" VerticalAlignment="Top" Width="75" Click="SaveBuildingName_Click" Background="Green"/>
-                            <Button x:Name="addBuildingName" Content="Add" HorizontalAlignment="Left" Margin="384,52,0,0" VerticalAlignment="Top" Width="75"  Click="AddBuildingName_Click"/>
+                            <Button x:Name="saveBuildingName" Content="Save" HorizontalAlignment="Left" Margin="171.5,52,0,0" VerticalAlignment="Top" Width="74" Click="SaveBuildingName_Click" Background="Green" Grid.Column="2"/>
+                            <Button x:Name="addBuildingName" Content="Add" HorizontalAlignment="Left" Margin="171.5,52,0,0" VerticalAlignment="Top" Width="74"  Click="AddBuildingName_Click" Grid.Column="2"/>
                         </Grid>
                     </TabItem>
-                    <TabItem Header="Room">
+                    <TabItem x:Name="TBRooms" Header="Room">
                         <Grid Background="White" DataContext="{StaticResource roomViewSource}">
-                            <TextBlock HorizontalAlignment="Left" Margin="170,66,0,0" TextWrapping="Wrap" Text="Building" VerticalAlignment="Top"/>
-                            <ComboBox x:Name="buildingComboBox" HorizontalAlignment="Left" Margin="236,49,0,0" VerticalAlignment="Top" Width="170" Height="33">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="130*"/>
+                                <ColumnDefinition Width="39*"/>
+                                <ColumnDefinition Width="47*"/>
+                                <ColumnDefinition Width="812*"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock HorizontalAlignment="Left" Margin="1.2,66,0,0" TextWrapping="Wrap" Text="Building" VerticalAlignment="Top" Grid.Column="2"/>
+                            <ComboBox x:Name="buildingComboBox" HorizontalAlignment="Left" Margin="19.9,49,0,0" VerticalAlignment="Top" Width="170" Height="33" Grid.Column="3">
                                 <ComboBoxItem ></ComboBoxItem>
                             </ComboBox>
-                            <TextBlock HorizontalAlignment="Left" Margin="632,65,0,0" TextWrapping="Wrap" Text="Capacity" VerticalAlignment="Top"/>
-                            <TextBox x:Name="capacityTextbox" HorizontalAlignment="Left" Height="23" Margin="705,61,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="178"/>
-                            <TextBlock HorizontalAlignment="Left" Margin="170,114,0,0" TextWrapping="Wrap" Text="Room ID" VerticalAlignment="Top"/>
-                            <TextBox x:Name="roomIdTextBox" HorizontalAlignment="Left" Height="23" Margin="236,107,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="170" />
-                            <TextBlock HorizontalAlignment="Left" Margin="632,114,0,0" TextWrapping="Wrap" Text="Room Type" VerticalAlignment="Top" Width="68"/>
-                            <ComboBox x:Name="roomTypeComboBox" HorizontalAlignment="Left" Margin="705,97,0,0" VerticalAlignment="Top" Width="178" Height="33"/>
-                            <Button x:Name="addRoomBtn" Content="Add" HorizontalAlignment="Center" Margin="491,162,462,0" VerticalAlignment="Top" Width="75" Click="AddRoomBtn_Click" />
-                            <DataGrid x:Name="roomDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding}" Margin="170,232,168,141.6" RowDetailsVisibilityMode="VisibleWhenSelected" CanUserAddRows="False">
+                            <TextBlock HorizontalAlignment="Left" Margin="415.9,65,0,0" TextWrapping="Wrap" Text="Capacity" VerticalAlignment="Top" Grid.Column="3"/>
+                            <TextBox x:Name="capacityTextbox" HorizontalAlignment="Left" Height="23" Margin="488.9,61,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="178" Grid.Column="3"/>
+                            <TextBlock HorizontalAlignment="Left" Margin="1.2,114,0,0" TextWrapping="Wrap" Text="Room ID" VerticalAlignment="Top" Grid.Column="2" Grid.ColumnSpan="2"/>
+                            <TextBox x:Name="roomIdTextBox" HorizontalAlignment="Left" Height="23" Margin="19.9,107,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="170" Grid.Column="3" />
+                            <TextBlock HorizontalAlignment="Left" Margin="415.9,114,0,0" TextWrapping="Wrap" Text="Room Type" VerticalAlignment="Top" Width="68" Grid.Column="3"/>
+                            <ComboBox x:Name="roomTypeComboBox" HorizontalAlignment="Left" Margin="488.9,97,0,0" VerticalAlignment="Top" Width="178" Height="33" Grid.Column="3"/>
+                            <Button x:Name="addRoomBtn" Content="Add" HorizontalAlignment="Center" Margin="274.9,162,462,0" VerticalAlignment="Top" Width="75" Click="AddRoomBtn_Click" Grid.Column="3" />
+                            <DataGrid x:Name="roomDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding}" Margin="1.2,232,168,141.6" RowDetailsVisibilityMode="VisibleWhenSelected" CanUserAddRows="False" Grid.Column="2" Grid.ColumnSpan="2">
                                 <DataGrid.Columns>
                                     <DataGridTextColumn x:Name="roomIdColumn" Binding="{Binding roomId}" Header="Room Code" Width="SizeToHeader"/>
                                     <DataGridTextColumn x:Name="buildingColumn" Binding="{Binding building}" Header="Building" Width="SizeToHeader"/>
@@ -93,23 +105,61 @@
                                         </DataGridTemplateColumn.CellTemplate>
                                     </DataGridTemplateColumn>
                                 </DataGrid.Columns>
-                                
+
                             </DataGrid>
                         </Grid>
                     </TabItem>
-                    <TabItem Header="Subject Preferences">
+                    <TabItem Header="Suitable Rooms for Tag" MouseUp="TBSuitableRoomsforTags">
+                        <TabItem.Background>
+                            <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
+                                <GradientStop Color="#FFF0F0F0" Offset="0"/>
+                                <GradientStop Color="#FFE5E5E5" Offset="1"/>
+                            </LinearGradientBrush>
+                        </TabItem.Background>
+                        <Grid Background="White" DataContext="{StaticResource sutiableTabforRoomViewSource}">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="41*"/>
+                                <ColumnDefinition Width="473*"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock x:Name="textBlock" Grid.Column="1" HorizontalAlignment="Left" Margin="286.6,25,0,0" TextWrapping="Wrap" Text="Suitable Rooms for tags" VerticalAlignment="Top" Height="39" Width="273" FontWeight="Bold" FontSize="22"/>
+                            <ComboBox x:Name="comboBox_Tags_TBSuitableRoomsForTags" Grid.Column="1" HorizontalAlignment="Left" Margin="126.6,114,0,0" VerticalAlignment="Top" Width="223" Height="47"/>
+                            <ComboBox x:Name="comboBox_Rooms_TBSuitableRoomsForTags" Grid.Column="1" HorizontalAlignment="Left" Margin="582.6,114,0,0" VerticalAlignment="Top" Width="220" Height="47"/>
+                            <TextBlock x:Name="textBlock1" Grid.Column="1" HorizontalAlignment="Left" Margin="513.6,144,0,0" TextWrapping="Wrap" Text="Room :" VerticalAlignment="Top" FontSize="16"/>
+                            <TextBlock x:Name="textBlock2" Grid.Column="1" HorizontalAlignment="Left" Margin="59.6,140,0,0" TextWrapping="Wrap" Text="Tags : " VerticalAlignment="Top" FontSize="16"/>
+                            <Button x:Name="btnAddClick_TBSuitableRoomsForTags" Content="Add" HorizontalAlignment="Center" Margin="395.6,206,475,0" VerticalAlignment="Top" Width="75" Click="addClickSuitableRoomsfoTag_TBSuitableRoomsForTags" Grid.Column="1" />
+                            <DataGrid x:Name="sutiableTabforRoomDataGrid" AutoGenerateColumns="False" Grid.Column="1" EnableRowVirtualization="True" ItemsSource="{Binding}" Margin="286.6,291,338,82.6" RowDetailsVisibilityMode="VisibleWhenSelected" CanUserAddRows="False" Background="#FFF0A3A3">
+                                <DataGrid.Columns>
+                                    <DataGridTextColumn x:Name="idColumn1" Binding="{Binding id}" Header="id" Width="Auto" Visibility="Hidden"/>
+                                    <DataGridTextColumn x:Name="tagColumn" Binding="{Binding tag}" Header="Tag" Width="Auto"/>
+                                    <DataGridTextColumn x:Name="roomColumn" Binding="{Binding room}" Header="Room" Width="Auto"/>
+                                    <DataGridTemplateColumn>
+                                        <DataGridTemplateColumn.HeaderTemplate>
+                                            <DataTemplate>
+                                                <TextBlock Text="Action" />
+                                            </DataTemplate>
+                                        </DataGridTemplateColumn.HeaderTemplate>
+                                        <DataGridTemplateColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <StackPanel Orientation="Horizontal" >
+                                                    <Button x:Name="deleteRoomBtn_TBSuitableRoomsForTags"  Click="deleteRoomBtnClick_TBSuitableRoomsForTags" Content="Delete" Background="red" />
+                                                </StackPanel>
+                                            </DataTemplate>
+                                        </DataGridTemplateColumn.CellTemplate>
+                                    </DataGridTemplateColumn>
+                                </DataGrid.Columns>
+                            </DataGrid>
+                        </Grid>
+                    </TabItem>
+                    <TabItem Header="Suitable Rooms for Subjects">
+                        <Grid Background="White"/>
+                    </TabItem>
+                    <TabItem Header="Suitable Rooms for Lecturers">
                         <Grid Background="#FFE5E5E5"/>
                     </TabItem>
-                    <TabItem Header="Reserved Time">
+                    <TabItem Header="Suitable Rooms for Group">
                         <Grid Background="#FFE5E5E5"/>
                     </TabItem>
-                    <TabItem Header="Lecturer">
-                        <Grid Background="#FFE5E5E5"/>
-                    </TabItem>
-                    <TabItem Header="Group">
-                        <Grid Background="#FFE5E5E5"/>
-                    </TabItem>
-                    <TabItem Header="Sessions">
+                    <TabItem Header="Suitable Rooms for Sesions">
                         <Grid Background="#FFE5E5E5"/>
                     </TabItem>
                     <TabItem Header="Consecutive">
