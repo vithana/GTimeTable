@@ -14,7 +14,7 @@
     </UserControl.Resources>
     <Grid>
         <materialDesign:TransitioningContent x:Name="TrainsitionigContentSlide_student" OpeningEffect="{materialDesign:TransitionEffect SlideInFromLeft, Duration=0:0:0.1}">
-            <Grid  Margin="0,-10,139.6,0" Height="867" VerticalAlignment="Top" HorizontalAlignment="Right" Width="906" DataContext="{StaticResource studentViewSource}">
+            <Grid  Margin="0,-10,139.6,0" Height="867" VerticalAlignment="Top" HorizontalAlignment="Right" Width="906" DataContext="{StaticResource studentViewSource}" Background="White">
                 <TextBlock x:Name="textBlock_studnet" HorizontalAlignment="Left" Margin="315,10,0,0" TextWrapping="Wrap" Text="Student" VerticalAlignment="Top" FontWeight="Bold" FontSize="36"/>
                 <Grid x:Name="grid1" DataContext="{StaticResource studentViewSource}" HorizontalAlignment="Left" Margin="360,419,0,0" VerticalAlignment="Top">
                     <Grid.ColumnDefinitions>
@@ -32,16 +32,16 @@
                         <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
                     <Label Content="Academic Year:" Grid.Column="0" HorizontalAlignment="Left" Margin="-358,-312,0,327" Grid.Row="0" VerticalAlignment="Center"/>
-                    <ComboBox x:Name="acdamicYearComboBox" HorizontalAlignment="Left" Height="36" Margin="-211,-316,0,332" Grid.Row="0" Text="{Binding acdamicYear, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="109" FontSize="18">
+                    <ComboBox x:Name="acdamicYearComboBox" HorizontalAlignment="Left" Height="36" Margin="-224,-315,0,333.4" Grid.Row="0" Text="{Binding acdamicYear, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="122" FontSize="18">
                         <ComboBoxItem Content="Y1"/>
                         <ComboBoxItem Content="Y2"/>
                         <ComboBoxItem Content="Y3"/>
                         <ComboBoxItem Content="Y4"/>
                     </ComboBox>
-                    <Label Content="Group Id:" HorizontalAlignment="Left" Margin="151,-219,-16.4,247.4" VerticalAlignment="Center" Grid.Column="1"/>
-                    <TextBox x:Name="groupIdTextBox" HorizontalAlignment="Left" Height="31" Margin="266,-224,-242.4,247.4" VerticalAlignment="Center" Width="170" Grid.Column="1" FontSize="14" IsEnabled="False"/>
+                    <Label Content="Group Id:" HorizontalAlignment="Left" Margin="184,-219,-49.4,247.4" VerticalAlignment="Center" Grid.Column="1"/>
+                    <TextBox x:Name="groupIdTextBox" HorizontalAlignment="Left" Height="31" Margin="291,-224,-267.4,247.4" VerticalAlignment="Center" Width="170" Grid.Column="1" FontSize="14" IsEnabled="False" Background="#FFBFFF07"  TextAlignment="Center" FontWeight="Bold"/>
                     <Label Content="Group No:" Grid.Column="0" HorizontalAlignment="Left" Margin="-347,-204,0,232.4" VerticalAlignment="Center"/>
-                    <ComboBox x:Name="groupNoComboBox" HorizontalAlignment="Left" Height="38" Margin="-224,-224,0,240.4" Text="{Binding groupNo, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="154" FontSize="18" SelectionChanged="GroupNocomboboxOnchange">
+                    <ComboBox x:Name="groupNoComboBox" HorizontalAlignment="Left" Height="38" Margin="-224,-224,0,240.4" Text="{Binding groupNo, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="122" FontSize="18" SelectionChanged="GroupNocomboboxOnchange">
                         <ComboBoxItem Content="1"/>
                         <ComboBoxItem Content="2"/>
                         <ComboBoxItem Content="3"/>
@@ -55,14 +55,14 @@
                         <ComboBoxItem Content="IS"/>
                     </ComboBox>
                     <Label Content="Semester:" Grid.Column="0" HorizontalAlignment="Left" Margin="-73,-313,0,328" VerticalAlignment="Center" Grid.ColumnSpan="2"/>
-                    <ComboBox x:Name="semesterComboBox" HorizontalAlignment="Left" Height="38" Margin="41,-319,0,333" Text="{Binding semester, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="119" Grid.Column="1" FontSize="18">
+                    <ComboBox x:Name="semesterComboBox" HorizontalAlignment="Left" Height="38" Margin="25,-318,0,334.4" Text="{Binding semester, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="119" Grid.Column="1" FontSize="18">
                         <ComboBoxItem Content="S1"/>
                         <ComboBoxItem Content="S2"/>
                     </ComboBox>
-                    <Label Content="Sub Grop Id:" Grid.Column="1" HorizontalAlignment="Left" Margin="133,-137,-16.4,165.4" VerticalAlignment="Center"/>
-                    <TextBox x:Name="subGropIdTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="34" Margin="266,-145,-242.4,165.4" VerticalAlignment="Center" Width="170" FontSize="14" IsEnabled="False"/>
+                    <Label Content="Sub Grop Id:" Grid.Column="1" HorizontalAlignment="Left" Margin="165,-137,-48.4,165.4" VerticalAlignment="Center"/>
+                    <TextBox x:Name="subGropIdTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="34" Margin="291,-145,-267.4,165.4" VerticalAlignment="Center" Width="170" FontSize="14" IsEnabled="False" Background="#FFFF590A" TextAlignment="Center" FontWeight="Bold"/>
                     <Label Content="Sub Group No:" Grid.Column="0" HorizontalAlignment="Left" Margin="-347,-129,0,157.4" VerticalAlignment="Center"/>
-                    <ComboBox x:Name="subGroupNoComboBox" HorizontalAlignment="Left" Height="41" Margin="-224,-152,0,165.4" Text="{Binding subGroupNo, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="154" FontSize="18" SelectionChanged="SubGroupNocomboboxOnchange">
+                    <ComboBox x:Name="subGroupNoComboBox" HorizontalAlignment="Left" Height="41" Margin="-224,-152,0,165.4" Text="{Binding subGroupNo, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="122" FontSize="18" SelectionChanged="SubGroupNocomboboxOnchange">
                         <ComboBoxItem Content="1"/>
                         <ComboBoxItem Content="2"/>
                     </ComboBox>
