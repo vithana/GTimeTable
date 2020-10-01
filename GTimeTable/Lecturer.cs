@@ -34,6 +34,7 @@ namespace GTimeTable
         public virtual Building Building1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<LecturesSession> LecturesSessions { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<NotAvailbleTimesOfLecturer> NotAvailbleTimesOfLecturers { get; set; }
     }
 }

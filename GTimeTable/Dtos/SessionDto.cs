@@ -16,5 +16,6 @@ namespace GTimeTable.Dtos
         public string groupId { get; set; }
         public int count { get; set; }
         public string duration { get; set; }
+        public Nullable<int> consecutive_session_id { get; set; }
     }
 }
