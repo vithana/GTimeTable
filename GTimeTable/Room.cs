@@ -14,6 +14,12 @@ namespace GTimeTable
     
     public partial class Room
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Room()
+        {
+            this.SutiableTabforRooms = new HashSet<SutiableTabforRoom>();
+        }
+    
         public int id { get; set; }
         public int capacity { get; set; }
         public string roomId { get; set; }
@@ -21,5 +27,7 @@ namespace GTimeTable
         public int building { get; set; }
     
         public virtual Building Building1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<SutiableTabforRoom> SutiableTabforRooms { get; set; }
     }
 }

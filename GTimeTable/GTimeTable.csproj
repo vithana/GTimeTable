@@ -132,6 +132,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>DataSet1.xsd</DependentUpon>
     </Compile>
+    <Compile Include="Dtos\suitableroomsforTagDto.cs" />
     <Compile Include="Dtos\LectureDto.cs" />
     <Compile Include="Dtos\RoomsDto.cs" />
     <Compile Include="frmStudent.xaml.cs">
@@ -178,6 +179,9 @@
     </Compile>
     <Compile Include="Locations.xaml.cs">
       <DependentUpon>Locations.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="SutiableTabforRoom.cs">
+      <DependentUpon>GTimeTable.tt</DependentUpon>
     </Compile>
     <Compile Include="Tag.cs">
       <DependentUpon>GTimeTable.tt</DependentUpon>
@@ -284,6 +288,7 @@
     <None Include="Properties\DataSources\Student.datasource" />
     <None Include="Properties\DataSources\Subject.datasource" />
     <None Include="Properties\DataSources\Building.datasource" />
+    <None Include="Properties\DataSources\SutiableTabforRoom.datasource" />
     <None Include="Properties\DataSources\Tag.datasource" />
     <None Include="Properties\DataSources\TimeTableSlot.datasource" />
     <None Include="Properties\DataSources\WorkingDay.datasource" />

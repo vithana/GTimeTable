@@ -63,6 +63,14 @@
           <Property Name="lab_hrs" Type="int" Nullable="false" />
           <Property Name="eval_hrs" Type="int" Nullable="false" />
         </EntityType>
+        <EntityType Name="SutiableTabforRoom">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="tag" Type="int" Nullable="false" />
+          <Property Name="room" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="Tags">
           <Key>
             <PropertyRef Name="id" />
@@ -111,6 +119,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_SutiableTabforRoom_room">
+          <End Role="Rooms" Type="Self.Rooms" Multiplicity="1" />
+          <End Role="SutiableTabforRoom" Type="Self.SutiableTabforRoom" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Rooms">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="SutiableTabforRoom">
+              <PropertyRef Name="room" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SutiableTabforRoom_tag">
+          <End Role="Tags" Type="Self.Tags" Multiplicity="1" />
+          <End Role="SutiableTabforRoom" Type="Self.SutiableTabforRoom" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tags">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="SutiableTabforRoom">
+              <PropertyRef Name="tag" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_WorkingDaysOfWeek_WorkingDaysAndHours">
           <End Role="WorkingDaysAndHours" Type="Self.WorkingDaysAndHours" Multiplicity="1" />
           <End Role="WorkingDaysOfWeek" Type="Self.WorkingDaysOfWeek" Multiplicity="*" />
@@ -129,6 +161,7 @@
           <EntitySet Name="Rooms" EntityType="Self.Rooms" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Student" EntityType="Self.Student" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Subjects" EntityType="Self.Subjects" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SutiableTabforRoom" EntityType="Self.SutiableTabforRoom" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Tags" EntityType="Self.Tags" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="WorkingDaysAndHours" EntityType="Self.WorkingDaysAndHours" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="WorkingDaysOfWeek" EntityType="Self.WorkingDaysOfWeek" Schema="dbo" store:Type="Tables" />
@@ -139,6 +172,14 @@
           <AssociationSet Name="FK_Rooms_Buildings" Association="Self.FK_Rooms_Buildings">
             <End Role="Buildings" EntitySet="Buildings" />
             <End Role="Rooms" EntitySet="Rooms" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SutiableTabforRoom_room" Association="Self.FK_SutiableTabforRoom_room">
+            <End Role="Rooms" EntitySet="Rooms" />
+            <End Role="SutiableTabforRoom" EntitySet="SutiableTabforRoom" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SutiableTabforRoom_tag" Association="Self.FK_SutiableTabforRoom_tag">
+            <End Role="Tags" EntitySet="Tags" />
+            <End Role="SutiableTabforRoom" EntitySet="SutiableTabforRoom" />
           </AssociationSet>
           <AssociationSet Name="FK_WorkingDaysOfWeek_WorkingDaysAndHours" Association="Self.FK_WorkingDaysOfWeek_WorkingDaysAndHours">
             <End Role="WorkingDaysAndHours" EntitySet="WorkingDaysAndHours" />
@@ -170,6 +211,15 @@
             <End Role="Building" EntitySet="Buildings" />
             <End Role="Room" EntitySet="Rooms" />
           </AssociationSet>
+          <EntitySet Name="SutiableTabforRooms" EntityType="GTimeTableModel.SutiableTabforRoom" />
+          <AssociationSet Name="FK_SutiableTabforRoom_room" Association="GTimeTableModel.FK_SutiableTabforRoom_room">
+            <End Role="Room" EntitySet="Rooms" />
+            <End Role="SutiableTabforRoom" EntitySet="SutiableTabforRooms" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SutiableTabforRoom_tag" Association="GTimeTableModel.FK_SutiableTabforRoom_tag">
+            <End Role="Tag" EntitySet="Tags" />
+            <End Role="SutiableTabforRoom" EntitySet="SutiableTabforRooms" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="Subject">
           <Key>
@@ -191,6 +241,7 @@
           </Key>
           <Property Name="id" Type="Int32" Nullable="false" />
           <Property Name="tag1" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="SutiableTabforRooms" Relationship="GTimeTableModel.FK_SutiableTabforRoom_tag" FromRole="Tag" ToRole="SutiableTabforRoom" />
         </EntityType>
         <EntityType Name="Student">
           <Key>
@@ -282,6 +333,7 @@
           <Property Name="roomType" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="building" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Building1" Relationship="GTimeTableModel.FK_Rooms_Buildings" FromRole="Room" ToRole="Building" />
+          <NavigationProperty Name="SutiableTabforRooms" Relationship="GTimeTableModel.FK_SutiableTabforRoom_room" FromRole="Room" ToRole="SutiableTabforRoom" />
         </EntityType>
         <Association Name="FK_Rooms_Buildings">
           <End Type="GTimeTableModel.Building" Role="Building" Multiplicity="1" />
@@ -292,6 +344,40 @@
             </Principal>
             <Dependent Role="Room">
               <PropertyRef Name="building" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="SutiableTabforRoom">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="tag" Type="Int32" Nullable="false" />
+          <Property Name="room" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Room1" Relationship="GTimeTableModel.FK_SutiableTabforRoom_room" FromRole="SutiableTabforRoom" ToRole="Room" />
+          <NavigationProperty Name="Tag1" Relationship="GTimeTableModel.FK_SutiableTabforRoom_tag" FromRole="SutiableTabforRoom" ToRole="Tag" />
+        </EntityType>
+        <Association Name="FK_SutiableTabforRoom_room">
+          <End Type="GTimeTableModel.Room" Role="Room" Multiplicity="1" />
+          <End Type="GTimeTableModel.SutiableTabforRoom" Role="SutiableTabforRoom" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Room">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="SutiableTabforRoom">
+              <PropertyRef Name="room" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SutiableTabforRoom_tag">
+          <End Type="GTimeTableModel.Tag" Role="Tag" Multiplicity="1" />
+          <End Type="GTimeTableModel.SutiableTabforRoom" Role="SutiableTabforRoom" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tag">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="SutiableTabforRoom">
+              <PropertyRef Name="tag" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -387,6 +473,15 @@
                 <ScalarProperty Name="roomType" ColumnName="roomType" />
                 <ScalarProperty Name="roomId" ColumnName="roomId" />
                 <ScalarProperty Name="capacity" ColumnName="capacity" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SutiableTabforRooms">
+            <EntityTypeMapping TypeName="GTimeTableModel.SutiableTabforRoom">
+              <MappingFragment StoreEntitySet="SutiableTabforRoom">
+                <ScalarProperty Name="room" ColumnName="room" />
+                <ScalarProperty Name="tag" ColumnName="tag" />
                 <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>

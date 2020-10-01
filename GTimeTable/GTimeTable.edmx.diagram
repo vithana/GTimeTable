@@ -16,6 +16,9 @@
         <AssociationConnector Association="GTimeTableModel.FK_Lecturers_Buildings" />
         <EntityTypeShape EntityType="GTimeTableModel.Room" Width="1.5" PointX="5.625" PointY="9.375" />
         <AssociationConnector Association="GTimeTableModel.FK_Rooms_Buildings" />
+        <EntityTypeShape EntityType="GTimeTableModel.SutiableTabforRoom" Width="1.5" PointX="7.875" PointY="5.25" />
+        <AssociationConnector Association="GTimeTableModel.FK_SutiableTabforRoom_room" />
+        <AssociationConnector Association="GTimeTableModel.FK_SutiableTabforRoom_tag" />
       </Diagram>      
     </edmx:Diagrams>
   </edmx:Designer>

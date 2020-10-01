@@ -33,5 +33,6 @@ namespace GTimeTable
         public virtual DbSet<Building> Buildings { get; set; }
         public virtual DbSet<Lecturer> Lecturers { get; set; }
         public virtual DbSet<Room> Rooms { get; set; }
+        public virtual DbSet<SutiableTabforRoom> SutiableTabforRooms { get; set; }
     }
 }
