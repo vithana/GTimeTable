@@ -140,13 +140,21 @@ namespace GTimeTable
 
         private void GroupNocomboboxOnchange(object sender, SelectionChangedEventArgs e)
         {
-            acadamicyear_onchange = acdamicYearComboBox.Text;
-            semester_onchange = semesterComboBox.Text;
-            program_onchange = programComboBox.Text;
-            GroupNo_onchange = (groupNoComboBox.SelectedIndex + 1).ToString();
-
-
-            genarateGropId();
+            if (acdamicYearComboBox.Text != "" && semesterComboBox.Text != "" && programComboBox.Text != "")
+            {
+                acadamicyear_onchange = acdamicYearComboBox.Text;
+                semester_onchange = semesterComboBox.Text;
+                program_onchange = programComboBox.Text;
+                GroupNo_onchange = (groupNoComboBox.SelectedIndex + 1).ToString();
+                subGroupNoComboBox.Text = "";
+                subGropIdTextBox.Text = "";
+                genarateGropId();
+            }
+            else
+            {               
+                MaterialMessageBox.ShowError(@"Cannot be null values in to Academic Year , Semester or Program");
+                
+            }
         }
 
         private void SubGroupNocomboboxOnchange(object sender, SelectionChangedEventArgs e)
