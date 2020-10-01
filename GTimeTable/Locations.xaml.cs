@@ -1,4 +1,5 @@
 ﻿using BespokeFusion;
+using GTimeTable.Dtos;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,7 +24,9 @@ namespace GTimeTable
     {
         GTimeTableEntities _db = new GTimeTableEntities();
         int buildingId;
+        int roomId;
         Building building = new Building();
+        Room room;
 
         public Locations()
         {
@@ -33,13 +36,57 @@ namespace GTimeTable
 
         private void Load()
         {
-            buildingDataGrid.ItemsSource = _db.Buildings.ToList();
 
+            BuildingLoad();
+            RoomsLoad();
+        }
+
+        private void BuildingLoad()
+        {
+            //Showing Values in the Building Tab
+            buildingDataGrid.ItemsSource = _db.Buildings.ToList();
             saveBuildingName.Visibility = Visibility.Hidden;
+        }
+        private void RoomsLoad()
+        {
+            List<RoomsDto> roomDto = new List<RoomsDto>();
+
+            using (var ctx = new GTimeTableEntities())
+            {
+               roomDto = ctx.Database.SqlQuery<RoomsDto>("SELECT R.id , R.capacity, R.roomId, R.roomType, B.name As building " +
+                                                                "FROM Rooms R INNER JOIN Buildings B ON R.[building] = B.id   ").ToList();
+            }
+
+            roomDataGrid.ItemsSource = roomDto;
+                
+
+            List<Building> buildings = new List<Building>();
+            buildings = _db.Buildings.ToList();
+
+
+            foreach (var building in buildings)
+            {
+                if (building != null)
+                {
+                    buildingComboBox.Items.Add(building.name);
+                }
+            }
+
+            roomTypeComboBox.Items.Add("Lecture Hall");
+            roomTypeComboBox.Items.Add("Laboratory");
+         
         }
 
         private void clean() {
             buildingNameTextBox.Text = "";
+            capacityTextbox.Text = "";
+            roomIdTextBox.Text = "";
+        }
+
+        private void CleanRoom()
+        {           
+            capacityTextbox.Text = "";
+            roomIdTextBox.Text = "";
         }
 
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
@@ -105,6 +152,93 @@ namespace GTimeTable
             addBuildingName.Visibility = Visibility.Visible;
         }
 
-        
+        private void AddRoomBtn_Click(object sender, RoutedEventArgs e)
+        {
+            //Add Function
+            if(addRoomBtn.Content.Equals("Add"))
+            {
+                room = new Room();
+
+                Building building = (from m in _db.Buildings
+                                     where m.name.Equals(buildingComboBox.Text)
+                                     select m).Single();
+
+                room.capacity = int.Parse(capacityTextbox.Text);
+                room.roomId = roomIdTextBox.Text;
+                room.building = building.id;
+                room.roomType = roomTypeComboBox.Text;
+
+                _db.Rooms.Add(room);
+                _db.SaveChanges();
+                using (var ctx = new GTimeTableEntities())
+                {
+                    roomDataGrid.ItemsSource = ctx.Database.SqlQuery<RoomsDto>("SELECT R.id , R.capacity, R.roomId, R.roomType, B.name As building " +
+                                                                     "FROM Rooms R INNER JOIN Buildings B ON R.[building] = B.id   ").ToList();
+                }
+                CleanRoom();
+            }
+            //update a room
+            else
+            {
+                Room room = (from m in _db.Rooms
+                             where m.id == roomId
+                             select m).Single();
+
+                Building building = (from m in _db.Buildings
+                                     where m.name.Equals(buildingComboBox.Text)
+                                     select m).Single();
+
+                room.capacity = int.Parse(capacityTextbox.Text);
+                room.roomId = roomIdTextBox.Text;
+                room.building = building.id;
+                room.roomType = roomTypeComboBox.Text;
+                
+                _db.SaveChanges();
+                using (var ctx = new GTimeTableEntities())
+                {
+                    roomDataGrid.ItemsSource = ctx.Database.SqlQuery<RoomsDto>("SELECT R.id , R.capacity, R.roomId, R.roomType, B.name As building " +
+                                                                     "FROM Rooms R INNER JOIN Buildings B ON R.[building] = B.id   ").ToList();
+                }
+                CleanRoom();
+            }
+            
+        }
+
+        private void updateRoomBtn_Click(object sender, RoutedEventArgs e)
+        {
+            addRoomBtn.Content = "Save";
+
+            int Id = (roomDataGrid.SelectedItem as RoomsDto).id;
+
+            Room room = (from m in _db.Rooms
+                         where m.id == Id
+                         select m).Single();
+
+            Building building = (from m in _db.Buildings
+                                 where m.id == room.building
+                                 select m).Single();
+
+            buildingComboBox.Text = building.name;
+            roomIdTextBox.Text = room.roomId;
+            capacityTextbox.Text = room.capacity.ToString();
+            roomTypeComboBox.Text = room.roomType;
+            roomId = room.id;
+        }
+
+        private void deleteRoomBtn_Click(object sender, RoutedEventArgs e)
+        {
+            int Id = (roomDataGrid.SelectedItem as RoomsDto).id;
+            var deletedRoom = _db.Rooms.Where(r => r.id == Id).Single();
+            _db.Rooms.Remove(deletedRoom);
+            _db.SaveChanges();
+
+            using (var ctx = new GTimeTableEntities())
+            {
+                roomDataGrid.ItemsSource = ctx.Database.SqlQuery<RoomsDto>("SELECT R.id , R.capacity, R.roomId, R.roomType, B.name As building " +
+                                                                 "FROM Rooms R INNER JOIN Buildings B ON R.[building] = B.id   ").ToList();
+            }
+           
+
+        }
     }
 }
