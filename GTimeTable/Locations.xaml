@@ -9,6 +9,7 @@
              Height="867.463" Width="1130" Loaded="UserControl_Loaded">
     <UserControl.Resources>
         <CollectionViewSource x:Key="buildingViewSource" d:DesignSource="{d:DesignInstance {x:Type local:Building}, CreateList=True}"/>
+        <CollectionViewSource x:Key="roomViewSource" d:DesignSource="{d:DesignInstance {x:Type local:Room}, CreateList=True}"/>
     </UserControl.Resources>
     <Grid>
         <materialDesign:TransitioningContent x:Name="TrainsitionigContentSlide" OpeningEffect="{materialDesign:TransitionEffect SlideInFromLeft, Duration=0:0:0.1}">
@@ -57,29 +58,42 @@
                         </Grid>
                     </TabItem>
                     <TabItem Header="Room">
-                        <Grid Background="White">
+                        <Grid Background="White" DataContext="{StaticResource roomViewSource}">
                             <TextBlock HorizontalAlignment="Left" Margin="170,66,0,0" TextWrapping="Wrap" Text="Building" VerticalAlignment="Top"/>
-                            <ComboBox HorizontalAlignment="Left" Margin="236,49,0,0" VerticalAlignment="Top" Width="170" Height="33">
+                            <ComboBox x:Name="buildingComboBox" HorizontalAlignment="Left" Margin="236,49,0,0" VerticalAlignment="Top" Width="170" Height="33">
                                 <ComboBoxItem ></ComboBoxItem>
                             </ComboBox>
                             <TextBlock HorizontalAlignment="Left" Margin="632,65,0,0" TextWrapping="Wrap" Text="Capacity" VerticalAlignment="Top"/>
-                            <TextBox HorizontalAlignment="Left" Height="23" Margin="705,61,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="178"/>
+                            <TextBox x:Name="capacityTextbox" HorizontalAlignment="Left" Height="23" Margin="705,61,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="178"/>
                             <TextBlock HorizontalAlignment="Left" Margin="170,114,0,0" TextWrapping="Wrap" Text="Room ID" VerticalAlignment="Top"/>
-                            <TextBox HorizontalAlignment="Left" Height="23" Margin="236,107,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="170" />
+                            <TextBox x:Name="roomIdTextBox" HorizontalAlignment="Left" Height="23" Margin="236,107,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="170" />
                             <TextBlock HorizontalAlignment="Left" Margin="632,114,0,0" TextWrapping="Wrap" Text="Room Type" VerticalAlignment="Top" Width="68"/>
-                            <ComboBox HorizontalAlignment="Left" Margin="705,97,0,0" VerticalAlignment="Top" Width="178" Height="33"/>
-                            <TextBlock HorizontalAlignment="Left" Margin="170,168,0,0" TextWrapping="Wrap" Text="Room Type" VerticalAlignment="Top" Width="68"/>
-                            <ComboBox HorizontalAlignment="Left" Margin="236,151,0,0" VerticalAlignment="Top" Width="170" Height="33"/>
-                            <Button Content="Add" HorizontalAlignment="Center" Margin="493,220,460,0" VerticalAlignment="Top" Width="75"/>
-                            <DataGrid HorizontalAlignment="Left" Height="236" Margin="86,281,0,0" VerticalAlignment="Top" Width="866" AutoGenerateColumns="False" CanUserAddRows="False">
+                            <ComboBox x:Name="roomTypeComboBox" HorizontalAlignment="Left" Margin="705,97,0,0" VerticalAlignment="Top" Width="178" Height="33"/>
+                            <Button x:Name="addRoomBtn" Content="Add" HorizontalAlignment="Center" Margin="491,162,462,0" VerticalAlignment="Top" Width="75" Click="AddRoomBtn_Click" />
+                            <DataGrid x:Name="roomDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding}" Margin="170,232,168,141.6" RowDetailsVisibilityMode="VisibleWhenSelected" CanUserAddRows="False">
                                 <DataGrid.Columns>
-                                    <DataGridTextColumn Header="Building" />
-                                    <DataGridTextColumn Header="RoomID" />
-                                    <DataGridTextColumn Header="Faculty" />
-                                    <DataGridTextColumn Header="Capacity" />
-                                    <DataGridTextColumn Header="Room Type" />
-                                    <DataGridTextColumn Header="Action" />
+                                    <DataGridTextColumn x:Name="roomIdColumn" Binding="{Binding roomId}" Header="Room Code" Width="SizeToHeader"/>
+                                    <DataGridTextColumn x:Name="buildingColumn" Binding="{Binding building}" Header="Building" Width="SizeToHeader"/>
+                                    <DataGridTextColumn x:Name="capacityColumn" Binding="{Binding capacity}" Header="Capacity" Width="SizeToHeader"/>
+                                    <DataGridTextColumn x:Name="idColumn" Binding="{Binding id}" Header="id" Width="SizeToHeader" Visibility="Hidden"/>
+                                    <DataGridTextColumn x:Name="roomTypeColumn" Binding="{Binding roomType}" Header="Room Type" Width="SizeToHeader"/>
+                                    <DataGridTemplateColumn>
+                                        <DataGridTemplateColumn.HeaderTemplate>
+                                            <DataTemplate>
+                                                <TextBlock Text="Action" />
+                                            </DataTemplate>
+                                        </DataGridTemplateColumn.HeaderTemplate>
+                                        <DataGridTemplateColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <StackPanel Orientation="Horizontal" >
+                                                    <Button x:Name="updateRoomBtn" Content="Update" Click="updateRoomBtn_Click"  Margin="0 0 5 0 " />
+                                                    <Button x:Name="deleteRoomBtn" Content="Delete" Click="deleteRoomBtn_Click"  Background="red" />
+                                                </StackPanel>
+                                            </DataTemplate>
+                                        </DataGridTemplateColumn.CellTemplate>
+                                    </DataGridTemplateColumn>
                                 </DataGrid.Columns>
+                                
                             </DataGrid>
                         </Grid>
                     </TabItem>

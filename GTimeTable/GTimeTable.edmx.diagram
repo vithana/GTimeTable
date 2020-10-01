@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="3e98bcf8942543c09ab82a7fba1ffdd8" Name="Diagram1" ZoomLevel="47">
+      <Diagram DiagramId="3e98bcf8942543c09ab82a7fba1ffdd8" Name="Diagram1" ZoomLevel="71">
         <EntityTypeShape EntityType="GTimeTableModel.Subject" Width="1.5" PointX="0.5" PointY="4.25" />
         <EntityTypeShape EntityType="GTimeTableModel.Tag" Width="1.5" PointX="0.625" PointY="0.75" />
         <EntityTypeShape EntityType="GTimeTableModel.Student" Width="1.5" PointX="2.75" PointY="0.75" />
@@ -14,6 +14,15 @@
         <EntityTypeShape EntityType="GTimeTableModel.Building" Width="1.5" PointX="3.375" PointY="5.625" />
         <EntityTypeShape EntityType="GTimeTableModel.Lecturer" Width="1.5" PointX="5.625" PointY="5" />
         <AssociationConnector Association="GTimeTableModel.FK_Lecturers_Buildings" />
+        <EntityTypeShape EntityType="GTimeTableModel.Room" Width="1.5" PointX="5.625" PointY="9.375" />
+        <AssociationConnector Association="GTimeTableModel.FK_Rooms_Buildings" />
+        <EntityTypeShape EntityType="GTimeTableModel.LecturesSession" Width="1.5" PointX="7.875" PointY="4.625" />
+        <EntityTypeShape EntityType="GTimeTableModel.Session" Width="1.5" PointX="5" PointY="0.75" />
+        <AssociationConnector Association="GTimeTableModel.FK_LecturesSessions_Lecturers" />
+        <AssociationConnector Association="GTimeTableModel.FK_LecturesSessions_Sessions" />
+        <AssociationConnector Association="GTimeTableModel.FK_Sessions_Student" />
+        <AssociationConnector Association="GTimeTableModel.FK_Sessions_Subjects" />
+        <AssociationConnector Association="GTimeTableModel.FK_Sessions_Tags" />
         <EntityTypeShape EntityType="GTimeTableModel.NotAvailbleTimesOfLecturer" Width="1.5" PointX="7.875" PointY="5.625" />
         <AssociationConnector Association="GTimeTableModel.FK_NotAvailbleTimesOfLecturers_Lecturers" />
       </Diagram>      
