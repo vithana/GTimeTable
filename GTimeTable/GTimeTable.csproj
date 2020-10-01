@@ -135,6 +135,7 @@
     <Compile Include="Dtos\LectureDto.cs" />
     <Compile Include="Dtos\RoomsDto.cs" />
     <Compile Include="Dtos\SessionDto.cs" />
+    <Compile Include="Dtos\NotAvaibleTimeOfLectrureDto.cs" />
     <Compile Include="frmStudent.xaml.cs">
       <DependentUpon>frmStudent.xaml</DependentUpon>
     </Compile>
@@ -173,6 +174,12 @@
     </Compile>
     <Compile Include="Sessions.xaml.cs">
       <DependentUpon>Sessions.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Managment.xaml.cs">
+      <DependentUpon>Managment.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="NotAvailbleTimesOfLecturer.cs">
+      <DependentUpon>GTimeTable.tt</DependentUpon>
     </Compile>
     <Compile Include="Staticstic.xaml.cs">
       <DependentUpon>Staticstic.xaml</DependentUpon>
@@ -233,6 +240,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="Sessions.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Managment.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -297,6 +308,7 @@
     <None Include="Properties\DataSources\LecturesSession.datasource" />
     <None Include="Properties\DataSources\Session.datasource" />
     <None Include="Properties\DataSources\Room.datasource" />
+    <None Include="Properties\DataSources\NotAvailbleTimesOfLecturer.datasource" />
     <None Include="Properties\DataSources\Student.datasource" />
     <None Include="Properties\DataSources\Subject.datasource" />
     <None Include="Properties\DataSources\Building.datasource" />

@@ -55,6 +55,14 @@
           <Property Name="roomType" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="building" Type="int" Nullable="false" />
         </EntityType>
+        <EntityType Name="NotAvailbleTimesOfLecturers">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="lecturer" Type="int" Nullable="false" />
+          <Property Name="timeSlot" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
         <EntityType Name="Student">
           <Key>
             <PropertyRef Name="id" />
@@ -190,6 +198,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_NotAvailbleTimesOfLecturers_Lecturers">
+          <End Role="Lecturers" Type="Self.Lecturers" Multiplicity="1" />
+          <End Role="NotAvailbleTimesOfLecturers" Type="Self.NotAvailbleTimesOfLecturers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Lecturers">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="NotAvailbleTimesOfLecturers">
+              <PropertyRef Name="lecturer" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_WorkingDaysOfWeek_WorkingDaysAndHours">
           <End Role="WorkingDaysAndHours" Type="Self.WorkingDaysAndHours" Multiplicity="1" />
           <End Role="WorkingDaysOfWeek" Type="Self.WorkingDaysOfWeek" Multiplicity="*" />
@@ -208,6 +228,7 @@
           <EntitySet Name="LecturesSessions" EntityType="Self.LecturesSessions" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Sessions" EntityType="Self.Sessions" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Rooms" EntityType="Self.Rooms" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="NotAvailbleTimesOfLecturers" EntityType="Self.NotAvailbleTimesOfLecturers" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Student" EntityType="Self.Student" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Subjects" EntityType="Self.Subjects" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Tags" EntityType="Self.Tags" Schema="dbo" store:Type="Tables" />
@@ -240,6 +261,10 @@
           <AssociationSet Name="FK_Rooms_Buildings" Association="Self.FK_Rooms_Buildings">
             <End Role="Buildings" EntitySet="Buildings" />
             <End Role="Rooms" EntitySet="Rooms" />
+          </AssociationSet>
+          <AssociationSet Name="FK_NotAvailbleTimesOfLecturers_Lecturers" Association="Self.FK_NotAvailbleTimesOfLecturers_Lecturers">
+            <End Role="Lecturers" EntitySet="Lecturers" />
+            <End Role="NotAvailbleTimesOfLecturers" EntitySet="NotAvailbleTimesOfLecturers" />
           </AssociationSet>
           <AssociationSet Name="FK_WorkingDaysOfWeek_WorkingDaysAndHours" Association="Self.FK_WorkingDaysOfWeek_WorkingDaysAndHours">
             <End Role="WorkingDaysAndHours" EntitySet="WorkingDaysAndHours" />
@@ -292,6 +317,11 @@
           <AssociationSet Name="FK_Rooms_Buildings" Association="GTimeTableModel.FK_Rooms_Buildings">
             <End Role="Building" EntitySet="Buildings" />
             <End Role="Room" EntitySet="Rooms" />
+          </AssociationSet>
+          <EntitySet Name="NotAvailbleTimesOfLecturers" EntityType="GTimeTableModel.NotAvailbleTimesOfLecturer" />
+          <AssociationSet Name="FK_NotAvailbleTimesOfLecturers_Lecturers" Association="GTimeTableModel.FK_NotAvailbleTimesOfLecturers_Lecturers">
+            <End Role="Lecturer" EntitySet="Lecturers" />
+            <End Role="NotAvailbleTimesOfLecturer" EntitySet="NotAvailbleTimesOfLecturers" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="Subject">
@@ -386,6 +416,7 @@
           <Property Name="rank" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Building1" Relationship="GTimeTableModel.FK_Lecturers_Buildings" FromRole="Lecturer" ToRole="Building" />
           <NavigationProperty Name="LecturesSessions" Relationship="GTimeTableModel.FK_LecturesSessions_Lecturers" FromRole="Lecturer" ToRole="LecturesSession" />
+          <NavigationProperty Name="NotAvailbleTimesOfLecturers" Relationship="GTimeTableModel.FK_NotAvailbleTimesOfLecturers_Lecturers" FromRole="Lecturer" ToRole="NotAvailbleTimesOfLecturer" />
         </EntityType>
         <Association Name="FK_Lecturers_Buildings">
           <End Type="GTimeTableModel.Building" Role="Building" Multiplicity="1" />
@@ -507,6 +538,27 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="NotAvailbleTimesOfLecturer">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="lecturer" Type="Int32" Nullable="false" />
+          <Property Name="timeSlot" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Lecturer1" Relationship="GTimeTableModel.FK_NotAvailbleTimesOfLecturers_Lecturers" FromRole="NotAvailbleTimesOfLecturer" ToRole="Lecturer" />
+        </EntityType>
+        <Association Name="FK_NotAvailbleTimesOfLecturers_Lecturers">
+          <End Type="GTimeTableModel.Lecturer" Role="Lecturer" Multiplicity="1" />
+          <End Type="GTimeTableModel.NotAvailbleTimesOfLecturer" Role="NotAvailbleTimesOfLecturer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Lecturer">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="NotAvailbleTimesOfLecturer">
+              <PropertyRef Name="lecturer" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -620,6 +672,15 @@
                 <ScalarProperty Name="roomType" ColumnName="roomType" />
                 <ScalarProperty Name="roomId" ColumnName="roomId" />
                 <ScalarProperty Name="capacity" ColumnName="capacity" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="NotAvailbleTimesOfLecturers">
+            <EntityTypeMapping TypeName="GTimeTableModel.NotAvailbleTimesOfLecturer">
+              <MappingFragment StoreEntitySet="NotAvailbleTimesOfLecturers">
+                <ScalarProperty Name="timeSlot" ColumnName="timeSlot" />
+                <ScalarProperty Name="lecturer" ColumnName="lecturer" />
                 <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>

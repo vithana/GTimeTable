@@ -24,6 +24,8 @@ namespace GTimeTable
     {
         GTimeTableEntities _db = new GTimeTableEntities();
 
+        private WorkingDaysAndHoursNew WorkingDaysAndHours = new WorkingDaysAndHoursNew();
+
         int lecturer_id;
         Lecturer lecturer = new Lecturer();
 
@@ -42,7 +44,6 @@ namespace GTimeTable
                                                                 "from Lecturers L INNER JOIN Buildings B ON L.[building] = B.id   ").ToList();                
             }
             
-
             lecturerDataGrid.ItemsSource = lectureDto;
             edit_lecture_btn.Visibility = Visibility.Hidden;
 
@@ -57,7 +58,10 @@ namespace GTimeTable
                 }
             }
 
-
+            foreach (var item in WorkingDaysAndHours.TimeSlots)
+            {
+                Console.WriteLine(item);
+            }
 
         }
         private void clean()
@@ -146,7 +150,7 @@ namespace GTimeTable
                                          where m.name.Equals(buildingTextBox.Text)
                                          select m).Single();
 
-                    Console.WriteLine(building.id + building.name);
+                    
 
                     lecturer.name = nameTextBox.Text;
                     lecturer.emp_id = emp_idTextBox.Text;

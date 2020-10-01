@@ -18,6 +18,7 @@ namespace GTimeTable
         public Lecturer()
         {
             this.LecturesSessions = new HashSet<LecturesSession>();
+            this.NotAvailbleTimesOfLecturers = new HashSet<NotAvailbleTimesOfLecturer>();
         }
     
         public int id { get; set; }
@@ -33,5 +34,6 @@ namespace GTimeTable
         public virtual Building Building1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<LecturesSession> LecturesSessions { get; set; }
+        public virtual ICollection<NotAvailbleTimesOfLecturer> NotAvailbleTimesOfLecturers { get; set; }
     }
 }

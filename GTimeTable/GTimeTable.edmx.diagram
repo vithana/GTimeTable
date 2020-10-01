@@ -23,6 +23,8 @@
         <AssociationConnector Association="GTimeTableModel.FK_Sessions_Student" />
         <AssociationConnector Association="GTimeTableModel.FK_Sessions_Subjects" />
         <AssociationConnector Association="GTimeTableModel.FK_Sessions_Tags" />
+        <EntityTypeShape EntityType="GTimeTableModel.NotAvailbleTimesOfLecturer" Width="1.5" PointX="7.875" PointY="5.625" />
+        <AssociationConnector Association="GTimeTableModel.FK_NotAvailbleTimesOfLecturers_Lecturers" />
       </Diagram>      
     </edmx:Diagrams>
   </edmx:Designer>
