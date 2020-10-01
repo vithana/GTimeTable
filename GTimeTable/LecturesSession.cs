@@ -12,18 +12,13 @@ namespace GTimeTable
     using System;
     using System.Collections.Generic;
     
-    public partial class Tag
+    public partial class LecturesSession
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Tag()
-        {
-            this.Sessions = new HashSet<Session>();
-        }
-    
         public int id { get; set; }
-        public string tag1 { get; set; }
+        public int lecture { get; set; }
+        public int session { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Session> Sessions { get; set; }
+        public virtual Lecturer Lecturer { get; set; }
+        public virtual Session Session1 { get; set; }
     }
 }

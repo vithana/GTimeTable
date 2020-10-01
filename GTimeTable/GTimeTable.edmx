@@ -26,6 +26,25 @@
           <Property Name="lvl" Type="int" Nullable="false" />
           <Property Name="rank" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
+        <EntityType Name="LecturesSessions">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="lecture" Type="int" Nullable="false" />
+          <Property Name="session" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Sessions">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="count" Type="int" Nullable="false" />
+          <Property Name="duration" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="subject" Type="int" Nullable="false" />
+          <Property Name="tag" Type="int" Nullable="false" />
+          <Property Name="student" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="Rooms">
           <Key>
             <PropertyRef Name="id" />
@@ -99,6 +118,66 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_LecturesSessions_Lecturers">
+          <End Role="Lecturers" Type="Self.Lecturers" Multiplicity="1" />
+          <End Role="LecturesSessions" Type="Self.LecturesSessions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Lecturers">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="LecturesSessions">
+              <PropertyRef Name="lecture" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LecturesSessions_Sessions">
+          <End Role="Sessions" Type="Self.Sessions" Multiplicity="1" />
+          <End Role="LecturesSessions" Type="Self.LecturesSessions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sessions">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="LecturesSessions">
+              <PropertyRef Name="session" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Sessions_Student">
+          <End Role="Student" Type="Self.Student" Multiplicity="1" />
+          <End Role="Sessions" Type="Self.Sessions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Student">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Sessions">
+              <PropertyRef Name="student" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Sessions_Subjects">
+          <End Role="Subjects" Type="Self.Subjects" Multiplicity="1" />
+          <End Role="Sessions" Type="Self.Sessions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Subjects">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Sessions">
+              <PropertyRef Name="subject" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Sessions_Tags">
+          <End Role="Tags" Type="Self.Tags" Multiplicity="1" />
+          <End Role="Sessions" Type="Self.Sessions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tags">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Sessions">
+              <PropertyRef Name="tag" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Rooms_Buildings">
           <End Role="Buildings" Type="Self.Buildings" Multiplicity="1" />
           <End Role="Rooms" Type="Self.Rooms" Multiplicity="*" />
@@ -126,6 +205,8 @@
         <EntityContainer Name="GTimeTableModelStoreContainer">
           <EntitySet Name="Buildings" EntityType="Self.Buildings" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Lecturers" EntityType="Self.Lecturers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LecturesSessions" EntityType="Self.LecturesSessions" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Sessions" EntityType="Self.Sessions" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Rooms" EntityType="Self.Rooms" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Student" EntityType="Self.Student" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Subjects" EntityType="Self.Subjects" Schema="dbo" store:Type="Tables" />
@@ -135,6 +216,26 @@
           <AssociationSet Name="FK_Lecturers_Buildings" Association="Self.FK_Lecturers_Buildings">
             <End Role="Buildings" EntitySet="Buildings" />
             <End Role="Lecturers" EntitySet="Lecturers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LecturesSessions_Lecturers" Association="Self.FK_LecturesSessions_Lecturers">
+            <End Role="Lecturers" EntitySet="Lecturers" />
+            <End Role="LecturesSessions" EntitySet="LecturesSessions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LecturesSessions_Sessions" Association="Self.FK_LecturesSessions_Sessions">
+            <End Role="Sessions" EntitySet="Sessions" />
+            <End Role="LecturesSessions" EntitySet="LecturesSessions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Sessions_Student" Association="Self.FK_Sessions_Student">
+            <End Role="Student" EntitySet="Student" />
+            <End Role="Sessions" EntitySet="Sessions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Sessions_Subjects" Association="Self.FK_Sessions_Subjects">
+            <End Role="Subjects" EntitySet="Subjects" />
+            <End Role="Sessions" EntitySet="Sessions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Sessions_Tags" Association="Self.FK_Sessions_Tags">
+            <End Role="Tags" EntitySet="Tags" />
+            <End Role="Sessions" EntitySet="Sessions" />
           </AssociationSet>
           <AssociationSet Name="FK_Rooms_Buildings" Association="Self.FK_Rooms_Buildings">
             <End Role="Buildings" EntitySet="Buildings" />
@@ -165,6 +266,28 @@
             <End Role="Building" EntitySet="Buildings" />
             <End Role="Lecturer" EntitySet="Lecturers" />
           </AssociationSet>
+          <EntitySet Name="LecturesSessions" EntityType="GTimeTableModel.LecturesSession" />
+          <EntitySet Name="Sessions" EntityType="GTimeTableModel.Session" />
+          <AssociationSet Name="FK_LecturesSessions_Lecturers" Association="GTimeTableModel.FK_LecturesSessions_Lecturers">
+            <End Role="Lecturer" EntitySet="Lecturers" />
+            <End Role="LecturesSession" EntitySet="LecturesSessions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LecturesSessions_Sessions" Association="GTimeTableModel.FK_LecturesSessions_Sessions">
+            <End Role="Session" EntitySet="Sessions" />
+            <End Role="LecturesSession" EntitySet="LecturesSessions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Sessions_Student" Association="GTimeTableModel.FK_Sessions_Student">
+            <End Role="Student" EntitySet="Students" />
+            <End Role="Session" EntitySet="Sessions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Sessions_Subjects" Association="GTimeTableModel.FK_Sessions_Subjects">
+            <End Role="Subject" EntitySet="Subjects" />
+            <End Role="Session" EntitySet="Sessions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Sessions_Tags" Association="GTimeTableModel.FK_Sessions_Tags">
+            <End Role="Tag" EntitySet="Tags" />
+            <End Role="Session" EntitySet="Sessions" />
+          </AssociationSet>
           <EntitySet Name="Rooms" EntityType="GTimeTableModel.Room" />
           <AssociationSet Name="FK_Rooms_Buildings" Association="GTimeTableModel.FK_Rooms_Buildings">
             <End Role="Building" EntitySet="Buildings" />
@@ -184,6 +307,7 @@
           <Property Name="tute_hrs" Type="Int32" Nullable="false" />
           <Property Name="lab_hrs" Type="Int32" Nullable="false" />
           <Property Name="eval_hrs" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Sessions" Relationship="GTimeTableModel.FK_Sessions_Subjects" FromRole="Subject" ToRole="Session" />
         </EntityType>
         <EntityType Name="Tag">
           <Key>
@@ -191,6 +315,7 @@
           </Key>
           <Property Name="id" Type="Int32" Nullable="false" />
           <Property Name="tag1" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Sessions" Relationship="GTimeTableModel.FK_Sessions_Tags" FromRole="Tag" ToRole="Session" />
         </EntityType>
         <EntityType Name="Student">
           <Key>
@@ -204,6 +329,7 @@
           <Property Name="groupId" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="subGroupNo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="subGropId" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Sessions" Relationship="GTimeTableModel.FK_Sessions_Student" FromRole="Student" ToRole="Session" />
         </EntityType>
         <EntityType Name="WorkingDaysAndHour">
           <Key>
@@ -259,6 +385,7 @@
           <Property Name="lvl" Type="Int32" Nullable="false" />
           <Property Name="rank" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Building1" Relationship="GTimeTableModel.FK_Lecturers_Buildings" FromRole="Lecturer" ToRole="Building" />
+          <NavigationProperty Name="LecturesSessions" Relationship="GTimeTableModel.FK_LecturesSessions_Lecturers" FromRole="Lecturer" ToRole="LecturesSession" />
         </EntityType>
         <Association Name="FK_Lecturers_Buildings">
           <End Type="GTimeTableModel.Building" Role="Building" Multiplicity="1" />
@@ -269,6 +396,91 @@
             </Principal>
             <Dependent Role="Lecturer">
               <PropertyRef Name="building" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="LecturesSession">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="lecture" Type="Int32" Nullable="false" />
+          <Property Name="session" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Lecturer" Relationship="GTimeTableModel.FK_LecturesSessions_Lecturers" FromRole="LecturesSession" ToRole="Lecturer" />
+          <NavigationProperty Name="Session1" Relationship="GTimeTableModel.FK_LecturesSessions_Sessions" FromRole="LecturesSession" ToRole="Session" />
+        </EntityType>
+        <EntityType Name="Session">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="count" Type="Int32" Nullable="false" />
+          <Property Name="duration" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="subject" Type="Int32" Nullable="false" />
+          <Property Name="tag" Type="Int32" Nullable="false" />
+          <Property Name="student" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="LecturesSessions" Relationship="GTimeTableModel.FK_LecturesSessions_Sessions" FromRole="Session" ToRole="LecturesSession" />
+          <NavigationProperty Name="Student1" Relationship="GTimeTableModel.FK_Sessions_Student" FromRole="Session" ToRole="Student" />
+          <NavigationProperty Name="Subject1" Relationship="GTimeTableModel.FK_Sessions_Subjects" FromRole="Session" ToRole="Subject" />
+          <NavigationProperty Name="Tag1" Relationship="GTimeTableModel.FK_Sessions_Tags" FromRole="Session" ToRole="Tag" />
+        </EntityType>
+        <Association Name="FK_LecturesSessions_Lecturers">
+          <End Type="GTimeTableModel.Lecturer" Role="Lecturer" Multiplicity="1" />
+          <End Type="GTimeTableModel.LecturesSession" Role="LecturesSession" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Lecturer">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="LecturesSession">
+              <PropertyRef Name="lecture" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LecturesSessions_Sessions">
+          <End Type="GTimeTableModel.Session" Role="Session" Multiplicity="1" />
+          <End Type="GTimeTableModel.LecturesSession" Role="LecturesSession" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Session">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="LecturesSession">
+              <PropertyRef Name="session" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Sessions_Student">
+          <End Type="GTimeTableModel.Student" Role="Student" Multiplicity="1" />
+          <End Type="GTimeTableModel.Session" Role="Session" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Student">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Session">
+              <PropertyRef Name="student" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Sessions_Subjects">
+          <End Type="GTimeTableModel.Subject" Role="Subject" Multiplicity="1" />
+          <End Type="GTimeTableModel.Session" Role="Session" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Subject">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Session">
+              <PropertyRef Name="subject" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Sessions_Tags">
+          <End Type="GTimeTableModel.Tag" Role="Tag" Multiplicity="1" />
+          <End Type="GTimeTableModel.Session" Role="Session" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tag">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Session">
+              <PropertyRef Name="tag" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -376,6 +588,27 @@
                 <ScalarProperty Name="faculty" ColumnName="faculty" />
                 <ScalarProperty Name="emp_id" ColumnName="emp_id" />
                 <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LecturesSessions">
+            <EntityTypeMapping TypeName="GTimeTableModel.LecturesSession">
+              <MappingFragment StoreEntitySet="LecturesSessions">
+                <ScalarProperty Name="session" ColumnName="session" />
+                <ScalarProperty Name="lecture" ColumnName="lecture" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Sessions">
+            <EntityTypeMapping TypeName="GTimeTableModel.Session">
+              <MappingFragment StoreEntitySet="Sessions">
+                <ScalarProperty Name="student" ColumnName="student" />
+                <ScalarProperty Name="tag" ColumnName="tag" />
+                <ScalarProperty Name="subject" ColumnName="subject" />
+                <ScalarProperty Name="duration" ColumnName="duration" />
+                <ScalarProperty Name="count" ColumnName="count" />
                 <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>
