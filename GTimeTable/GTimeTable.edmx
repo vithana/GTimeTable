@@ -26,6 +26,16 @@
           <Property Name="lvl" Type="int" Nullable="false" />
           <Property Name="rank" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
+        <EntityType Name="Rooms">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="capacity" Type="int" Nullable="false" />
+          <Property Name="roomId" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="roomType" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="building" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="Student">
           <Key>
             <PropertyRef Name="id" />
@@ -89,6 +99,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Rooms_Buildings">
+          <End Role="Buildings" Type="Self.Buildings" Multiplicity="1" />
+          <End Role="Rooms" Type="Self.Rooms" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Buildings">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Rooms">
+              <PropertyRef Name="building" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_WorkingDaysOfWeek_WorkingDaysAndHours">
           <End Role="WorkingDaysAndHours" Type="Self.WorkingDaysAndHours" Multiplicity="1" />
           <End Role="WorkingDaysOfWeek" Type="Self.WorkingDaysOfWeek" Multiplicity="*" />
@@ -104,6 +126,7 @@
         <EntityContainer Name="GTimeTableModelStoreContainer">
           <EntitySet Name="Buildings" EntityType="Self.Buildings" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Lecturers" EntityType="Self.Lecturers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Rooms" EntityType="Self.Rooms" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Student" EntityType="Self.Student" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Subjects" EntityType="Self.Subjects" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Tags" EntityType="Self.Tags" Schema="dbo" store:Type="Tables" />
@@ -112,6 +135,10 @@
           <AssociationSet Name="FK_Lecturers_Buildings" Association="Self.FK_Lecturers_Buildings">
             <End Role="Buildings" EntitySet="Buildings" />
             <End Role="Lecturers" EntitySet="Lecturers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Rooms_Buildings" Association="Self.FK_Rooms_Buildings">
+            <End Role="Buildings" EntitySet="Buildings" />
+            <End Role="Rooms" EntitySet="Rooms" />
           </AssociationSet>
           <AssociationSet Name="FK_WorkingDaysOfWeek_WorkingDaysAndHours" Association="Self.FK_WorkingDaysOfWeek_WorkingDaysAndHours">
             <End Role="WorkingDaysAndHours" EntitySet="WorkingDaysAndHours" />
@@ -137,6 +164,11 @@
           <AssociationSet Name="FK_Lecturers_Buildings" Association="GTimeTableModel.FK_Lecturers_Buildings">
             <End Role="Building" EntitySet="Buildings" />
             <End Role="Lecturer" EntitySet="Lecturers" />
+          </AssociationSet>
+          <EntitySet Name="Rooms" EntityType="GTimeTableModel.Room" />
+          <AssociationSet Name="FK_Rooms_Buildings" Association="GTimeTableModel.FK_Rooms_Buildings">
+            <End Role="Building" EntitySet="Buildings" />
+            <End Role="Room" EntitySet="Rooms" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="Subject">
@@ -211,6 +243,7 @@
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Lecturers" Relationship="GTimeTableModel.FK_Lecturers_Buildings" FromRole="Building" ToRole="Lecturer" />
+          <NavigationProperty Name="Rooms" Relationship="GTimeTableModel.FK_Rooms_Buildings" FromRole="Building" ToRole="Room" />
         </EntityType>
         <EntityType Name="Lecturer">
           <Key>
@@ -235,6 +268,29 @@
               <PropertyRef Name="id" />
             </Principal>
             <Dependent Role="Lecturer">
+              <PropertyRef Name="building" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Room">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="capacity" Type="Int32" Nullable="false" />
+          <Property Name="roomId" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="roomType" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="building" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Building1" Relationship="GTimeTableModel.FK_Rooms_Buildings" FromRole="Room" ToRole="Building" />
+        </EntityType>
+        <Association Name="FK_Rooms_Buildings">
+          <End Type="GTimeTableModel.Building" Role="Building" Multiplicity="1" />
+          <End Type="GTimeTableModel.Room" Role="Room" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Building">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Room">
               <PropertyRef Name="building" />
             </Dependent>
           </ReferentialConstraint>
@@ -320,6 +376,17 @@
                 <ScalarProperty Name="faculty" ColumnName="faculty" />
                 <ScalarProperty Name="emp_id" ColumnName="emp_id" />
                 <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Rooms">
+            <EntityTypeMapping TypeName="GTimeTableModel.Room">
+              <MappingFragment StoreEntitySet="Rooms">
+                <ScalarProperty Name="building" ColumnName="building" />
+                <ScalarProperty Name="roomType" ColumnName="roomType" />
+                <ScalarProperty Name="roomId" ColumnName="roomId" />
+                <ScalarProperty Name="capacity" ColumnName="capacity" />
                 <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>

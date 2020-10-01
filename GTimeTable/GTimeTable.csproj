@@ -133,6 +133,7 @@
       <DependentUpon>DataSet1.xsd</DependentUpon>
     </Compile>
     <Compile Include="Dtos\LectureDto.cs" />
+    <Compile Include="Dtos\RoomsDto.cs" />
     <Compile Include="frmStudent.xaml.cs">
       <DependentUpon>frmStudent.xaml</DependentUpon>
     </Compile>
@@ -159,6 +160,9 @@
     </Compile>
     <Compile Include="Lecturers.xaml.cs">
       <DependentUpon>Lecturers.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Room.cs">
+      <DependentUpon>GTimeTable.tt</DependentUpon>
     </Compile>
     <Compile Include="Staticstic.xaml.cs">
       <DependentUpon>Staticstic.xaml</DependentUpon>
@@ -276,6 +280,7 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="Properties\DataSources\Lecturer.datasource" />
+    <None Include="Properties\DataSources\Room.datasource" />
     <None Include="Properties\DataSources\Student.datasource" />
     <None Include="Properties\DataSources\Subject.datasource" />
     <None Include="Properties\DataSources\Building.datasource" />
