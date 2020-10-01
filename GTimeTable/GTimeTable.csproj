@@ -135,6 +135,8 @@
     <Compile Include="Dtos\suitableroomsforTagDto.cs" />
     <Compile Include="Dtos\LectureDto.cs" />
     <Compile Include="Dtos\RoomsDto.cs" />
+    <Compile Include="Dtos\SessionDto.cs" />
+    <Compile Include="Dtos\NotAvaibleTimeOfLectrureDto.cs" />
     <Compile Include="frmStudent.xaml.cs">
       <DependentUpon>frmStudent.xaml</DependentUpon>
     </Compile>
@@ -163,6 +165,21 @@
       <DependentUpon>Lecturers.xaml</DependentUpon>
     </Compile>
     <Compile Include="Room.cs">
+      <DependentUpon>GTimeTable.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LecturesSession.cs">
+      <DependentUpon>GTimeTable.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Session.cs">
+      <DependentUpon>GTimeTable.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Sessions.xaml.cs">
+      <DependentUpon>Sessions.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Managment.xaml.cs">
+      <DependentUpon>Managment.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="NotAvailbleTimesOfLecturer.cs">
       <DependentUpon>GTimeTable.tt</DependentUpon>
     </Compile>
     <Compile Include="Staticstic.xaml.cs">
@@ -226,6 +243,14 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Sessions.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Managment.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Staticstic.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -284,7 +309,10 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="Properties\DataSources\Lecturer.datasource" />
+    <None Include="Properties\DataSources\LecturesSession.datasource" />
+    <None Include="Properties\DataSources\Session.datasource" />
     <None Include="Properties\DataSources\Room.datasource" />
+    <None Include="Properties\DataSources\NotAvailbleTimesOfLecturer.datasource" />
     <None Include="Properties\DataSources\Student.datasource" />
     <None Include="Properties\DataSources\Subject.datasource" />
     <None Include="Properties\DataSources\Building.datasource" />

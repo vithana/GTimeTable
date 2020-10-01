@@ -14,6 +14,12 @@ namespace GTimeTable
     
     public partial class Student
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Student()
+        {
+            this.Sessions = new HashSet<Session>();
+        }
+    
         public int id { get; set; }
         public string acdamicYear { get; set; }
         public string semester { get; set; }
@@ -22,5 +28,8 @@ namespace GTimeTable
         public string groupId { get; set; }
         public string subGroupNo { get; set; }
         public string subGropId { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Session> Sessions { get; set; }
     }
 }

@@ -12,25 +12,25 @@ namespace GTimeTable
     using System;
     using System.Collections.Generic;
     
-    public partial class Subject
+    public partial class Session
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Subject()
+        public Session()
         {
-            this.Sessions = new HashSet<Session>();
+            this.LecturesSessions = new HashSet<LecturesSession>();
         }
     
         public int id { get; set; }
-        public string name { get; set; }
-        public string code { get; set; }
-        public int off_year { get; set; }
-        public int off_sem { get; set; }
-        public int lec_hrs { get; set; }
-        public int tute_hrs { get; set; }
-        public int lab_hrs { get; set; }
-        public int eval_hrs { get; set; }
+        public int count { get; set; }
+        public string duration { get; set; }
+        public int subject { get; set; }
+        public int tag { get; set; }
+        public int student { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Session> Sessions { get; set; }
+        public virtual ICollection<LecturesSession> LecturesSessions { get; set; }
+        public virtual Student Student1 { get; set; }
+        public virtual Subject Subject1 { get; set; }
+        public virtual Tag Tag1 { get; set; }
     }
 }

@@ -17,6 +17,7 @@ namespace GTimeTable
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Tag()
         {
+            this.Sessions = new HashSet<Session>();
             this.SutiableTabforRooms = new HashSet<SutiableTabforRoom>();
         }
     
@@ -24,6 +25,7 @@ namespace GTimeTable
         public string tag1 { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Session> Sessions { get; set; }
         public virtual ICollection<SutiableTabforRoom> SutiableTabforRooms { get; set; }
     }
 }

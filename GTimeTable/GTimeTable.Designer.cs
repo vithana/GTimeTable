@@ -1,4 +1,4 @@
-﻿// T4 code generation is enabled for model 'E:\SPM Project Sprint 2\GTImeTable\GTimeTable\GTimeTable.edmx'. 
+﻿// T4 code generation is enabled for model 'F:\SLIIT\3rd Year\2nd sem\spm\project\GTimeTable\GTimeTable\GTimeTable.edmx'. 
 // To enable legacy code generation, change the value of the 'Code Generation Strategy' designer
 // property to 'Legacy ObjectContext'. This property is available in the Properties Window when the model
 // is open in the designer.
