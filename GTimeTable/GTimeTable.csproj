@@ -132,6 +132,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>DataSet1.xsd</DependentUpon>
     </Compile>
+    <Compile Include="Dtos\ConcevutiveSessionDto.cs" />
     <Compile Include="Dtos\suitableroomsforTagDto.cs" />
     <Compile Include="Dtos\LectureDto.cs" />
     <Compile Include="Dtos\RoomsDto.cs" />

@@ -26,6 +26,7 @@ namespace GTimeTable
         public int subject { get; set; }
         public int tag { get; set; }
         public int student { get; set; }
+        public Nullable<int> consecutive_session_id { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<LecturesSession> LecturesSessions { get; set; }
