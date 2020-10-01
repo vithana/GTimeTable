@@ -66,6 +66,10 @@ namespace GTimeTable
                     GridPrincipal.Children.Clear();
                     GridPrincipal.Children.Add(new Locations());
                     break;
+                case 7:
+                    GridPrincipal.Children.Clear();
+                    GridPrincipal.Children.Add(new Managment());
+                    break;
                 case 8:
                     GridPrincipal.Children.Clear();
                     GridPrincipal.Children.Add(new Staticstic());

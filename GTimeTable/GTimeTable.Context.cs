@@ -32,5 +32,6 @@ namespace GTimeTable
         public virtual DbSet<WorkingDaysOfWeek> WorkingDaysOfWeeks { get; set; }
         public virtual DbSet<Building> Buildings { get; set; }
         public virtual DbSet<Lecturer> Lecturers { get; set; }
+        public virtual DbSet<NotAvailbleTimesOfLecturer> NotAvailbleTimesOfLecturers { get; set; }
     }
 }

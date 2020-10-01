@@ -14,6 +14,8 @@
         <EntityTypeShape EntityType="GTimeTableModel.Building" Width="1.5" PointX="3.375" PointY="5.625" />
         <EntityTypeShape EntityType="GTimeTableModel.Lecturer" Width="1.5" PointX="5.625" PointY="5" />
         <AssociationConnector Association="GTimeTableModel.FK_Lecturers_Buildings" />
+        <EntityTypeShape EntityType="GTimeTableModel.NotAvailbleTimesOfLecturer" Width="1.5" PointX="7.875" PointY="5.625" />
+        <AssociationConnector Association="GTimeTableModel.FK_NotAvailbleTimesOfLecturers_Lecturers" />
       </Diagram>      
     </edmx:Diagrams>
   </edmx:Designer>

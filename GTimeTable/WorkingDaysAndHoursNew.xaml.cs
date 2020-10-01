@@ -25,6 +25,9 @@ namespace GTimeTable
         GTimeTableEntities _db = new GTimeTableEntities();
         int workingDaysAndHoursId;
         List<WorkingDaysOfWeek> workingDaysList;
+        public List<String> TimeSlots;
+        int workingHours  ;
+        string timeSlot  ;
 
         WorkingDaysOfWeek workingDaysOfWeek = new WorkingDaysOfWeek();
         public WorkingDaysAndHoursNew()
@@ -82,6 +85,12 @@ namespace GTimeTable
         {
             GetValuesOfWorkingDaysAndHours();            
             workingDaysOfWeekDataGrid.ItemsSource = _db.WorkingDaysOfWeeks.ToList();
+
+
+            workingHours = int.Parse(TimeTextBox.Text);
+            timeSlot = timeTableSlotComboBox.SelectionBoxItem.ToString();
+
+            calTimeSlots();
             //workingDaysOfWeekDataGrid.CanUserAddRows = false;
         }
 
@@ -160,9 +169,38 @@ namespace GTimeTable
             updateWorkingDaysAndHours.slots_for_time_table = timeTableSlotComboBox.SelectionBoxItem.ToString();
             _db.SaveChanges();
 
+
             MaterialMessageBox.Show( @" Successfuly Updated");
 
+            int workingHours = int.Parse(TimeTextBox.Text);
 
+            calTimeSlots();
         }
+
+
+        public void calTimeSlots()
+        {
+            DateTime startingDate = new DateTime(2008, 9, 22, 8, 00, 0);
+            TimeSlots = new List<string>();
+
+
+            if (this.timeSlot.Equals("1hr"))
+            {
+                for (int i = 0; i < this.workingHours; i++)
+                {
+                    TimeSlots.Add(startingDate.ToShortTimeString() + "-" + startingDate.AddHours(+1).ToShortTimeString());                    
+                    startingDate = startingDate.AddHours(+1);
+                }
+            }
+            else
+            {
+                for (int i = 0; i < this.workingHours*2; i++)
+                {
+                    TimeSlots.Add(startingDate.ToShortTimeString() + "-" + startingDate.AddMinutes(+30).ToShortTimeString());                   
+                    startingDate = startingDate.AddMinutes(+30);
+                }
+            }           
+        }
+
     }
 }

@@ -14,6 +14,12 @@ namespace GTimeTable
     
     public partial class Lecturer
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Lecturer()
+        {
+            this.NotAvailbleTimesOfLecturers = new HashSet<NotAvailbleTimesOfLecturer>();
+        }
+    
         public int id { get; set; }
         public string name { get; set; }
         public string emp_id { get; set; }
@@ -25,5 +31,7 @@ namespace GTimeTable
         public string rank { get; set; }
     
         public virtual Building Building1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<NotAvailbleTimesOfLecturer> NotAvailbleTimesOfLecturers { get; set; }
     }
 }

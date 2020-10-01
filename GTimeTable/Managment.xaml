@@ -1,0 +1,54 @@
+﻿<UserControl x:Class="GTimeTable.Managment"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:GTimeTable"
+             mc:Ignorable="d" Height="735.424" Width="1230.461" Loaded="UserControl_Loaded">
+    <UserControl.Resources>
+        <CollectionViewSource x:Key="notAvailbleTimesOfLecturerViewSource" d:DesignSource="{d:DesignInstance {x:Type local:NotAvailbleTimesOfLecturer}, CreateList=True}"/>
+    </UserControl.Resources>
+    <Grid>
+        <Grid Margin="0,10,10.4,0.2">
+            <Grid x:Name="GridPrincipal" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            <Label Content="Managment" HorizontalAlignment="Left" Margin="530,10,0,0" VerticalAlignment="Top" FontSize="24" FontWeight="Bold"/>
+            <TabControl HorizontalAlignment="Left" Height="593" Margin="26,76,0,0" VerticalAlignment="Top" Width="1167">
+                <TabItem Header="Not Availble Times">
+                    <Grid Background="#FFE5E5E5" DataContext="{StaticResource notAvailbleTimesOfLecturerViewSource}">
+                        <Label Content="Lecturers" HorizontalAlignment="Left" Margin="197,38,0,0" VerticalAlignment="Top" FontSize="20" FontWeight="Bold"/>
+                        <ComboBox x:Name="lectrureCombobox" HorizontalAlignment="Left" Margin="110,134,0,0" VerticalAlignment="Top" Width="120"/>
+                        <Label Content="Lecturer" HorizontalAlignment="Left" Height="25" Margin="38,136,0,0" VerticalAlignment="Top" Width="54"/>
+                        <Label Content="Time Slot" HorizontalAlignment="Left" Margin="257,136,0,0" VerticalAlignment="Top"/>
+                        <ComboBox x:Name="timeSlotComboBox" HorizontalAlignment="Left" Height="26" Margin="347,136,0,0" VerticalAlignment="Top" Width="112"/>
+                        <DataGrid x:Name="notAvailbleTimesOfLecturerDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding}" Margin="38,216,595.8,148" RowDetailsVisibilityMode="VisibleWhenSelected" CanUserAddRows="False">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn x:Name="idColumn" Binding="{Binding id}" Header="id" Width="SizeToHeader" Visibility="Hidden"/>
+                                <DataGridTextColumn x:Name="lecturerColumn" Binding="{Binding lecturer}" Header="Lecturer" Width="Auto" />
+                                <DataGridTextColumn x:Name="timeSlotColumn" Binding="{Binding timeSlot}" Header="Time Slot" Width="200"/>
+                                <DataGridTemplateColumn>
+                                    <DataGridTemplateColumn.HeaderTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Text="Action" />
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.HeaderTemplate>
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <StackPanel Orientation="Horizontal" >
+                                                <Button x:Name="deleteBtn" Content="Delete" Click="not_avilable_time_lectrure_deleteBtn_Click"  Background="red" />
+                                            </StackPanel>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                        <Button Content="Add" HorizontalAlignment="Left" Margin="490,132,0,0" VerticalAlignment="Top" Width="75" Click="Not_Avilable_TIme_Add_Button_Click"/>
+                    </Grid>
+                </TabItem>
+                <TabItem Header=" Consecutive Sessions">
+                    <Grid Background="#FFE5E5E5"/>
+                </TabItem>
+            </TabControl>
+        </Grid>
+
+    </Grid>
+</UserControl>
