@@ -58,6 +58,14 @@
           <Property Name="lecturer" Type="int" Nullable="false" />
           <Property Name="timeSlot" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
+        <EntityType Name="ParrelalSession">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="session" Type="int" Nullable="false" />
+          <Property Name="parellal_session" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="Rooms">
           <Key>
             <PropertyRef Name="id" />
@@ -106,6 +114,39 @@
           <Property Name="tute_hrs" Type="int" Nullable="false" />
           <Property Name="lab_hrs" Type="int" Nullable="false" />
           <Property Name="eval_hrs" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SuiableRoomsforSession">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="session" Type="int" Nullable="false" />
+          <Property Name="room" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SuitableRoomsforGroup">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="group_id" Type="int" Nullable="false" />
+          <Property Name="room" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SuitableRoomsforLecturer">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="lecturer" Type="int" Nullable="false" />
+          <Property Name="room" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SuitableRoomsforSubjectTag">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="subject" Type="int" Nullable="false" />
+          <Property Name="tag" Type="int" Nullable="false" />
+          <Property Name="room" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="SutiableTabforRoom">
           <Key>
@@ -211,6 +252,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_ParrelalSession_session">
+          <End Role="Sessions" Type="Self.Sessions" Multiplicity="1" />
+          <End Role="ParrelalSession" Type="Self.ParrelalSession" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sessions">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="ParrelalSession">
+              <PropertyRef Name="session" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Rooms_Buildings">
           <End Role="Buildings" Type="Self.Buildings" Multiplicity="1" />
           <End Role="Rooms" Type="Self.Rooms" Multiplicity="*" />
@@ -259,6 +312,114 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_SuiableRoomsforSession_room">
+          <End Role="Rooms" Type="Self.Rooms" Multiplicity="1" />
+          <End Role="SuiableRoomsforSession" Type="Self.SuiableRoomsforSession" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Rooms">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="SuiableRoomsforSession">
+              <PropertyRef Name="room" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SuiableRoomsforSession_session">
+          <End Role="Sessions" Type="Self.Sessions" Multiplicity="1" />
+          <End Role="SuiableRoomsforSession" Type="Self.SuiableRoomsforSession" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sessions">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="SuiableRoomsforSession">
+              <PropertyRef Name="session" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SuitableRoomsforGroup_group">
+          <End Role="Student" Type="Self.Student" Multiplicity="1" />
+          <End Role="SuitableRoomsforGroup" Type="Self.SuitableRoomsforGroup" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Student">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="SuitableRoomsforGroup">
+              <PropertyRef Name="group_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SuitableRoomsforGroup_room">
+          <End Role="Rooms" Type="Self.Rooms" Multiplicity="1" />
+          <End Role="SuitableRoomsforGroup" Type="Self.SuitableRoomsforGroup" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Rooms">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="SuitableRoomsforGroup">
+              <PropertyRef Name="room" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SuitableRoomsforLecturer_lecturer">
+          <End Role="Lecturers" Type="Self.Lecturers" Multiplicity="1" />
+          <End Role="SuitableRoomsforLecturer" Type="Self.SuitableRoomsforLecturer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Lecturers">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="SuitableRoomsforLecturer">
+              <PropertyRef Name="lecturer" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SuitableRoomsforLecturer_room">
+          <End Role="Rooms" Type="Self.Rooms" Multiplicity="1" />
+          <End Role="SuitableRoomsforLecturer" Type="Self.SuitableRoomsforLecturer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Rooms">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="SuitableRoomsforLecturer">
+              <PropertyRef Name="room" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SuitableRoomsforSubjectTag_room">
+          <End Role="Rooms" Type="Self.Rooms" Multiplicity="1" />
+          <End Role="SuitableRoomsforSubjectTag" Type="Self.SuitableRoomsforSubjectTag" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Rooms">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="SuitableRoomsforSubjectTag">
+              <PropertyRef Name="room" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SuitableRoomsforSubjectTag_subject">
+          <End Role="Subjects" Type="Self.Subjects" Multiplicity="1" />
+          <End Role="SuitableRoomsforSubjectTag" Type="Self.SuitableRoomsforSubjectTag" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Subjects">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="SuitableRoomsforSubjectTag">
+              <PropertyRef Name="subject" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SuitableRoomsforSubjectTag_tag">
+          <End Role="Tags" Type="Self.Tags" Multiplicity="1" />
+          <End Role="SuitableRoomsforSubjectTag" Type="Self.SuitableRoomsforSubjectTag" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tags">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="SuitableRoomsforSubjectTag">
+              <PropertyRef Name="tag" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_SutiableTabforRoom_room">
           <End Role="Rooms" Type="Self.Rooms" Multiplicity="1" />
           <End Role="SutiableTabforRoom" Type="Self.SutiableTabforRoom" Multiplicity="*" />
@@ -302,10 +463,15 @@
           <EntitySet Name="NotAvailbeleTimesOfSessions" EntityType="Self.NotAvailbeleTimesOfSessions" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="NotAvailbleTimesOfGroup" EntityType="Self.NotAvailbleTimesOfGroup" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="NotAvailbleTimesOfLecturers" EntityType="Self.NotAvailbleTimesOfLecturers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ParrelalSession" EntityType="Self.ParrelalSession" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Rooms" EntityType="Self.Rooms" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Sessions" EntityType="Self.Sessions" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Student" EntityType="Self.Student" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Subjects" EntityType="Self.Subjects" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SuiableRoomsforSession" EntityType="Self.SuiableRoomsforSession" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SuitableRoomsforGroup" EntityType="Self.SuitableRoomsforGroup" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SuitableRoomsforLecturer" EntityType="Self.SuitableRoomsforLecturer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SuitableRoomsforSubjectTag" EntityType="Self.SuitableRoomsforSubjectTag" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SutiableTabforRoom" EntityType="Self.SutiableTabforRoom" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Tags" EntityType="Self.Tags" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="WorkingDaysAndHours" EntityType="Self.WorkingDaysAndHours" Schema="dbo" store:Type="Tables" />
@@ -334,6 +500,10 @@
             <End Role="Lecturers" EntitySet="Lecturers" />
             <End Role="NotAvailbleTimesOfLecturers" EntitySet="NotAvailbleTimesOfLecturers" />
           </AssociationSet>
+          <AssociationSet Name="FK_ParrelalSession_session" Association="Self.FK_ParrelalSession_session">
+            <End Role="Sessions" EntitySet="Sessions" />
+            <End Role="ParrelalSession" EntitySet="ParrelalSession" />
+          </AssociationSet>
           <AssociationSet Name="FK_Rooms_Buildings" Association="Self.FK_Rooms_Buildings">
             <End Role="Buildings" EntitySet="Buildings" />
             <End Role="Rooms" EntitySet="Rooms" />
@@ -349,6 +519,42 @@
           <AssociationSet Name="FK_Sessions_Tags" Association="Self.FK_Sessions_Tags">
             <End Role="Tags" EntitySet="Tags" />
             <End Role="Sessions" EntitySet="Sessions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SuiableRoomsforSession_room" Association="Self.FK_SuiableRoomsforSession_room">
+            <End Role="Rooms" EntitySet="Rooms" />
+            <End Role="SuiableRoomsforSession" EntitySet="SuiableRoomsforSession" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SuiableRoomsforSession_session" Association="Self.FK_SuiableRoomsforSession_session">
+            <End Role="Sessions" EntitySet="Sessions" />
+            <End Role="SuiableRoomsforSession" EntitySet="SuiableRoomsforSession" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SuitableRoomsforGroup_group" Association="Self.FK_SuitableRoomsforGroup_group">
+            <End Role="Student" EntitySet="Student" />
+            <End Role="SuitableRoomsforGroup" EntitySet="SuitableRoomsforGroup" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SuitableRoomsforGroup_room" Association="Self.FK_SuitableRoomsforGroup_room">
+            <End Role="Rooms" EntitySet="Rooms" />
+            <End Role="SuitableRoomsforGroup" EntitySet="SuitableRoomsforGroup" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SuitableRoomsforLecturer_lecturer" Association="Self.FK_SuitableRoomsforLecturer_lecturer">
+            <End Role="Lecturers" EntitySet="Lecturers" />
+            <End Role="SuitableRoomsforLecturer" EntitySet="SuitableRoomsforLecturer" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SuitableRoomsforLecturer_room" Association="Self.FK_SuitableRoomsforLecturer_room">
+            <End Role="Rooms" EntitySet="Rooms" />
+            <End Role="SuitableRoomsforLecturer" EntitySet="SuitableRoomsforLecturer" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SuitableRoomsforSubjectTag_room" Association="Self.FK_SuitableRoomsforSubjectTag_room">
+            <End Role="Rooms" EntitySet="Rooms" />
+            <End Role="SuitableRoomsforSubjectTag" EntitySet="SuitableRoomsforSubjectTag" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SuitableRoomsforSubjectTag_subject" Association="Self.FK_SuitableRoomsforSubjectTag_subject">
+            <End Role="Subjects" EntitySet="Subjects" />
+            <End Role="SuitableRoomsforSubjectTag" EntitySet="SuitableRoomsforSubjectTag" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SuitableRoomsforSubjectTag_tag" Association="Self.FK_SuitableRoomsforSubjectTag_tag">
+            <End Role="Tags" EntitySet="Tags" />
+            <End Role="SuitableRoomsforSubjectTag" EntitySet="SuitableRoomsforSubjectTag" />
           </AssociationSet>
           <AssociationSet Name="FK_SutiableTabforRoom_room" Association="Self.FK_SutiableTabforRoom_room">
             <End Role="Rooms" EntitySet="Rooms" />
@@ -424,6 +630,46 @@
             <End Role="Tag" EntitySet="Tags" />
             <End Role="SutiableTabforRoom" EntitySet="SutiableTabforRooms" />
           </AssociationSet>
+          <EntitySet Name="SuitableRoomsforSubjectTags" EntityType="GTimeTableModel.SuitableRoomsforSubjectTag" />
+          <AssociationSet Name="FK_SuitableRoomsforSubjectTag_room" Association="GTimeTableModel.FK_SuitableRoomsforSubjectTag_room">
+            <End Role="Room" EntitySet="Rooms" />
+            <End Role="SuitableRoomsforSubjectTag" EntitySet="SuitableRoomsforSubjectTags" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SuitableRoomsforSubjectTag_subject" Association="GTimeTableModel.FK_SuitableRoomsforSubjectTag_subject">
+            <End Role="Subject" EntitySet="Subjects" />
+            <End Role="SuitableRoomsforSubjectTag" EntitySet="SuitableRoomsforSubjectTags" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SuitableRoomsforSubjectTag_tag" Association="GTimeTableModel.FK_SuitableRoomsforSubjectTag_tag">
+            <End Role="Tag" EntitySet="Tags" />
+            <End Role="SuitableRoomsforSubjectTag" EntitySet="SuitableRoomsforSubjectTags" />
+          </AssociationSet>
+          <EntitySet Name="SuitableRoomsforLecturers" EntityType="GTimeTableModel.SuitableRoomsforLecturer" />
+          <AssociationSet Name="FK_SuitableRoomsforLecturer_lecturer" Association="GTimeTableModel.FK_SuitableRoomsforLecturer_lecturer">
+            <End Role="Lecturer" EntitySet="Lecturers" />
+            <End Role="SuitableRoomsforLecturer" EntitySet="SuitableRoomsforLecturers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SuitableRoomsforLecturer_room" Association="GTimeTableModel.FK_SuitableRoomsforLecturer_room">
+            <End Role="Room" EntitySet="Rooms" />
+            <End Role="SuitableRoomsforLecturer" EntitySet="SuitableRoomsforLecturers" />
+          </AssociationSet>
+          <EntitySet Name="SuiableRoomsforSessions" EntityType="GTimeTableModel.SuiableRoomsforSession" />
+          <AssociationSet Name="FK_SuiableRoomsforSession_room" Association="GTimeTableModel.FK_SuiableRoomsforSession_room">
+            <End Role="Room" EntitySet="Rooms" />
+            <End Role="SuiableRoomsforSession" EntitySet="SuiableRoomsforSessions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SuiableRoomsforSession_session" Association="GTimeTableModel.FK_SuiableRoomsforSession_session">
+            <End Role="Session" EntitySet="Sessions" />
+            <End Role="SuiableRoomsforSession" EntitySet="SuiableRoomsforSessions" />
+          </AssociationSet>
+          <EntitySet Name="SuitableRoomsforGroups" EntityType="GTimeTableModel.SuitableRoomsforGroup" />
+          <AssociationSet Name="FK_SuitableRoomsforGroup_room" Association="GTimeTableModel.FK_SuitableRoomsforGroup_room">
+            <End Role="Room" EntitySet="Rooms" />
+            <End Role="SuitableRoomsforGroup" EntitySet="SuitableRoomsforGroups" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SuitableRoomsforGroup_group" Association="GTimeTableModel.FK_SuitableRoomsforGroup_group">
+            <End Role="Student" EntitySet="Students" />
+            <End Role="SuitableRoomsforGroup" EntitySet="SuitableRoomsforGroups" />
+          </AssociationSet>
           <EntitySet Name="NotAvailbeleTimesOfSessions" EntityType="GTimeTableModel.NotAvailbeleTimesOfSession" />
           <AssociationSet Name="FK_NotAvailbeleTimesOfSessions_Sessions" Association="GTimeTableModel.FK_NotAvailbeleTimesOfSessions_Sessions">
             <End Role="Session" EntitySet="Sessions" />
@@ -433,6 +679,11 @@
           <AssociationSet Name="FK_NotAvailbleTimesOfGroup_Student" Association="GTimeTableModel.FK_NotAvailbleTimesOfGroup_Student">
             <End Role="Student" EntitySet="Students" />
             <End Role="NotAvailbleTimesOfGroup" EntitySet="NotAvailbleTimesOfGroups" />
+          </AssociationSet>
+          <EntitySet Name="ParrelalSessions" EntityType="GTimeTableModel.ParrelalSession" />
+          <AssociationSet Name="FK_ParrelalSession_session" Association="GTimeTableModel.FK_ParrelalSession_session">
+            <End Role="Session" EntitySet="Sessions" />
+            <End Role="ParrelalSession" EntitySet="ParrelalSessions" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="Subject">
@@ -449,6 +700,7 @@
           <Property Name="lab_hrs" Type="Int32" Nullable="false" />
           <Property Name="eval_hrs" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Sessions" Relationship="GTimeTableModel.FK_Sessions_Subjects" FromRole="Subject" ToRole="Session" />
+          <NavigationProperty Name="SuitableRoomsforSubjectTags" Relationship="GTimeTableModel.FK_SuitableRoomsforSubjectTag_subject" FromRole="Subject" ToRole="SuitableRoomsforSubjectTag" />
         </EntityType>
         <EntityType Name="Tag">
           <Key>
@@ -458,6 +710,7 @@
           <Property Name="tag1" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Sessions" Relationship="GTimeTableModel.FK_Sessions_Tags" FromRole="Tag" ToRole="Session" />
           <NavigationProperty Name="SutiableTabforRooms" Relationship="GTimeTableModel.FK_SutiableTabforRoom_tag" FromRole="Tag" ToRole="SutiableTabforRoom" />
+          <NavigationProperty Name="SuitableRoomsforSubjectTags" Relationship="GTimeTableModel.FK_SuitableRoomsforSubjectTag_tag" FromRole="Tag" ToRole="SuitableRoomsforSubjectTag" />
         </EntityType>
         <EntityType Name="Student">
           <Key>
@@ -473,6 +726,7 @@
           <Property Name="subGropId" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Sessions" Relationship="GTimeTableModel.FK_Sessions_Student" FromRole="Student" ToRole="Session" />
           <NavigationProperty Name="NotAvailbleTimesOfGroups" Relationship="GTimeTableModel.FK_NotAvailbleTimesOfGroup_Student" FromRole="Student" ToRole="NotAvailbleTimesOfGroup" />
+          <NavigationProperty Name="SuitableRoomsforGroups" Relationship="GTimeTableModel.FK_SuitableRoomsforGroup_group" FromRole="Student" ToRole="SuitableRoomsforGroup" />
         </EntityType>
         <EntityType Name="WorkingDaysAndHour">
           <Key>
@@ -530,6 +784,7 @@
           <NavigationProperty Name="Building1" Relationship="GTimeTableModel.FK_Lecturers_Buildings" FromRole="Lecturer" ToRole="Building" />
           <NavigationProperty Name="LecturesSessions" Relationship="GTimeTableModel.FK_LecturesSessions_Lecturers" FromRole="Lecturer" ToRole="LecturesSession" />
           <NavigationProperty Name="NotAvailbleTimesOfLecturers" Relationship="GTimeTableModel.FK_NotAvailbleTimesOfLecturers_Lecturers" FromRole="Lecturer" ToRole="NotAvailbleTimesOfLecturer" />
+          <NavigationProperty Name="SuitableRoomsforLecturers" Relationship="GTimeTableModel.FK_SuitableRoomsforLecturer_lecturer" FromRole="Lecturer" ToRole="SuitableRoomsforLecturer" />
         </EntityType>
         <Association Name="FK_Lecturers_Buildings">
           <End Type="GTimeTableModel.Building" Role="Building" Multiplicity="1" />
@@ -569,6 +824,9 @@
           <NavigationProperty Name="Tag1" Relationship="GTimeTableModel.FK_Sessions_Tags" FromRole="Session" ToRole="Tag" />
           <Property Name="consecutive_session_id" Type="Int32" />
           <NavigationProperty Name="NotAvailbeleTimesOfSessions" Relationship="GTimeTableModel.FK_NotAvailbeleTimesOfSessions_Sessions" FromRole="Session" ToRole="NotAvailbeleTimesOfSession" />
+          
+          <NavigationProperty Name="SuiableRoomsforSessions" Relationship="GTimeTableModel.FK_SuiableRoomsforSession_session" FromRole="Session" ToRole="SuiableRoomsforSession" />
+          <NavigationProperty Name="ParrelalSessions" Relationship="GTimeTableModel.FK_ParrelalSession_session" FromRole="Session" ToRole="ParrelalSession" />
         </EntityType>
         <Association Name="FK_LecturesSessions_Lecturers">
           <End Type="GTimeTableModel.Lecturer" Role="Lecturer" Multiplicity="1" />
@@ -641,6 +899,10 @@
           <Property Name="building" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Building1" Relationship="GTimeTableModel.FK_Rooms_Buildings" FromRole="Room" ToRole="Building" />
           <NavigationProperty Name="SutiableTabforRooms" Relationship="GTimeTableModel.FK_SutiableTabforRoom_room" FromRole="Room" ToRole="SutiableTabforRoom" />
+          <NavigationProperty Name="SuitableRoomsforSubjectTags" Relationship="GTimeTableModel.FK_SuitableRoomsforSubjectTag_room" FromRole="Room" ToRole="SuitableRoomsforSubjectTag" />
+          <NavigationProperty Name="SuitableRoomsforLecturers" Relationship="GTimeTableModel.FK_SuitableRoomsforLecturer_room" FromRole="Room" ToRole="SuitableRoomsforLecturer" />
+          <NavigationProperty Name="SuiableRoomsforSessions" Relationship="GTimeTableModel.FK_SuiableRoomsforSession_room" FromRole="Room" ToRole="SuiableRoomsforSession" />
+          <NavigationProperty Name="SuitableRoomsforGroups" Relationship="GTimeTableModel.FK_SuitableRoomsforGroup_room" FromRole="Room" ToRole="SuitableRoomsforGroup" />
         </EntityType>
         <Association Name="FK_Rooms_Buildings">
           <End Type="GTimeTableModel.Building" Role="Building" Multiplicity="1" />
@@ -709,6 +971,156 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="SuitableRoomsforSubjectTag">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="subject" Type="Int32" Nullable="false" />
+          <Property Name="tag" Type="Int32" Nullable="false" />
+          <Property Name="room" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Room1" Relationship="GTimeTableModel.FK_SuitableRoomsforSubjectTag_room" FromRole="SuitableRoomsforSubjectTag" ToRole="Room" />
+          <NavigationProperty Name="Subject1" Relationship="GTimeTableModel.FK_SuitableRoomsforSubjectTag_subject" FromRole="SuitableRoomsforSubjectTag" ToRole="Subject" />
+          <NavigationProperty Name="Tag1" Relationship="GTimeTableModel.FK_SuitableRoomsforSubjectTag_tag" FromRole="SuitableRoomsforSubjectTag" ToRole="Tag" />
+        </EntityType>
+        <Association Name="FK_SuitableRoomsforSubjectTag_room">
+          <End Type="GTimeTableModel.Room" Role="Room" Multiplicity="1" />
+          <End Type="GTimeTableModel.SuitableRoomsforSubjectTag" Role="SuitableRoomsforSubjectTag" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Room">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="SuitableRoomsforSubjectTag">
+              <PropertyRef Name="room" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SuitableRoomsforSubjectTag_subject">
+          <End Type="GTimeTableModel.Subject" Role="Subject" Multiplicity="1" />
+          <End Type="GTimeTableModel.SuitableRoomsforSubjectTag" Role="SuitableRoomsforSubjectTag" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Subject">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="SuitableRoomsforSubjectTag">
+              <PropertyRef Name="subject" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SuitableRoomsforSubjectTag_tag">
+          <End Type="GTimeTableModel.Tag" Role="Tag" Multiplicity="1" />
+          <End Type="GTimeTableModel.SuitableRoomsforSubjectTag" Role="SuitableRoomsforSubjectTag" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tag">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="SuitableRoomsforSubjectTag">
+              <PropertyRef Name="tag" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="SuitableRoomsforLecturer">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="lecturer" Type="Int32" Nullable="false" />
+          <Property Name="room" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Lecturer1" Relationship="GTimeTableModel.FK_SuitableRoomsforLecturer_lecturer" FromRole="SuitableRoomsforLecturer" ToRole="Lecturer" />
+          <NavigationProperty Name="Room1" Relationship="GTimeTableModel.FK_SuitableRoomsforLecturer_room" FromRole="SuitableRoomsforLecturer" ToRole="Room" />
+        </EntityType>
+        <Association Name="FK_SuitableRoomsforLecturer_lecturer">
+          <End Type="GTimeTableModel.Lecturer" Role="Lecturer" Multiplicity="1" />
+          <End Type="GTimeTableModel.SuitableRoomsforLecturer" Role="SuitableRoomsforLecturer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Lecturer">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="SuitableRoomsforLecturer">
+              <PropertyRef Name="lecturer" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SuitableRoomsforLecturer_room">
+          <End Type="GTimeTableModel.Room" Role="Room" Multiplicity="1" />
+          <End Type="GTimeTableModel.SuitableRoomsforLecturer" Role="SuitableRoomsforLecturer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Room">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="SuitableRoomsforLecturer">
+              <PropertyRef Name="room" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="SuiableRoomsforSession">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="session" Type="Int32" Nullable="false" />
+          <Property Name="room" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Room1" Relationship="GTimeTableModel.FK_SuiableRoomsforSession_room" FromRole="SuiableRoomsforSession" ToRole="Room" />
+          <NavigationProperty Name="Session1" Relationship="GTimeTableModel.FK_SuiableRoomsforSession_session" FromRole="SuiableRoomsforSession" ToRole="Session" />
+        </EntityType>
+        <Association Name="FK_SuiableRoomsforSession_room">
+          <End Type="GTimeTableModel.Room" Role="Room" Multiplicity="1" />
+          <End Type="GTimeTableModel.SuiableRoomsforSession" Role="SuiableRoomsforSession" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Room">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="SuiableRoomsforSession">
+              <PropertyRef Name="room" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SuiableRoomsforSession_session">
+          <End Type="GTimeTableModel.Session" Role="Session" Multiplicity="1" />
+          <End Type="GTimeTableModel.SuiableRoomsforSession" Role="SuiableRoomsforSession" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Session">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="SuiableRoomsforSession">
+              <PropertyRef Name="session" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="SuitableRoomsforGroup">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="group_id" Type="Int32" Nullable="false" />
+          <Property Name="room" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Room1" Relationship="GTimeTableModel.FK_SuitableRoomsforGroup_room" FromRole="SuitableRoomsforGroup" ToRole="Room" />
+          <NavigationProperty Name="Student" Relationship="GTimeTableModel.FK_SuitableRoomsforGroup_group" FromRole="SuitableRoomsforGroup" ToRole="Student" />
+        </EntityType>
+        <Association Name="FK_SuitableRoomsforGroup_room">
+          <End Type="GTimeTableModel.Room" Role="Room" Multiplicity="1" />
+          <End Type="GTimeTableModel.SuitableRoomsforGroup" Role="SuitableRoomsforGroup" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Room">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="SuitableRoomsforGroup">
+              <PropertyRef Name="room" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SuitableRoomsforGroup_group">
+          <End Type="GTimeTableModel.Student" Role="Student" Multiplicity="1" />
+          <End Type="GTimeTableModel.SuitableRoomsforGroup" Role="SuitableRoomsforGroup" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Student">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="SuitableRoomsforGroup">
+              <PropertyRef Name="group_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityType Name="NotAvailbeleTimesOfSession">
           <Key>
             <PropertyRef Name="id" />
@@ -748,6 +1160,27 @@
             </Principal>
             <Dependent Role="NotAvailbleTimesOfGroup">
               <PropertyRef Name="student" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="ParrelalSession">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="session" Type="Int32" Nullable="false" />
+          <Property Name="parellal_session" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Session1" Relationship="GTimeTableModel.FK_ParrelalSession_session" FromRole="ParrelalSession" ToRole="Session" />
+        </EntityType>
+        <Association Name="FK_ParrelalSession_session">
+          <End Type="GTimeTableModel.Session" Role="Session" Multiplicity="1" />
+          <End Type="GTimeTableModel.ParrelalSession" Role="ParrelalSession" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Session">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="ParrelalSession">
+              <PropertyRef Name="session" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -887,6 +1320,43 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="SuitableRoomsforSubjectTags">
+            <EntityTypeMapping TypeName="GTimeTableModel.SuitableRoomsforSubjectTag">
+              <MappingFragment StoreEntitySet="SuitableRoomsforSubjectTag">
+                <ScalarProperty Name="room" ColumnName="room" />
+                <ScalarProperty Name="tag" ColumnName="tag" />
+                <ScalarProperty Name="subject" ColumnName="subject" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SuitableRoomsforLecturers">
+            <EntityTypeMapping TypeName="GTimeTableModel.SuitableRoomsforLecturer">
+              <MappingFragment StoreEntitySet="SuitableRoomsforLecturer">
+                <ScalarProperty Name="room" ColumnName="room" />
+                <ScalarProperty Name="lecturer" ColumnName="lecturer" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SuiableRoomsforSessions">
+            <EntityTypeMapping TypeName="GTimeTableModel.SuiableRoomsforSession">
+              <MappingFragment StoreEntitySet="SuiableRoomsforSession">
+                <ScalarProperty Name="room" ColumnName="room" />
+                <ScalarProperty Name="session" ColumnName="session" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SuitableRoomsforGroups">
+            <EntityTypeMapping TypeName="GTimeTableModel.SuitableRoomsforGroup">
+              <MappingFragment StoreEntitySet="SuitableRoomsforGroup">
+                <ScalarProperty Name="room" ColumnName="room" />
+                <ScalarProperty Name="group_id" ColumnName="group_id" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="NotAvailbeleTimesOfSessions">
             <EntityTypeMapping TypeName="GTimeTableModel.NotAvailbeleTimesOfSession">
               <MappingFragment StoreEntitySet="NotAvailbeleTimesOfSessions">
@@ -901,6 +1371,15 @@
               <MappingFragment StoreEntitySet="NotAvailbleTimesOfGroup">
                 <ScalarProperty Name="timeSlot" ColumnName="timeSlot" />
                 <ScalarProperty Name="student" ColumnName="student" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ParrelalSessions">
+            <EntityTypeMapping TypeName="GTimeTableModel.ParrelalSession">
+              <MappingFragment StoreEntitySet="ParrelalSession">
+                <ScalarProperty Name="parellal_session" ColumnName="parellal_session" />
+                <ScalarProperty Name="session" ColumnName="session" />
                 <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>

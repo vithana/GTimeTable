@@ -32,6 +32,21 @@
         <AssociationConnector Association="GTimeTableModel.FK_NotAvailbeleTimesOfSessions_Sessions" />
         <EntityTypeShape EntityType="GTimeTableModel.NotAvailbleTimesOfGroup" Width="1.5" PointX="5" PointY="13.375" />
         <AssociationConnector Association="GTimeTableModel.FK_NotAvailbleTimesOfGroup_Student" />
+        <EntityTypeShape EntityType="GTimeTableModel.SuitableRoomsforSubjectTag" Width="1.5" PointX="7.875" PointY="8.125" />
+        <AssociationConnector Association="GTimeTableModel.FK_SuitableRoomsforSubjectTag_room" />
+        <AssociationConnector Association="GTimeTableModel.FK_SuitableRoomsforSubjectTag_subject" />
+        <AssociationConnector Association="GTimeTableModel.FK_SuitableRoomsforSubjectTag_tag" />
+        <EntityTypeShape EntityType="GTimeTableModel.SuitableRoomsforLecturer" Width="1.5" PointX="10.875" PointY="7.625" />
+        <AssociationConnector Association="GTimeTableModel.FK_SuitableRoomsforLecturer_lecturer" />
+        <AssociationConnector Association="GTimeTableModel.FK_SuitableRoomsforLecturer_room" />
+        <EntityTypeShape EntityType="GTimeTableModel.SuiableRoomsforSession" Width="1.5" PointX="10.875" PointY="4.5" />
+        <AssociationConnector Association="GTimeTableModel.FK_SuiableRoomsforSession_room" />
+        <AssociationConnector Association="GTimeTableModel.FK_SuiableRoomsforSession_session" />
+        <EntityTypeShape EntityType="GTimeTableModel.SuitableRoomsforGroup" Width="1.5" PointX="10.875" PointY="10.625" />
+        <AssociationConnector Association="GTimeTableModel.FK_SuitableRoomsforGroup_room" />
+        <AssociationConnector Association="GTimeTableModel.FK_SuitableRoomsforGroup_group" />
+        <EntityTypeShape EntityType="GTimeTableModel.ParrelalSession" Width="1.5" PointX="7.25" PointY="15.75" />
+        <AssociationConnector Association="GTimeTableModel.FK_ParrelalSession_session" />
       </Diagram>      
     </edmx:Diagrams>
   </edmx:Designer>

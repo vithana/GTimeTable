@@ -18,6 +18,10 @@ namespace GTimeTable
         public Room()
         {
             this.SutiableTabforRooms = new HashSet<SutiableTabforRoom>();
+            this.SuitableRoomsforSubjectTags = new HashSet<SuitableRoomsforSubjectTag>();
+            this.SuitableRoomsforLecturers = new HashSet<SuitableRoomsforLecturer>();
+            this.SuiableRoomsforSessions = new HashSet<SuiableRoomsforSession>();
+            this.SuitableRoomsforGroups = new HashSet<SuitableRoomsforGroup>();
         }
     
         public int id { get; set; }
@@ -29,5 +33,13 @@ namespace GTimeTable
         public virtual Building Building1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<SutiableTabforRoom> SutiableTabforRooms { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<SuitableRoomsforSubjectTag> SuitableRoomsforSubjectTags { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<SuitableRoomsforLecturer> SuitableRoomsforLecturers { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<SuiableRoomsforSession> SuiableRoomsforSessions { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<SuitableRoomsforGroup> SuitableRoomsforGroups { get; set; }
     }
 }
