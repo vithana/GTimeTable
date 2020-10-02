@@ -19,6 +19,8 @@ namespace GTimeTable
         {
             this.LecturesSessions = new HashSet<LecturesSession>();
             this.NotAvailbeleTimesOfSessions = new HashSet<NotAvailbeleTimesOfSession>();
+            this.SuiableRoomsforSessions = new HashSet<SuiableRoomsforSession>();
+            this.ParrelalSessions = new HashSet<ParrelalSession>();
         }
     
         public int id { get; set; }
@@ -36,5 +38,9 @@ namespace GTimeTable
         public virtual Tag Tag1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<NotAvailbeleTimesOfSession> NotAvailbeleTimesOfSessions { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<SuiableRoomsforSession> SuiableRoomsforSessions { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ParrelalSession> ParrelalSessions { get; set; }
     }
 }

@@ -159,6 +159,10 @@
     <Compile Include="Dtos\NotAvailableTimeOfSessionDto.cs" />
     <Compile Include="Dtos\NotAvailbleTimeOfGroupDto.cs" />
     <Compile Include="Dtos\ConcevutiveSessionDto.cs" />
+    <Compile Include="Dtos\SuitableRoomsforGroupDto.cs" />
+    <Compile Include="Dtos\SuitableRoomsForLecturers.cs" />
+    <Compile Include="Dtos\SuitableRoomsForSessionDto.cs" />
+    <Compile Include="Dtos\SuitableRoomsForSubjectandTagsscs.cs" />
     <Compile Include="Dtos\suitableroomsforTagDto.cs" />
     <Compile Include="Dtos\LectureDto.cs" />
     <Compile Include="Dtos\RoomsDto.cs" />
@@ -197,6 +201,9 @@
     <Compile Include="NotAvailbleTimesOfGroup.cs">
       <DependentUpon>GTimeTable.tt</DependentUpon>
     </Compile>
+    <Compile Include="ParrelalSession.cs">
+      <DependentUpon>GTimeTable.tt</DependentUpon>
+    </Compile>
     <Compile Include="Room.cs">
       <DependentUpon>GTimeTable.tt</DependentUpon>
     </Compile>
@@ -229,6 +236,18 @@
     </Compile>
     <Compile Include="Locations.xaml.cs">
       <DependentUpon>Locations.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="SuiableRoomsforSession.cs">
+      <DependentUpon>GTimeTable.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SuitableRoomsforGroup.cs">
+      <DependentUpon>GTimeTable.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SuitableRoomsforLecturer.cs">
+      <DependentUpon>GTimeTable.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SuitableRoomsforSubjectTag.cs">
+      <DependentUpon>GTimeTable.tt</DependentUpon>
     </Compile>
     <Compile Include="SutiableTabforRoom.cs">
       <DependentUpon>GTimeTable.tt</DependentUpon>
@@ -348,12 +367,18 @@
     <None Include="Properties\DataSources\Lecturer.datasource" />
     <None Include="Properties\DataSources\LecturesSession.datasource" />
     <None Include="Properties\DataSources\NotAvailbeleTimesOfSession.datasource" />
+    <None Include="Properties\DataSources\NotAvailbleTimesOfGroup.datasource" />
+    <None Include="Properties\DataSources\ParrelalSession.datasource" />
     <None Include="Properties\DataSources\Session.datasource" />
     <None Include="Properties\DataSources\Room.datasource" />
     <None Include="Properties\DataSources\NotAvailbleTimesOfLecturer.datasource" />
     <None Include="Properties\DataSources\Student.datasource" />
     <None Include="Properties\DataSources\Subject.datasource" />
     <None Include="Properties\DataSources\Building.datasource" />
+    <None Include="Properties\DataSources\SuiableRoomsforSession.datasource" />
+    <None Include="Properties\DataSources\SuitableRoomsforGroup.datasource" />
+    <None Include="Properties\DataSources\SuitableRoomsforLecturer.datasource" />
+    <None Include="Properties\DataSources\SuitableRoomsforSubjectTag.datasource" />
     <None Include="Properties\DataSources\SutiableTabforRoom.datasource" />
     <None Include="Properties\DataSources\Tag.datasource" />
     <None Include="Properties\DataSources\TimeTableSlot.datasource" />
