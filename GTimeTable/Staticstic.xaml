@@ -4,45 +4,137 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:GTimeTable"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d" 
-             Height="867.463" Width="1130">
-    <Grid>
+             Height="600" Width="930">
+ 
+        <Grid Grid.Column="1" Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+         
+        </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
 
-        <Grid Background="White" Margin="34,115,613.6,455.2">
-            <TextBlock x:Name="textBlock" HorizontalAlignment="Left" Margin="184,10,0,0" TextWrapping="Wrap" Text="Lecturer" VerticalAlignment="Top" FontSize="18" FontWeight="Bold"/>
-            <TextBlock x:Name="textBlock3" HorizontalAlignment="Left" Margin="37,88,0,0" TextWrapping="Wrap" Text="Number of Lecturer :" VerticalAlignment="Top" Width="117"/>
-            <TextBox x:Name="textBox" HorizontalAlignment="Left" Height="23" Margin="234,78,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" TextChanged="textBox_TextChanged" Text="12"/>
-            <TextBox x:Name="textBox1" HorizontalAlignment="Left" Height="23" Margin="234,131,0,0" TextWrapping="Wrap" Text="20h" VerticalAlignment="Top" Width="120"/>
-            <TextBlock x:Name="textBlock5" HorizontalAlignment="Left" Margin="37,178,0,0" TextWrapping="Wrap" Text="Average Student Lecturing" VerticalAlignment="Top"/>
-            <TextBox x:Name="textBox3" HorizontalAlignment="Left" Height="23" Margin="234,221,0,0" TextWrapping="Wrap" Text="20h" VerticalAlignment="Top" Width="120"/>
-            <TextBlock x:Name="textBlock6" HorizontalAlignment="Left" Margin="37,228,0,0" TextWrapping="Wrap" Text="Average free time" VerticalAlignment="Top"/>
+            <Grid Grid.Column="0">
+                <Grid.Effect>
+                    <DropShadowEffect/>
+                </Grid.Effect>
+            <Rectangle Height="120" Margin="20" RadiusY="10" RadiusX="10" Stroke="#FF007ACC" Fill="White" StrokeThickness="2"/>
+                <Grid Margin="25" Height="120">
+                    <Grid Width="35" Height="50" Background="#FF007ACC" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20 0">
+                        <Grid.Effect>
+                            <DropShadowEffect BlurRadius="20" Color="#FFCDCDCD"/>
+                        </Grid.Effect>
+                        <materialDesign:PackIcon Kind="AccountMultiple" Margin="5,16,0,0" Foreground="White" Height="26" Width="26"/>
+                    </Grid>
+                    <TextBlock Text="Lecturers" HorizontalAlignment="Right" Margin="0,26,10,0" VerticalAlignment="Top" Height="24" Width="70" FontFamily="Segoe UI Black" FontSize="15"/>
+                    <TextBlock x:Name="numOfLecTxtBx" HorizontalAlignment="Right"  Margin="0,55,10,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" FontSize="30" FontFamily="Segoe UI Black"/>
+                </Grid>
+            </Grid>
+
+            <Grid Grid.Column="1">
+                <Grid.Effect>
+                    <DropShadowEffect/>
+                </Grid.Effect>
+            <Rectangle Height="120" Margin="20" RadiusY="10" RadiusX="10" Stroke="#FF80C770" Fill="White" StrokeThickness="2"/>
+                <Grid Margin="25" Height="120">
+                    <Grid Width="35" Height="50" Background="#FF80C770" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20 0">
+                        <Grid.Effect>
+                            <DropShadowEffect BlurRadius="20" Color="#FFCDCDCD"/>
+                        </Grid.Effect>
+                        <materialDesign:PackIcon Kind="LibraryBooks" Margin="5,16,0,0" Foreground="White" Height="26" Width="26"/>
+                    </Grid>
+                    <TextBlock Text="Subjects" HorizontalAlignment="Right" Margin="0,26,10,0" VerticalAlignment="Top" Height="24" Width="70" FontFamily="Segoe UI Black" FontSize="15" RenderTransformOrigin="1.179,0.375"/>
+                    <TextBlock x:Name="numOfSubTxtBx" HorizontalAlignment="Right"  Margin="0,55,10,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" FontSize="30" FontFamily="Segoe UI Black"/>
+                </Grid>
+            </Grid>
+
+        <Grid Grid.Column="2">
+            <Grid.Effect>
+                <DropShadowEffect/>
+            </Grid.Effect>
+            <Rectangle Height="120" Margin="20" RadiusY="10" RadiusX="10" Stroke="#FFD1D12F" Fill="White" StrokeThickness="2"/>
+            <Grid Margin="25" Height="120">
+                <Grid Width="35" Height="50" Background="#FFD1D12F" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20 0">
+                    <Grid.Effect>
+                        <DropShadowEffect BlurRadius="20" Color="#FFCDCDCD"/>
+                    </Grid.Effect>
+                    <materialDesign:PackIcon Kind="Home" Margin="5,16,0,0" Foreground="White" Height="26" Width="26"/>
+                </Grid>
+                <TextBlock Text="Rooms" HorizontalAlignment="Right" Margin="0,26,0,0" VerticalAlignment="Top" Height="24" Width="70" FontFamily="Segoe UI Black" FontSize="15"/>
+                <TextBlock x:Name="numOfRoomsTxtBx" HorizontalAlignment="Right"  Margin="0,55,10,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" FontSize="30" FontFamily="Segoe UI Black"/>
+            </Grid>
         </Grid>
-        <Grid Background="White" Margin="607,115,45.6,455.2">
-            <TextBlock x:Name="textBlock7" HorizontalAlignment="Left" Margin="46,77,0,0" TextWrapping="Wrap" Text="Number of Students" VerticalAlignment="Top"/>
-            <TextBox x:Name="textBox4" HorizontalAlignment="Left" Height="23" Margin="284,72,0,0" TextWrapping="Wrap" Text="4" VerticalAlignment="Top" Width="120"/>
-            <TextBlock x:Name="textBlock8" HorizontalAlignment="Left" Margin="46,125,0,0" TextWrapping="Wrap" Text="Average hours of lecturers" VerticalAlignment="Top"/>
-            <TextBox x:Name="textBox5" HorizontalAlignment="Left" Height="23" Margin="284,118,0,0" TextWrapping="Wrap" Text="21" VerticalAlignment="Top" Width="120"/>
-            <TextBox x:Name="textBox6" HorizontalAlignment="Left" Height="23" Margin="284,167,0,0" TextWrapping="Wrap" Text="2" VerticalAlignment="Top" Width="120"/>
-            <TextBlock x:Name="textBlock9" HorizontalAlignment="Left" Margin="46,174,0,0" TextWrapping="Wrap" Text="Avarage Subject Ammount" VerticalAlignment="Top"/>
-            <TextBlock x:Name="textBlock10" HorizontalAlignment="Left" Margin="46,229,0,0" TextWrapping="Wrap" Text="Avarage Free Time" VerticalAlignment="Top"/>
-            <TextBox x:Name="textBox7" HorizontalAlignment="Left" Height="23" Margin="284,222,0,0" TextWrapping="Wrap" Text="50h" VerticalAlignment="Top" Width="120"/>
+
+        <Grid Grid.Row="1">
+            <Grid Grid.Column="0">
+                <Grid.Effect>
+                    <DropShadowEffect/>
+                </Grid.Effect>
+                <Rectangle Height="120" Margin="20" RadiusY="10" RadiusX="10" Stroke="#FF8AEEBC" Fill="White" StrokeThickness="2"/>
+                <Grid Margin="25" Height="120">
+                    <Grid Width="35" Height="50" Background="#FF8AEEBC" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20 0" Cursor="None" IsEnabled="False">
+                        <Grid.Effect>
+                            <DropShadowEffect BlurRadius="20" Color="#FFCDCDCD"/>
+                        </Grid.Effect>
+                        <materialDesign:PackIcon Kind="Timer" Margin="5,16,0,0" Foreground="White" Height="26" Width="26"/>
+                    </Grid>
+                    <TextBlock Text="Sessions" HorizontalAlignment="Right" Margin="0,26,0,0" VerticalAlignment="Top" Height="24" Width="70" FontFamily="Segoe UI Black" FontSize="15"/>
+                    <TextBlock x:Name="numOfSessionTxtBx" HorizontalAlignment="Right"  Margin="0,55,10,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" FontSize="30" FontFamily="Segoe UI Black"/>
+                </Grid>
+            </Grid>
+
+            <Grid Grid.Row="1">
+                
+            </Grid>
+            <Grid Margin="310,0,-310,0">
+                <Grid.Effect>
+                    <DropShadowEffect/>
+                </Grid.Effect>
+                <Rectangle Height="120" Margin="20" RadiusY="10" RadiusX="10" Stroke="#FFEEDC8A" Fill="White" StrokeThickness="2"/>
+                <Grid Margin="25" Height="120">
+                    <Grid Width="35" Height="50" Background="#FFEEDC8A" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20 0" Cursor="None" IsEnabled="False">
+                        <Grid.Effect>
+                            <DropShadowEffect BlurRadius="20" Color="#FFCDCDCD"/>
+                        </Grid.Effect>
+                        <materialDesign:PackIcon Kind="HospitalBuilding" Margin="5,16,0,0" Foreground="White" Height="26" Width="26"/>
+                    </Grid>
+                    <TextBlock Text="Buildings" HorizontalAlignment="Right" Margin="0,26,0,0" VerticalAlignment="Top" Height="24" Width="70" FontFamily="Segoe UI Black" FontSize="15"/>
+                    <TextBlock x:Name="numOfBuildingTxtBx" HorizontalAlignment="Right"  Margin="0,55,10,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" FontSize="30" FontFamily="Segoe UI Black"/>
+                </Grid>
+            </Grid>
+
+            <Grid Margin="620,0,-620,0">
+                <Grid.Effect>
+                    <DropShadowEffect/>
+                </Grid.Effect>
+                <Rectangle Height="120" Margin="20" RadiusY="10" RadiusX="10" Stroke="#FF4FA9E8" Fill="White" StrokeThickness="2"/>
+                <Grid Margin="25" Height="120">
+                    <Grid Width="35" Height="50" Background="#FF4FA9E8" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20 0" Cursor="None" IsEnabled="False">
+                        <Grid.Effect>
+                            <DropShadowEffect BlurRadius="20" Color="#FFCDCDCD"/>
+                        </Grid.Effect>
+                        <materialDesign:PackIcon Kind="NaturePeople" Margin="5,16,0,0" Foreground="White" Height="26" Width="26"/>
+                    </Grid>
+                    <TextBlock Text="Groups" HorizontalAlignment="Right" Margin="0,26,0,0" VerticalAlignment="Top" Height="24" Width="70" FontFamily="Segoe UI Black" FontSize="15"/>
+                    <TextBlock x:Name="numOfGroupsTxtBx" HorizontalAlignment="Right"  Margin="0,55,10,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" FontSize="30" FontFamily="Segoe UI Black"/>
+                </Grid>
+            </Grid>
+
+
         </Grid>
-        <Grid Background="White" Margin="277,492,283.6,98.2">
-            <TextBlock x:Name="textBlock2" HorizontalAlignment="Left" Margin="244,10,0,0" TextWrapping="Wrap" Text="Subjects" VerticalAlignment="Top" FontSize="18" FontWeight="Bold"/>
-            <TextBox x:Name="textBox8" HorizontalAlignment="Left" Height="23" Margin="372,72,0,0" TextWrapping="Wrap" Text="5" VerticalAlignment="Top" Width="120"/>
-            <TextBlock x:Name="textBlock12" HorizontalAlignment="Left" Margin="83,116,0,0" TextWrapping="Wrap" Text="Average number of lecturer" VerticalAlignment="Top"/>
-            <TextBox x:Name="textBox9" HorizontalAlignment="Left" Height="23" Margin="372,109,0,0" TextWrapping="Wrap" Text="5" VerticalAlignment="Top" Width="120"/>
-            <TextBlock x:Name="textBlock13" HorizontalAlignment="Left" Margin="83,159,0,0" TextWrapping="Wrap" Text="Average Student Per Subject" VerticalAlignment="Top"/>
-            <TextBlock x:Name="textBlock14" HorizontalAlignment="Left" Margin="83,206,0,0" TextWrapping="Wrap" Text="Average Lecture Time Per Subject " VerticalAlignment="Top"/>
-            <TextBox x:Name="textBox11" HorizontalAlignment="Left" Height="23" Margin="372,199,0,0" TextWrapping="Wrap" Text="100h" VerticalAlignment="Top" Width="120"/>
-        </Grid>
-        <TextBlock x:Name="textBlock1" HorizontalAlignment="Left" Margin="814,125,0,0" TextWrapping="Wrap" Text="Student&#x9;" VerticalAlignment="Top" FontSize="18" FontWeight="Bold" Height="23" Width="77"/>
-        <ToolBar x:Name="toolBar" HorizontalAlignment="Left" Margin="567,287,0,0" VerticalAlignment="Top"/>
-        <TextBlock x:Name="textBlock4" HorizontalAlignment="Left" Margin="71,252,0,0" TextWrapping="Wrap" Text="Average hours in lecturing" VerticalAlignment="Top"/>
-        <TextBox x:Name="textBox2" HorizontalAlignment="Left" Height="23" Margin="264,287,0,0" TextWrapping="Wrap" Text="30h" VerticalAlignment="Top" Width="120"/>
-        <TextBlock x:Name="textBlock11" HorizontalAlignment="Left" Margin="358,569,0,0" TextWrapping="Wrap" Text="Number of Subject" VerticalAlignment="Top"/>
-        <TextBox x:Name="textBox10" HorizontalAlignment="Left" Height="23" Margin="650,643,0,0" TextWrapping="Wrap" Text="60" VerticalAlignment="Top" Width="120" RenderTransformOrigin="2.229,-0.087" TextChanged="textBox10_TextChanged"/>
-        <TextBlock x:Name="textBlock15" HorizontalAlignment="Left" Margin="513,10,0,0" TextWrapping="Wrap" Text="Statics" VerticalAlignment="Top" Height="46" Width="150" FontSize="36" FontWeight="Bold"/>
+            
+        
+
 
     </Grid>
+    
+    
+
+   
 </UserControl>
