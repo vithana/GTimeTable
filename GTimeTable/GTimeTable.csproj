@@ -132,6 +132,8 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>DataSet1.xsd</DependentUpon>
     </Compile>
+    <Compile Include="Dtos\NotAvailableTimeOfSessionDto.cs" />
+    <Compile Include="Dtos\NotAvailbleTimeOfGroupDto.cs" />
     <Compile Include="Dtos\ConcevutiveSessionDto.cs" />
     <Compile Include="Dtos\suitableroomsforTagDto.cs" />
     <Compile Include="Dtos\LectureDto.cs" />
@@ -164,6 +166,12 @@
     </Compile>
     <Compile Include="Lecturers.xaml.cs">
       <DependentUpon>Lecturers.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="NotAvailbeleTimesOfSession.cs">
+      <DependentUpon>GTimeTable.tt</DependentUpon>
+    </Compile>
+    <Compile Include="NotAvailbleTimesOfGroup.cs">
+      <DependentUpon>GTimeTable.tt</DependentUpon>
     </Compile>
     <Compile Include="Room.cs">
       <DependentUpon>GTimeTable.tt</DependentUpon>
@@ -311,6 +319,7 @@
     </None>
     <None Include="Properties\DataSources\Lecturer.datasource" />
     <None Include="Properties\DataSources\LecturesSession.datasource" />
+    <None Include="Properties\DataSources\NotAvailbeleTimesOfSession.datasource" />
     <None Include="Properties\DataSources\Session.datasource" />
     <None Include="Properties\DataSources\Room.datasource" />
     <None Include="Properties\DataSources\NotAvailbleTimesOfLecturer.datasource" />

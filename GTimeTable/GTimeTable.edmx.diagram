@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="3e98bcf8942543c09ab82a7fba1ffdd8" Name="Diagram1" ZoomLevel="71">
+      <Diagram DiagramId="3e98bcf8942543c09ab82a7fba1ffdd8" Name="Diagram1" ZoomLevel="53">
         <EntityTypeShape EntityType="GTimeTableModel.Subject" Width="1.5" PointX="0.5" PointY="4.25" />
         <EntityTypeShape EntityType="GTimeTableModel.Tag" Width="1.5" PointX="0.625" PointY="0.75" />
         <EntityTypeShape EntityType="GTimeTableModel.Student" Width="1.5" PointX="2.75" PointY="0.75" />
@@ -23,11 +23,15 @@
         <AssociationConnector Association="GTimeTableModel.FK_Sessions_Student" />
         <AssociationConnector Association="GTimeTableModel.FK_Sessions_Subjects" />
         <AssociationConnector Association="GTimeTableModel.FK_Sessions_Tags" />
-        <EntityTypeShape EntityType="GTimeTableModel.NotAvailbleTimesOfLecturer" Width="1.5" PointX="7.875" PointY="5.625" />
+        <EntityTypeShape EntityType="GTimeTableModel.NotAvailbleTimesOfLecturer" Width="1.5" PointX="7.875" PointY="8" />
         <AssociationConnector Association="GTimeTableModel.FK_NotAvailbleTimesOfLecturers_Lecturers" />
-        <EntityTypeShape EntityType="GTimeTableModel.SutiableTabforRoom" Width="1.5" PointX="7.875" PointY="5.25" />
+        <EntityTypeShape EntityType="GTimeTableModel.SutiableTabforRoom" Width="1.5" PointX="9.875" PointY="5.25" />
         <AssociationConnector Association="GTimeTableModel.FK_SutiableTabforRoom_room" />
         <AssociationConnector Association="GTimeTableModel.FK_SutiableTabforRoom_tag" />
+        <EntityTypeShape EntityType="GTimeTableModel.NotAvailbeleTimesOfSession" Width="1.5" PointX="7.25" PointY="12.5" />
+        <AssociationConnector Association="GTimeTableModel.FK_NotAvailbeleTimesOfSessions_Sessions" />
+        <EntityTypeShape EntityType="GTimeTableModel.NotAvailbleTimesOfGroup" Width="1.5" PointX="5" PointY="13.375" />
+        <AssociationConnector Association="GTimeTableModel.FK_NotAvailbleTimesOfGroup_Student" />
       </Diagram>      
     </edmx:Diagrams>
   </edmx:Designer>
