@@ -7,20 +7,31 @@
              mc:Ignorable="d" Height="735.424" Width="1230.461" Loaded="UserControl_Loaded">
     <UserControl.Resources>
         <CollectionViewSource x:Key="notAvailbleTimesOfLecturerViewSource" d:DesignSource="{d:DesignInstance {x:Type local:NotAvailbleTimesOfLecturer}, CreateList=True}"/>
+        <CollectionViewSource x:Key="notAvailbeleTimesOfSessionViewSource" d:DesignSource="{d:DesignInstance {x:Type local:NotAvailbeleTimesOfSession}, CreateList=True}"/>
+        <CollectionViewSource x:Key="notAvailbleTimesOfGroupViewSource" d:DesignSource="{d:DesignInstance {x:Type local:NotAvailbleTimesOfGroup}, CreateList=True}"/>
+        <CollectionViewSource x:Key="parrelalSessionViewSource" d:DesignSource="{d:DesignInstance {x:Type local:ParrelalSession}, CreateList=True}"/>
     </UserControl.Resources>
     <Grid>
         <Grid Margin="0,10,10.4,0.2">
             <Grid x:Name="GridPrincipal" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-            <Label Content="Managment" HorizontalAlignment="Left" Margin="530,10,0,0" VerticalAlignment="Top" FontSize="24" FontWeight="Bold"/>
-            <TabControl HorizontalAlignment="Left" Height="593" Margin="26,76,0,0" VerticalAlignment="Top" Width="1167">
-                <TabItem Header="Not Availble Times">
-                    <Grid Background="#FFE5E5E5" DataContext="{StaticResource notAvailbleTimesOfLecturerViewSource}">
-                        <Label Content="Lecturers" HorizontalAlignment="Left" Margin="197,38,0,0" VerticalAlignment="Top" FontSize="20" FontWeight="Bold"/>
-                        <ComboBox x:Name="lectrureCombobox" HorizontalAlignment="Left" Margin="110,134,0,0" VerticalAlignment="Top" Width="120"/>
-                        <Label Content="Lecturer" HorizontalAlignment="Left" Height="25" Margin="38,136,0,0" VerticalAlignment="Top" Width="54"/>
-                        <Label Content="Time Slot" HorizontalAlignment="Left" Margin="257,136,0,0" VerticalAlignment="Top"/>
-                        <ComboBox x:Name="timeSlotComboBox" HorizontalAlignment="Left" Height="26" Margin="347,136,0,0" VerticalAlignment="Top" Width="112"/>
-                        <DataGrid x:Name="notAvailbleTimesOfLecturerDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding}" Margin="38,216,595.8,148" RowDetailsVisibilityMode="VisibleWhenSelected" CanUserAddRows="False">
+            <Label Content="Managment" HorizontalAlignment="Left" Margin="530,0,0,0" VerticalAlignment="Top" FontSize="24" FontWeight="Bold"/>
+            <TabControl HorizontalAlignment="Left" Height="658" Margin="26,57,0,0" VerticalAlignment="Top" Width="1167">
+                <TabItem>
+                    <TabItem.Header>
+                        <Label Content="Not Availble Times" MouseUp="TBNotavailabeTime"/>
+                    </TabItem.Header>
+                    <Grid Background="White" DataContext="{StaticResource notAvailbleTimesOfLecturerViewSource}" Margin="0,-1,-0.2,1">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="7*"/>
+                            <ColumnDefinition Width="184*"/>
+                            <ColumnDefinition Width="970*"/>
+                        </Grid.ColumnDefinitions>
+                        <Label Content="Lecturers" HorizontalAlignment="Left" Margin="183.8,10,0,0" VerticalAlignment="Top" FontSize="20" FontWeight="Bold" Grid.Column="1" Grid.ColumnSpan="2"/>
+                        <ComboBox x:Name="lectrureCombobox" HorizontalAlignment="Left" Margin="67.8,52,0,0" VerticalAlignment="Top" Width="120" Grid.Column="1" Grid.ColumnSpan="2"/>
+                        <Label Content="Lecturer" HorizontalAlignment="Left" Height="25" Margin="3,54,0,0" VerticalAlignment="Top" Width="54" Grid.ColumnSpan="2"/>
+                        <Label Content="Time Slot" HorizontalAlignment="Left" Margin="30.8,54,0,0" VerticalAlignment="Top" Grid.Column="2"/>
+                        <ComboBox x:Name="timeSlotComboBox" HorizontalAlignment="Left" Height="26" Margin="120.8,54,0,0" VerticalAlignment="Top" Width="112" Grid.Column="2"/>
+                        <DataGrid x:Name="notAvailbleTimesOfLecturerDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding}" Margin="2.8,101,623.8,320" RowDetailsVisibilityMode="VisibleWhenSelected" CanUserAddRows="False" Grid.Column="1" Grid.ColumnSpan="2" Background="#FFE2DCDC">
                             <DataGrid.Columns>
                                 <DataGridTextColumn x:Name="idColumn" Binding="{Binding id}" Header="id" Width="SizeToHeader" Visibility="Hidden"/>
                                 <DataGridTextColumn x:Name="lecturerColumn" Binding="{Binding lecturer}" Header="Lecturer" Width="Auto" />
@@ -41,11 +52,143 @@
                                 </DataGridTemplateColumn>
                             </DataGrid.Columns>
                         </DataGrid>
-                        <Button Content="Add" HorizontalAlignment="Left" Margin="490,132,0,0" VerticalAlignment="Top" Width="75" Click="Not_Avilable_TIme_Add_Button_Click"/>
+                        <Button Content="Add" HorizontalAlignment="Left" Margin="263.8,50,0,0" VerticalAlignment="Top" Width="75" Click="Not_Avilable_TIme_Add_Button_Click" Grid.Column="2"/>
+                        <Label Content="Sessions" HorizontalAlignment="Left" Margin="564.8,10,0,0" VerticalAlignment="Top" FontSize="20" FontWeight="Bold" Grid.Column="2"/>
+                        <ComboBox x:Name="sessionComboBox" HorizontalAlignment="Left" Margin="448.8,53,0,0" VerticalAlignment="Top" Width="120" Grid.Column="2"/>
+                        <Label Content="Sessions" HorizontalAlignment="Left" Margin="378.8,52,0,0" VerticalAlignment="Top" Grid.Column="2"/>
+                        <Label Content="Time Slot" HorizontalAlignment="Left" Margin="592.8,51,0,0" VerticalAlignment="Top" RenderTransformOrigin="6.188,0.352" Grid.Column="2"/>
+                        <ComboBox x:Name="sessionTimeSlotComboBox" HorizontalAlignment="Left" Margin="660.8,52,0,0" VerticalAlignment="Top" Width="120" Grid.Column="2"/>
+                        <Button Content="Add" HorizontalAlignment="Left" Margin="804.8,49,0,0" VerticalAlignment="Top" Width="75" Click="Not_Avilable_TIme_Session_Add_Button_Click" Grid.Column="2"/>
+                        <DataGrid x:Name="notAvailbeleTimesOfSessionDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding Source={StaticResource notAvailbeleTimesOfSessionViewSource}}" Margin="378.8,101,82.8,328" RowDetailsVisibilityMode="VisibleWhenSelected" CanUserAddRows="False" Grid.Column="2" Background="#FFE7E7E7">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn x:Name="idColumn1" Binding="{Binding id}" Header="id" Width="SizeToHeader" Visibility="Hidden"/>
+                                <DataGridTextColumn x:Name="sessionColumn" Binding="{Binding session}" Header="Session" Width="Auto"/>
+                                <DataGridTextColumn x:Name="timeSlotColumn1" Binding="{Binding timeSlot}" Header="Time Slot" Width="200"/>
+                                <DataGridTemplateColumn>
+                                    <DataGridTemplateColumn.HeaderTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Text="Action" />
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.HeaderTemplate>
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <StackPanel Orientation="Horizontal" >
+                                                <Button x:Name="deleteBtn" Content="Delete" Click="not_avilable_session_deleteBtn_Click"  Background="red" />
+                                            </StackPanel>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                        <Label Content="Groups" HorizontalAlignment="Left" Margin="48.8,305,0,0" VerticalAlignment="Top" FontSize="20" FontWeight="Bold" Grid.Column="2"/>
+                        <Label Content="Time Slot" HorizontalAlignment="Left" Margin="55.8,348,0,0" VerticalAlignment="Top" Grid.Column="2"/>
+                        <Label Content="Group/SubGroup" HorizontalAlignment="Left" Height="25" Margin="6,349,0,0" VerticalAlignment="Top" Width="107" Grid.ColumnSpan="2"/>
+                        <ComboBox x:Name="groupComboBox" HorizontalAlignment="Left" Margin="105.8,346,0,0" VerticalAlignment="Top" Width="120" Grid.Column="1" Grid.ColumnSpan="2"/>
+                        <ComboBox x:Name="groupTimeSlotComboBox" HorizontalAlignment="Left" Margin="145.8,346,0,0" VerticalAlignment="Top" Width="120" Grid.Column="2"/>
+                        <Button Content="Add" HorizontalAlignment="Left" Margin="288.8,341,0,0" VerticalAlignment="Top" Width="75" Click="not_avilable_group_addBtn_Click" Grid.Column="2" />
+                        <DataGrid x:Name="notAvailbleTimesOfGroupDataGrid" AutoGenerateColumns="False" Grid.Column="1" EnableRowVirtualization="True" ItemsSource="{Binding Source={StaticResource notAvailbleTimesOfGroupViewSource}}" Margin="2.8,410,623.8,10" RowDetailsVisibilityMode="VisibleWhenSelected" Grid.ColumnSpan="2" Background="#FFD4D4D4" CanUserAddRows="False">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn x:Name="idColumn2" Binding="{Binding id}" Header="Id" Width="Auto" Visibility="Hidden"/>
+                                <DataGridTextColumn x:Name="studentColumn" Binding="{Binding student}" Header="Group" Width="Auto"/>
+                                <DataGridTextColumn x:Name="timeSlotColumn2" Binding="{Binding timeSlot}" Header="Time Slot" Width="200"/>
+                                <DataGridTemplateColumn>
+                                    <DataGridTemplateColumn.HeaderTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Text="Action" />
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.HeaderTemplate>
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <StackPanel Orientation="Horizontal" >
+                                                <Button x:Name="deleteBtn" Content="Delete" Click="not_avilable_group_deleteClick"  Background="red" />
+                                            </StackPanel>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                            </DataGrid.Columns>
+                        </DataGrid>
                     </Grid>
                 </TabItem>
-                <TabItem Header=" Consecutive Sessions">
-                    <Grid Background="#FFE5E5E5"/>
+                <TabItem>
+                    <TabItem.Header>
+                        <Label Content="Consecutive Sessions" MouseUp="concecutiveSessionTabLoad"/>
+                    </TabItem.Header>
+                    <Grid Background="White">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="36*"/>
+                            <ColumnDefinition Width="22*"/>
+                            <ColumnDefinition Width="24*"/>
+                            <ColumnDefinition Width="63*"/>
+                            <ColumnDefinition Width="78*"/>
+                            <ColumnDefinition Width="91*"/>
+                            <ColumnDefinition Width="35*"/>
+                            <ColumnDefinition Width="812*"/>
+                        </Grid.ColumnDefinitions>
+                        <Label Content="Add Consective Sessions" HorizontalAlignment="Left" Margin="63.1,40,0,0" VerticalAlignment="Top" FontSize="24" FontWeight="Bold" Grid.Column="7" Width="296"/>
+                        <ComboBox x:Name="concecutiveSession1Combobox" HorizontalAlignment="Right" Margin="0,113,738.8,0" VerticalAlignment="Top" Width="196" Grid.Column="5" SelectionChanged="concecutiveSession1Combobox_SelectionChanged" Height="47" Grid.ColumnSpan="3"/>
+                        <Label Content="Session :" HorizontalAlignment="Right" Height="31" Margin="0,130,34.4,0" VerticalAlignment="Top" Width="97" Grid.Column="3" Grid.ColumnSpan="2" FontSize="16"/>
+                        <Label Content="Concetutive Session :" HorizontalAlignment="Left" Margin="267.1,135,0,0" VerticalAlignment="Top" Grid.Column="7" FontSize="16"/>
+                        <ComboBox x:Name="concecutiveSession2ComboBox" HorizontalAlignment="Left" Height="48" Margin="457.1,113,0,0" VerticalAlignment="Top" Width="226" Grid.Column="7"/>
+                        <Button Content="Add" HorizontalAlignment="Left" Margin="171.1,218,0,0" VerticalAlignment="Top" Width="76" Grid.Column="7" Click="concecutiveSession_Add_Button_Click"/>
+                        <DataGrid x:Name="concecutiveSessionDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding}" RowDetailsVisibilityMode="VisibleWhenSelected"  Grid.Column="5" HorizontalAlignment="Left" Height="218" Margin="43.6,335,0,0" VerticalAlignment="Top" Width="597" CanUserAddRows="False" RenderTransformOrigin="0.495,0.88" Background="#FFC7C4C4" Grid.ColumnSpan="3">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn x:Name="concecutiveSession1Column" Binding="{Binding concecutiveSession1}" Header="Session" Width="Auto"/>
+                                <DataGridTextColumn x:Name="concecutiveSession2Column" Binding="{Binding concecutiveSession2}" Header="Following Session" Width="Auto"/>
+                                <DataGridTemplateColumn>
+                                    <DataGridTemplateColumn.HeaderTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Text="Action" />
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.HeaderTemplate>
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <StackPanel Orientation="Horizontal" >
+                                                <Button x:Name="deleteConcecutiveSessionBtn" Content="Delete" Background="red" Click="concecutiveSession_Delete_Button_Click" />
+                                            </StackPanel>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </Grid>
+                </TabItem>
+                <TabItem>
+                    <TabItem.Header>
+                        <Label Content="Parallel Sessions" MouseUp="TBClickParallelSession"/>
+                    </TabItem.Header>
+                    <Grid Background="White" DataContext="{StaticResource parrelalSessionViewSource}">
+                        <Label Content="Add Parallel Session" HorizontalAlignment="Left" Margin="455,27,0,0" VerticalAlignment="Top" FontSize="24" FontWeight="Bold" Width="257"/>
+                        <ComboBox x:Name="session_ParallelSession" HorizontalAlignment="Right" Margin="0,108,847.8,0" VerticalAlignment="Top" Width="196" SelectionChanged="concecutiveSession1Combobox_SelectionChanged" Height="47"/>
+                        <Label Content="Session :" HorizontalAlignment="Right" Height="31" Margin="0,130,1043.8,0" VerticalAlignment="Top" Width="97" FontSize="16"/>
+                        <Label Content="Parallel Session :" HorizontalAlignment="Left" Margin="521,130,0,0" VerticalAlignment="Top" FontSize="16"/>
+                        <ComboBox x:Name="parrelSession_ParallelSession" HorizontalAlignment="Left" Height="48" Margin="685,108,0,0" VerticalAlignment="Top" Width="204"/>
+                        <Button Content="Add" Click="AddBtnclik_ParrelalSession" HorizontalAlignment="Left" Margin="521,200,0,0" VerticalAlignment="Top" Width="75" />
+                        <Button x:Name="button_viewSession" Click="btnclickViewSession_ParallelSession" Content="View Session" HorizontalAlignment="Left" Margin="344,122,0,0" VerticalAlignment="Top" Width="99" Height="34" FontSize="10" Background="#FFFFA61A"/>
+                        <Button x:Name="button1_viewParrelalsSession" Click="btnclickViewParrelalSession_ParallelSession" Content="View Parallal Session" HorizontalAlignment="Left" Margin="921,121,0,0" VerticalAlignment="Top" Width="135" Height="34" FontSize="10" Background="#FF089C44" RenderTransformOrigin="0.037,0.547"/>
+                        <DataGrid x:Name="parrelalSessionDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding}" Margin="206,303,271.8,103" RowDetailsVisibilityMode="VisibleWhenSelected" Foreground="Black" CanUserAddRows="False" FontFamily="black" Background="#FFC5C5C5" FontWeight="Bold">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn x:Name="idColumn3" Binding="{Binding id}" Header="Id" Width="Auto" Visibility="Hidden"/>
+                                <DataGridTextColumn x:Name="sessionColumn1" Binding="{Binding session}" Header="Session" Width="Auto"/>
+                                <DataGridTextColumn x:Name="parellal_sessionColumn" Binding="{Binding parellal_session}" Header="Parralel Session" Width="100"/>
+                                <DataGridTemplateColumn>
+                                    <DataGridTemplateColumn.HeaderTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Text="Action" />
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.HeaderTemplate>
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <StackPanel Orientation="Horizontal" >
+                                                <Button x:Name="viewsession" Click="viewSessionGrid_parrrealSection"  Content="View Session" Background="#FFF9B917" Margin="12px" />
+                                                <Button x:Name="viewParellasSession" Click="ViewParellasession_Grid_parrrealSection" Content="View Parrelal Session" Background="#FF089C44" Margin="12px" />
+                                                <Button x:Name="deleteParrelaSesssion" Click="delete_parrrealSection" Content="Delete" Background="red" />
+                                            </StackPanel>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </Grid>
                 </TabItem>
             </TabControl>
         </Grid>

@@ -41,5 +41,8 @@ namespace GTimeTable
         public virtual DbSet<SuitableRoomsforLecturer> SuitableRoomsforLecturers { get; set; }
         public virtual DbSet<SuiableRoomsforSession> SuiableRoomsforSessions { get; set; }
         public virtual DbSet<SuitableRoomsforGroup> SuitableRoomsforGroups { get; set; }
+        public virtual DbSet<NotAvailbeleTimesOfSession> NotAvailbeleTimesOfSessions { get; set; }
+        public virtual DbSet<NotAvailbleTimesOfGroup> NotAvailbleTimesOfGroups { get; set; }
+        public virtual DbSet<ParrelalSession> ParrelalSessions { get; set; }
     }
 }
