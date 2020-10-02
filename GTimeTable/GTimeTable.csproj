@@ -61,17 +61,38 @@
     <Reference Include="MaterialDesignThemes.Wpf, Version=2.3.1.953, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\MaterialDesignThemes.2.3.1.953\lib\net45\MaterialDesignThemes.Wpf.dll</HintPath>
     </Reference>
+    <Reference Include="Syncfusion.Compression.Base, Version=18.3460.0.35, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
+      <HintPath>..\packages\Syncfusion.Compression.Base.18.3.0.35\lib\net46\Syncfusion.Compression.Base.dll</HintPath>
+    </Reference>
     <Reference Include="Syncfusion.Core.XForms, Version=18.2451.0.58, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Syncfusion.Xamarin.Core.18.2.0.58\lib\netstandard2.0\Syncfusion.Core.XForms.dll</HintPath>
     </Reference>
-    <Reference Include="Syncfusion.Licensing, Version=18.2460.0.58, Culture=neutral, PublicKeyToken=632609b4d040f6b4, processorArchitecture=MSIL">
-      <HintPath>..\packages\Syncfusion.Licensing.18.2.0.58\lib\net46\Syncfusion.Licensing.dll</HintPath>
+    <Reference Include="Syncfusion.Data.WPF, Version=18.3460.0.35, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
+      <HintPath>..\packages\Syncfusion.Data.WPF.18.3.0.35\lib\net46\Syncfusion.Data.WPF.dll</HintPath>
+    </Reference>
+    <Reference Include="Syncfusion.Licensing, Version=18.3460.0.35, Culture=neutral, PublicKeyToken=632609b4d040f6b4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Syncfusion.Licensing.18.3.0.35\lib\net46\Syncfusion.Licensing.dll</HintPath>
+    </Reference>
+    <Reference Include="Syncfusion.Pdf.Base, Version=18.3460.0.35, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
+      <HintPath>..\packages\Syncfusion.Pdf.Wpf.18.3.0.35\lib\net46\Syncfusion.Pdf.Base.dll</HintPath>
     </Reference>
     <Reference Include="Syncfusion.SfChart.WPF, Version=18.2460.0.58, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
       <HintPath>..\packages\Syncfusion.SfChart.WPF.18.2.0.58\lib\net46\Syncfusion.SfChart.WPF.dll</HintPath>
     </Reference>
     <Reference Include="Syncfusion.SfChart.XForms, Version=18.2451.0.58, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Syncfusion.Xamarin.SfChart.18.2.0.58\lib\netstandard2.0\Syncfusion.SfChart.XForms.dll</HintPath>
+    </Reference>
+    <Reference Include="Syncfusion.SfGrid.WPF, Version=18.3460.0.35, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
+      <HintPath>..\packages\Syncfusion.SfGrid.WPF.18.3.0.35\lib\net46\Syncfusion.SfGrid.WPF.dll</HintPath>
+    </Reference>
+    <Reference Include="Syncfusion.SfGridConverter.WPF, Version=18.3460.0.35, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
+      <HintPath>..\packages\Syncfusion.DataGridExcelExport.Wpf.18.3.0.35\lib\net46\Syncfusion.SfGridConverter.WPF.dll</HintPath>
+    </Reference>
+    <Reference Include="Syncfusion.Shared.WPF, Version=18.3460.0.35, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
+      <HintPath>..\packages\Syncfusion.Shared.WPF.18.3.0.35\lib\net46\Syncfusion.Shared.WPF.dll</HintPath>
+    </Reference>
+    <Reference Include="Syncfusion.XlsIO.Base, Version=18.3460.0.35, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
+      <HintPath>..\packages\Syncfusion.XlsIO.Wpf.18.3.0.35\lib\net46\Syncfusion.XlsIO.Base.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
@@ -124,6 +145,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="AllTimeTable.xaml.cs">
+      <DependentUpon>AllTimeTable.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Building.cs">
       <DependentUpon>GTimeTable.tt</DependentUpon>
     </Compile>
@@ -243,6 +267,10 @@
     <Compile Include="WorkingDaysOfWeek.cs">
       <DependentUpon>GTimeTable.tt</DependentUpon>
     </Compile>
+    <Page Include="AllTimeTable.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="frmStudent.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

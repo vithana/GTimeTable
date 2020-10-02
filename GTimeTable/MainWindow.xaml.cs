@@ -78,6 +78,10 @@ namespace GTimeTable
                     GridPrincipal.Children.Clear();
                     GridPrincipal.Children.Add(new Staticstic());
                     break;
+                case 9:
+                    GridPrincipal.Children.Clear();
+                    GridPrincipal.Children.Add(new AllTimeTable());
+                    break;
                 default:
                     break;
             }

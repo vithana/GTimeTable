@@ -1,0 +1,39 @@
+﻿<UserControl
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:GTimeTable"
+             xmlns:chart="http://schemas.syncfusion.com/wpf" x:Class="GTimeTable.AllTimeTable"
+             mc:Ignorable="d" Height="735.424" Width="1230.461" Name="UI">
+    <Grid>
+        <Grid Margin="0,10,10.4,0.2" Background="#FFFCFCFC">
+            <Grid x:Name="GridPrincipal" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            <Label Content="Time Table" HorizontalAlignment="Left" Margin="558,10,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="20"/>
+            <!--<DataGrid x:Name="AllTimeTableGrid" HorizontalAlignment="Left" Height="272" Margin="69,90,0,0" VerticalAlignment="Top" Width="1070" Background="#FFD3D2D2" VerticalGridLinesBrush="Black" GridLinesVisibility="All" HorizontalGridLinesBrush="Black" />-->
+
+
+
+            <chart:SfDataGrid Name="dataGridView"  ItemsSource="{Binding ElementName=UI,Path=ConnectionItems}" HorizontalAlignment="Left" RowHeight="70" ExpanderColumnWidth="200"  Margin="24,90,0,0" VerticalAlignment="Top" Width="Auto" Height="528" Background="{x:Null}"/>
+
+            <Button Content="Generate" Height="52" HorizontalAlignment="Left" Margin="24,0,0,36" x:Name="button1" VerticalAlignment="Bottom" Width="152" Click="button1_Click" />
+            <Button Content="Download Pdf" Height="52" HorizontalAlignment="Left" Margin="790,0,0,36" x:Name="button1_Copy" VerticalAlignment="Bottom" Width="152" Click="download_pdf_Click" Background="#FF21F360" />
+            <Label Content="Type" HorizontalAlignment="Left" Margin="1020,78,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.602,-0.401"/>
+            <ComboBox x:Name="TypeComboBox" HorizontalAlignment="Left" Margin="1020,109,0,0" VerticalAlignment="Top" Width="160" SelectionChanged="TypeComboBox_SelectionChanged">
+                <ComboBoxItem Content="Lecturers" HorizontalAlignment="Left" Width="160"/>
+                <ComboBoxItem Content="Room" HorizontalAlignment="Left" Width="160"/>
+                <ComboBoxItem Content="Group" HorizontalAlignment="Left" Width="160"/>
+            </ComboBox>
+            <Label Content="Select" HorizontalAlignment="Left" Margin="1020,149,0,0" VerticalAlignment="Top"/>
+            <ComboBox x:Name="selectComboBox" HorizontalAlignment="Left" Margin="1020,180,0,0" VerticalAlignment="Top" Width="160">
+                
+            </ComboBox>
+
+
+        </Grid>
+
+
+
+
+    </Grid>
+</UserControl>
