@@ -78,8 +78,45 @@
                         <Button Content="Add" HorizontalAlignment="Left" Margin="491,391,0,0" VerticalAlignment="Top" Width="75" Click="not_avilable_group_deleteBtn_Click" />
                     </Grid>
                 </TabItem>
-                <TabItem Header=" Consecutive Sessions">
-                    <Grid Background="#FFE5E5E5"/>
+                <TabItem>
+                    <TabItem.Header>
+                        <Label Content="Consecutive Sessions" MouseUp="concecutiveSessionTabLoad"/>
+                    </TabItem.Header>
+                    <Grid Background="#FFE5E5E5">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="36*"/>
+                            <ColumnDefinition Width="22*"/>
+                            <ColumnDefinition Width="24*"/>
+                            <ColumnDefinition Width="63*"/>
+                            <ColumnDefinition Width="1017*"/>
+                        </Grid.ColumnDefinitions>
+                        <Label Content="Sessions" HorizontalAlignment="Left" Margin="51.776,38,0,0" VerticalAlignment="Top" FontSize="20" FontWeight="Bold" Grid.Column="4"/>
+                        <ComboBox x:Name="concecutiveSession1Combobox" HorizontalAlignment="Left" Margin="27.976,134,0,0" VerticalAlignment="Top" Width="120" Grid.Column="3" Grid.ColumnSpan="2" SelectionChanged="concecutiveSession1Combobox_SelectionChanged"/>
+                        <Label Content="Session" HorizontalAlignment="Right" Height="25" Margin="0,136,53.224,0" VerticalAlignment="Top" Width="54" Grid.Column="1" Grid.ColumnSpan="3"/>
+                        <Label Content="Concetutive Session" HorizontalAlignment="Left" Margin="111.776,136,0,0" VerticalAlignment="Top" Grid.Column="4"/>
+                        <ComboBox x:Name="concecutiveSession2ComboBox" HorizontalAlignment="Left" Height="26" Margin="249.776,136,0,0" VerticalAlignment="Top" Width="112" Grid.Column="4"/>
+                        <Button Content="Add" HorizontalAlignment="Left" Margin="418.776,132,0,0" VerticalAlignment="Top" Width="75" Grid.Column="4" Click="concecutiveSession_Add_Button_Click"/>
+                        <DataGrid x:Name="concecutiveSessionDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding}" RowDetailsVisibilityMode="VisibleWhenSelected"  Grid.Column="1" HorizontalAlignment="Left" Height="171" Margin="10,202,0,0" VerticalAlignment="Top" Width="auto" CanUserAddRows="False" Grid.ColumnSpan="4">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn x:Name="concecutiveSession1Column" Binding="{Binding concecutiveSession1}" Header="Session" Width="Auto"/>
+                                <DataGridTextColumn x:Name="concecutiveSession2Column" Binding="{Binding concecutiveSession2}" Header="Following Session" Width="Auto"/>
+                                <DataGridTemplateColumn>
+                                    <DataGridTemplateColumn.HeaderTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Text="Action" />
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.HeaderTemplate>
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <StackPanel Orientation="Horizontal" >
+                                                <Button x:Name="deleteConcecutiveSessionBtn" Content="Delete" Background="red" Click="concecutiveSession_Delete_Button_Click" />
+                                            </StackPanel>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </Grid>
                 </TabItem>
             </TabControl>
         </Grid>

@@ -134,6 +134,7 @@
     </Compile>
     <Compile Include="Dtos\NotAvailableTimeOfSessionDto.cs" />
     <Compile Include="Dtos\NotAvailbleTimeOfGroupDto.cs" />
+    <Compile Include="Dtos\ConcevutiveSessionDto.cs" />
     <Compile Include="Dtos\suitableroomsforTagDto.cs" />
     <Compile Include="Dtos\LectureDto.cs" />
     <Compile Include="Dtos\RoomsDto.cs" />
