@@ -18,6 +18,7 @@ namespace GTimeTable
         public Student()
         {
             this.Sessions = new HashSet<Session>();
+            this.SuitableRoomsforGroups = new HashSet<SuitableRoomsforGroup>();
         }
     
         public int id { get; set; }
@@ -31,5 +32,7 @@ namespace GTimeTable
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Session> Sessions { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<SuitableRoomsforGroup> SuitableRoomsforGroups { get; set; }
     }
 }

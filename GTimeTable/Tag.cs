@@ -19,6 +19,7 @@ namespace GTimeTable
         {
             this.Sessions = new HashSet<Session>();
             this.SutiableTabforRooms = new HashSet<SutiableTabforRoom>();
+            this.SuitableRoomsforSubjectTags = new HashSet<SuitableRoomsforSubjectTag>();
         }
     
         public int id { get; set; }
@@ -26,6 +27,9 @@ namespace GTimeTable
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Session> Sessions { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<SutiableTabforRoom> SutiableTabforRooms { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<SuitableRoomsforSubjectTag> SuitableRoomsforSubjectTags { get; set; }
     }
 }
