@@ -32,10 +32,12 @@ namespace GTimeTable
         public virtual DbSet<WorkingDaysOfWeek> WorkingDaysOfWeeks { get; set; }
         public virtual DbSet<Building> Buildings { get; set; }
         public virtual DbSet<Lecturer> Lecturers { get; set; }
-        public virtual DbSet<Room> Rooms { get; set; }
         public virtual DbSet<LecturesSession> LecturesSessions { get; set; }
         public virtual DbSet<Session> Sessions { get; set; }
-        public virtual DbSet<NotAvailbleTimesOfLecturer> NotAvailbleTimesOfLecturers { get; set; }
+        public virtual DbSet<Room> Rooms { get; set; }
         public virtual DbSet<SutiableTabforRoom> SutiableTabforRooms { get; set; }
+        public virtual DbSet<NotAvailbleTimesOfLecturer> NotAvailbleTimesOfLecturers { get; set; }
+        public virtual DbSet<NotAvailbeleTimesOfSession> NotAvailbeleTimesOfSessions { get; set; }
+        public virtual DbSet<NotAvailbleTimesOfGroup> NotAvailbleTimesOfGroups { get; set; }
     }
 }

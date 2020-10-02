@@ -31,6 +31,8 @@ namespace GTimeTable
         {
             InitializeComponent();
             NotAvilableTimesLoad();
+            NotAvailbleSessionsLoad();
+            notAvailableGroupLoad();
         }
 
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
@@ -127,6 +129,146 @@ namespace GTimeTable
         }
 
 
+        //Start of not availble time of session
+        private void NotAvailbleSessionsLoad()
+        {
+            List<SessionDto> sessionDto = new List<SessionDto>();
+            using (var ctx = new GTimeTableEntities())
+            {
+                string sql = "Select S.id, SU.name AS subject_name, SU.code AS subject_code, T.tag AS tag, ST.groupId AS groupId, S.count AS count, S.duration AS duration " +
+                                                                "from Sessions S " +
+                                                                "INNER JOIN Subjects SU ON S.subject = SU.id " +
+                                                                "INNER JOIN Tags T ON S.tag = T.id " +
+                                                                "INNER JOIN Student ST ON S.student = ST.id ";
 
+                sessionDto = ctx.Database.SqlQuery<SessionDto>(sql).ToList();
+            }
+
+            foreach (var session in sessionDto)
+            {
+                sessionComboBox.Items.Add(session.subject_code + "-" + session.tag + "-" +  session.groupId);
+            }
+
+            foreach (var timeSlot in WorkingDaysAndHours.TimeSlots)
+            {
+                sessionTimeSlotComboBox.Items.Add(timeSlot);
+            }
+
+            List<NotAvailableTimeOfSessionDto> notAvailableTimeOfSessionDtos = new List<NotAvailableTimeOfSessionDto>();
+
+            using (var ctx = new GTimeTableEntities())
+            {
+                notAvailbeleTimesOfSessionDataGrid.ItemsSource = ctx.Database.SqlQuery<NotAvailableTimeOfSessionDto>("Select N.id as id ,S.id as session , N.timeSlot as timeSlot from NotAvailbeleTimesOfSessions N INNER JOIN Sessions S ON N.[session] = S.id" ).ToList();
+            }
+
+            
+
+
+        }
+
+        private void Not_Avilable_TIme_Session_Add_Button_Click(object sender, RoutedEventArgs e)
+        {
+            if (sessionComboBox.Text == "" || sessionTimeSlotComboBox.Text == "")
+            {
+                MaterialMessageBox.ShowError(@"Please Enter All the fields");
+            }
+            else
+            {
+                List<string> values = new List<string>(sessionComboBox.Text.Split('-'));
+
+                string subjectCodeValue = values[0].ToString();
+                string TagValue = values[1].ToString();
+                string groupIdValue = values[2].ToString();
+
+                Subject subject = (from s in _db.Subjects
+                           where s.code.Equals(subjectCodeValue)
+                           select s).Single();
+
+                Tag tag = (from m in _db.Tags
+                           where m.tag1.Equals(TagValue)
+                           select m).Single();
+
+                Student student = (from m in _db.Students
+                           where m.groupId.Equals(groupIdValue)
+                           select m).Single();
+
+                Session session = (from m in _db.Sessions
+                                   where (m.subject == subject.id && m.tag == tag.id && m.student == student.id )
+                                   select m).Single();
+
+
+
+                NotAvailbeleTimesOfSession notAvailbeleTimesOfSession = new NotAvailbeleTimesOfSession();
+
+                notAvailbeleTimesOfSession.session = session.id;
+                notAvailbeleTimesOfSession.timeSlot = sessionTimeSlotComboBox.Text;
+
+                _db.NotAvailbeleTimesOfSessions.Add(notAvailbeleTimesOfSession);
+                _db.SaveChanges();
+
+                using (var ctx = new GTimeTableEntities())
+                {
+                    notAvailbeleTimesOfSessionDataGrid.ItemsSource = ctx.Database.SqlQuery<NotAvailableTimeOfSessionDto>("Select N.id as id ,S.id as session , N.timeSlot as timeSlot from NotAvailbeleTimesOfSessions N INNER JOIN Sessions S ON N.[session] = S.id").ToList();
+                }
+
+
+                //Lecturer lecturer = (from m in _db.Sessions
+                //                     where m..Equals(sessionComboBox.Text)
+                //                     select m).Single();
+            }
+        }
+
+        private void not_avilable_session_deleteBtn_Click(object sender, RoutedEventArgs e)
+        {
+            int Id = (notAvailbeleTimesOfSessionDataGrid.SelectedItem as NotAvailableTimeOfSessionDto).id;
+
+            var deletedItem = _db.NotAvailbeleTimesOfSessions.Where(m => m.id == Id).Single();
+            _db.NotAvailbeleTimesOfSessions.Remove(deletedItem);
+            _db.SaveChanges();
+
+
+            using (var ctx = new GTimeTableEntities())
+            {
+                notAvailbeleTimesOfSessionDataGrid.ItemsSource = ctx.Database.SqlQuery<NotAvailableTimeOfSessionDto>("Select N.id as id ,S.id as session , N.timeSlot as timeSlot from NotAvailbeleTimesOfSessions N INNER JOIN Sessions S ON N.[session] = S.id").ToList();
+            }
+        }
+
+
+        //End of not availble time of session
+
+
+        //Start of not available time of groups and sub groups
+
+        private void notAvailableGroupLoad()
+        {
+            List<Student> students = new List<Student>();
+            students = _db.Students.ToList();
+            foreach (var timeSlot in WorkingDaysAndHours.TimeSlots)
+            {
+                groupTimeSlotComboBox.Items.Add(timeSlot);
+            }
+            foreach (var student in students)
+            {
+                groupComboBox.Items.Add(student.groupId);
+                groupComboBox.Items.Add(student.subGropId);
+            }
+
+            //List<NotAvailbleTimeOfGroupDto> notAvailbleTimeOfGroupDtos = new List<NotAvailbleTimeOfGroupDto>();
+
+            //using (var ctx = new GTimeTableEntities())
+            //{
+            //    notAvailbleTimeOfGroupDtos = ctx.Database.SqlQuery<NotAvailbleTimeOfGroupDto>("Select NL.id ,L.name as lecturer, NL.timeSlot  " +
+            //                                                    "from NotAvailbleTimesOfLecturers NL INNER JOIN Lecturers L ON NL.[lecturer] = L.id   ").ToList();
+            //}
+
+            ////.ItemsSource = notAvailbleTimeOfGroupDtos;
+        }
+
+        private void not_avilable_group_deleteBtn_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        //End of not available time of groups and sub groups
     }
 }
